@@ -7,7 +7,6 @@ import entity.mapper.UsersMapper;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -58,8 +57,7 @@ public class UsersDAO implements MainDAO<Users> {
     public Users getObjectById(int id) throws SQLException {
         PreparedStatement ps = connection.prepareStatement(SELECT_USER_BY_ID);
         ps.setLong(1, id);
-        ResultSet resultSet = ps.executeQuery();
-        return UsersMapper.mapRow(resultSet);
+        return UsersMapper.mapRow(ps.executeQuery());
     }
 
     @Override
