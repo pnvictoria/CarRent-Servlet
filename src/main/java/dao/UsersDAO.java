@@ -2,7 +2,7 @@ package dao;
 
 import dao.interfaces.MainDAO;
 import database.DataBaseConnection;
-import entity.User;
+import entity.Users;
 import entity.mapper.UsersMapper;
 
 import java.sql.Connection;
@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class UsersDAO implements MainDAO<User> {
+public class UsersDAO implements MainDAO<Users> {
 
     private Connection connection;
 
@@ -32,7 +32,7 @@ public class UsersDAO implements MainDAO<User> {
     }
 
     @Override
-    public void addObject(User obj) {
+    public void addObject(Users obj) {
 //        try {
 //            PreparedStatement ps = connection.prepareStatement(INSERT_USER);
 //            ps.setLong(1, obj.getId());
@@ -50,12 +50,12 @@ public class UsersDAO implements MainDAO<User> {
     }
 
     @Override
-    public void updateObject(User obj) {
+    public void updateObject(Users obj) {
 
     }
 
     @Override
-    public User getObjectById(int id) throws SQLException {
+    public Users getObjectById(int id) throws SQLException {
         PreparedStatement ps = connection.prepareStatement(SELECT_USER_BY_ID);
         ps.setLong(1, id);
         ResultSet resultSet = ps.executeQuery();
@@ -63,12 +63,12 @@ public class UsersDAO implements MainDAO<User> {
     }
 
     @Override
-    public List<User> getObjects() {
+    public List<Users> getObjects() {
         return null;
     }
 
     @Override
-    public List<User> getByItem(User obj) {
+    public List<Users> getByItem(Users obj) {
         return null;
     }
 }

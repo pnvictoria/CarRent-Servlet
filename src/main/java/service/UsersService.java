@@ -1,22 +1,23 @@
 package service;
 
 import dao.interfaces.MainDAO;
-import entity.User;
+import entity.Users;
+import service.interfaces.MainService;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public class UserService implements MainService<User> {
+public class UsersService implements MainService<Users> {
 
-    private MainDAO<User> daoUser;
+    private MainDAO<Users> daoUser;
 
-    public UserService(MainDAO<User> daoUser) {
+    public UsersService(MainDAO<Users> daoUser) {
         this.daoUser = daoUser;
     }
 
     @Override
-    public boolean addObject(User obj) {
-        List<User> byItem = daoUser.getByItem(obj);
+    public boolean addObject(Users obj) {
+        List<Users> byItem = daoUser.getByItem(obj);
         if(byItem.isEmpty()) {
             daoUser.addObject(obj);
             return true;
@@ -31,27 +32,27 @@ public class UserService implements MainService<User> {
     }
 
     @Override
-    public void updateObject(User obj) {
+    public void updateObject(Users obj) {
 
     }
 
     @Override
-    public User getObjectById(int id) throws SQLException {
+    public Users getObjectById(int id) throws SQLException {
         return daoUser.getObjectById(id);
     }
 
     @Override
-    public List<User> getObjects() {
+    public List<Users> getObjects() {
         return null;
     }
 
     @Override
-    public List<User> getByItem(User obj) {
+    public List<Users> getByItem(Users obj) {
         return null;
     }
 
     public boolean isUserRegistrated(String login, String password) throws SQLException {
-        User user = getObjectById(1);
+        Users user = getObjectById(1);
         if (login.equals(user.getEmail()) && password.equals(user.getPassword()))
             return true;
         else

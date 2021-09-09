@@ -1,7 +1,7 @@
 package servlet;
 
 import dao.UsersDAO;
-import service.UserService;
+import service.UsersService;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,7 +34,7 @@ public class ServletTest extends HttpServlet {
 
         boolean userRegistrated = false;
         try {
-            userRegistrated = new UserService(new UsersDAO()).isUserRegistrated(email, password);
+            userRegistrated = new UsersService(new UsersDAO()).isUserRegistrated(email, password);
         } catch (SQLException e) {
             e.printStackTrace();
         }

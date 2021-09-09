@@ -4,19 +4,39 @@ public class Roles {
     private int id;
     private String name;
 
-    public int getId() {
-        return id;
+    private Roles() {
+
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getId() {
+        return id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public static Builder newBuilder() {
+        return new Roles().new Builder();
+    }
+
+    public class Builder {
+        private Builder() {
+
+        }
+
+        public Builder setId(int id) {
+            Roles.this.id = id;
+            return this;
+        }
+
+        public Builder setName(String name) {
+            Roles.this.name = name;
+            return this;
+        }
+
+        public Roles build() {
+            return Roles.this;
+        }
     }
 }

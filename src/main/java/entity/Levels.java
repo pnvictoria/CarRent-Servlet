@@ -19,4 +19,28 @@ public class Levels {
     public void setName(String name) {
         this.name = name;
     }
+
+    public static Builder newBuilder() {
+        return new Levels().new Builder();
+    }
+
+    public class Builder {
+        private Builder() {
+
+        }
+
+        public Builder setId(int id) {
+            Levels.this.id = id;
+            return this;
+        }
+
+        public Builder setName(String name) {
+            Levels.this.name = name;
+            return this;
+        }
+
+        public Levels build() {
+            return Levels.this;
+        }
+    }
 }

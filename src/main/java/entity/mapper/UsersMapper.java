@@ -1,16 +1,18 @@
 package entity.mapper;
 
-import entity.User;
+import entity.Users;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UsersMapper {
 
-    public static User mapRow(ResultSet rs) throws SQLException {
-        User user = new User();
+    public static Users mapRow(ResultSet rs) throws SQLException {
+        Users user = null;
         if (rs.next()) {
-            user.setId(rs.getInt("id"));
+            user = Users.newBuilder()
+                    .setId(rs.getInt("id"))
+                    .build();
         }
         return user;
     }

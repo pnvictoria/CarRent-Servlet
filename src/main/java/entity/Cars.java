@@ -9,59 +9,77 @@ public class Cars {
     private Labels label;
     private Levels level;
 
-    public int getId() {
-        return id;
+    private Cars() {
+
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getId() {
+        return id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getPrice() {
         return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
     }
 
     public String getJpg() {
         return jpg;
     }
 
-    public void setJpg(String jpg) {
-        this.jpg = jpg;
-    }
-
     public String getDesc() {
         return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
     }
 
     public Labels getLabel() {
         return label;
     }
 
-    public void setLabel(Labels label) {
-        this.label = label;
-    }
-
     public Levels getLevel() {
         return level;
     }
 
-    public void setLevel(Levels level) {
-        this.level = level;
+    public static Builder newBuilder() {
+        return new Cars().new Builder();
+    }
+
+    public class Builder {
+        private Builder() {
+
+        }
+
+        public void setId(int id) {
+            Cars.this.id = id;
+        }
+
+        public void setName(String name) {
+            Cars.this.name = name;
+        }
+
+        public void setPrice(int price) {
+            Cars.this.price = price;
+        }
+
+        public void setJpg(String jpg) {
+            Cars.this.jpg = jpg;
+        }
+
+        public void setDesc(String desc) {
+            Cars.this.desc = desc;
+        }
+
+        public void setLabel(Labels label) {
+            Cars.this.label = label;
+        }
+
+        public void setLevel(Levels level) {
+            Cars.this.level = level;
+        }
+
+        public Cars build() {
+            return Cars.this;
+        }
     }
 }
