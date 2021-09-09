@@ -10,7 +10,7 @@
 <body>
 
 
-<form action="${pageContext.request.contextPath}/ServletLogin" method="POST" class="form sign-in">
+<form action="${pageContext.request.contextPath}/login" method="POST" class="form sign-in">
     <div class="form__mail item">
         <label for="email"><span>Электронная почта</span></label>
         <input class="form__input big" placeholder="Текст" type="text" name="email" id="email">

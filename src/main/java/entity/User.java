@@ -2,8 +2,13 @@ package entity;
 
 public class User {
     private int id;
-    private String login;
+    private String name;
+    private String surname;
+    private boolean sex;
+    private String date;
+    private String email;
     private String password;
+    private Roles role;
 
     public int getId() {
         return id;
@@ -13,12 +18,44 @@ public class User {
         this.id = id;
     }
 
-    public String getLogin() {
-        return login;
+    public String getName() {
+        return name;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public boolean isSex() {
+        return sex;
+    }
+
+    public void setSex(boolean sex) {
+        this.sex = sex;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -29,5 +66,11 @@ public class User {
         this.password = password;
     }
 
+    public Roles getRole() {
+        return role;
+    }
 
+    public void setRole(Roles role) {
+        this.role = role;
+    }
 }

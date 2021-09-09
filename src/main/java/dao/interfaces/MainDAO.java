@@ -1,8 +1,9 @@
-package dao;
+package dao.interfaces;
 
+import java.sql.SQLException;
 import java.util.List;
 
-public interface DAOMain<T> {
+public interface MainDAO<T> {
     /**
      * the method for inserting Object to Data Base
      * @param obj
@@ -26,7 +27,7 @@ public interface DAOMain<T> {
      * @return
      */
 
-    T getObjectById(int id);
+    T getObjectById(int id) throws SQLException;
 
     List<T> getObjects();
 
