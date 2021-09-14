@@ -9,45 +9,33 @@
     <link href="main/css/footer.css" rel="stylesheet">
     <link href="main/css/header-auth.css" rel="stylesheet">
     <link href="main/css/global.css" rel="stylesheet">
-    <link href="main/css/items.css" rel="stylesheet">
-    <link href="main/css/global.css" rel="stylesheet">
-    <title>Sign Up</title>
+    <title>Admin</title>
 </head>
 <body>
 <div class="wrapper">
     <%@ include file="/main/pages/comn/header-admin.jsp" %>
     <section class="body">
 
-        <table border="1" width="100%" cellpadding="5">
-            <c:forEach items="${allUsers}" var="user">
+        <table border="1" width="50%" cellpadding="5">
+            <c:forEach items="${allLevels}" var="level">
                 <tr>
                     <th>ID</th>
                     <th>Имя</th>
-                    <th>Фамилия</th>
-                    <th>Пол</th>
-                    <th>Дата Рождение</th>
-                    <th>Почта</th>
-                    <th>Роль</th>
 
                     <th>UPDATE</th>
                     <th>DELETE</th>
                 </tr>
                 <tr>
-                    <td><c:out value="${user.getId()}"/></td>
-                    <td><c:out value="${user.getName()}"/></td>
-                    <td><c:out value="${user.getSurname()}"/></td>
-                    <td><c:out value="${user.isSex()}"/></td>
-                    <td><c:out value="${user.getDate()}"/></td>
-                    <td><c:out value="${user.getEmail()}"/></td>
-                    <td><c:out value="${user.getRole().getName()}"/></td>
+                    <td><c:out value="${level.getId()}"/></td>
+                    <td><c:out value="${level.getName()}"/></td>
 
                     <td>
-                        <form method="POST" action="${pageContext.request.contextPath}/admin/update?userId=${user.getId()}">
+                        <form method="POST" action="${pageContext.request.contextPath}/admin/update?levelId=${level.getId()}">
                             <input type="submit" value="Update"/>
                         </form>
                     </td>
                     <td>
-                        <form method="POST" action="${pageContext.request.contextPath}/admin/delete?userId=${user.getId()}">
+                        <form method="POST" action="${pageContext.request.contextPath}/admin/delete?levelId=${level.getId()}">
                             <input type="submit" value="Delete"/>
                         </form>
                     </td>

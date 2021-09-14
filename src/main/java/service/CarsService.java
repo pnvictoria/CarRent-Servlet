@@ -13,7 +13,7 @@ public class CarsService implements MainService<Cars> {
     }
 
     @Override
-    public void removeObject(int id) {
+    public void deleteObject(int id) {
 
     }
 

@@ -42,6 +42,20 @@ public class Users {
         return role;
     }
 
+    @Override
+    public String toString() {
+        return "Users{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", sex=" + sex +
+                ", date='" + date + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                '}';
+    }
+
     public static Builder newBuilder() {
         return new Users().new Builder();
     }

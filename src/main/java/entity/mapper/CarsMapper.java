@@ -10,9 +10,8 @@ import java.sql.SQLException;
 
 public class CarsMapper {
     public static Cars mapRow(ResultSet rs) throws SQLException {
-        Cars car = null;
-        if (rs.next()) {
-            car = Cars.newBuilder()
+
+        return Cars.newBuilder()
                     .setId(rs.getInt("id"))
                     .setName(rs.getString("name"))
                     .setPrice(rs.getInt("price"))
@@ -29,7 +28,5 @@ public class CarsMapper {
                                     .build())
                     .setDesc(rs.getString("desc"))
                     .build();
-        }
-        return car;
     }
 }

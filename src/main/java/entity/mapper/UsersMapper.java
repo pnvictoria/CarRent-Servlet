@@ -9,9 +9,8 @@ import java.sql.SQLException;
 public class UsersMapper {
 
     public static Users mapRow(ResultSet rs) throws SQLException {
-        Users user = null;
-        if (rs.next()) {
-            user = Users.newBuilder()
+
+        return Users.newBuilder()
                     .setId(rs.getInt("id"))
                     .setName(rs.getString("name"))
                     .setSurname(rs.getString("surname"))
@@ -25,7 +24,5 @@ public class UsersMapper {
                                     .setName(rs.getString("name"))
                                     .build())
                     .build();
-        }
-        return user;
     }
 }
