@@ -43,4 +43,12 @@ public class Labels {
             return Labels.this;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Labels{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

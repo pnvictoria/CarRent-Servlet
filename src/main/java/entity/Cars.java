@@ -89,4 +89,17 @@ public class Cars {
             return Cars.this;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Cars{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", jpg='" + jpg + '\'' +
+                ", desc='" + desc + '\'' +
+                ", label=" + label +
+                ", level=" + level +
+                '}';
+    }
 }

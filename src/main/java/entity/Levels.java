@@ -43,4 +43,12 @@ public class Levels {
             return Levels.this;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Levels{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
