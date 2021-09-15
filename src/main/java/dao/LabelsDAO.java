@@ -3,9 +3,13 @@ package dao;
 import dao.interfaces.MainDAO;
 import database.DataBaseConnection;
 import entity.Labels;
+import entity.mapper.LabelsMapper;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LabelsDAO implements MainDAO<Labels> {
@@ -13,6 +17,7 @@ public class LabelsDAO implements MainDAO<Labels> {
     private final String INSERT_LABEL = "INSERT INTO car.label(id, name) VALUES (?, ?);";
     private final String SELECT_ALL_LABEL = "SELECT id, name FROM car.label;";
     private final String SELECT_LABEL_BY_ID = "SELECT id, name FROM car.label WHERE id = ?;";
+    private final String UPDATE_LABEL_BY_ID = "";
     private final String DELETE_LABEL_BY_ID = "DELETE FROM car.label WHERE id = ?;";
 
     public LabelsDAO() {
@@ -21,27 +26,54 @@ public class LabelsDAO implements MainDAO<Labels> {
 
     @Override
     public void addObject(Labels obj) {
-
+        try {
+            PreparedStatement ps = connection.prepareStatement(INSERT_LABEL);
+            ps.setLong(1, obj.getId());
+            ps.setString(2, obj.getName());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     @Override
-    public void deleteObject(int id) {
-
+    public void deleteObject(int id) throws SQLException {
+        PreparedStatement ps = connection.prepareStatement(DELETE_LABEL_BY_ID);
+        ps.setLong(1, id);
     }
 
     @Override
     public void updateObject(Labels obj) {
-
+        try {
+            PreparedStatement ps = connection.prepareStatement(UPDATE_LABEL_BY_ID);
+            ps.setLong(1, obj.getId());
+            ps.setString(2, obj.getName());
+            ps.setLong(3, obj.getId());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     @Override
     public Labels getObjectById(int id) throws SQLException {
-        return null;
+        PreparedStatement ps = connection.prepareStatement(SELECT_LABEL_BY_ID);
+        ps.setLong(1, id);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return LabelsMapper.mapRow(rs);
+        }
+        return Labels.newBuilder().build();
     }
 
     @Override
-    public List<Labels> getObjects() {
-        return null;
+    public List<Labels> getObjects() throws SQLException {
+        PreparedStatement ps = connection.prepareStatement(SELECT_ALL_LABEL);
+        List<Labels> labelsList = new ArrayList<>();
+
+        ResultSet resultSet = ps.executeQuery();
+        while (resultSet.next()) {
+            labelsList.add(LabelsMapper.mapRow(resultSet));
+        }
+        return labelsList;
     }
 
     @Override
