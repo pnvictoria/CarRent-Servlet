@@ -1,4 +1,4 @@
-<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html lang="ru">
 <head>
@@ -17,25 +17,27 @@
     <section class="body">
 
         <table border="1" width="50%" cellpadding="5">
-            <c:forEach items="${allRoles}" var="role">
-                <tr>
-                    <th>ID</th>
-                    <th>Имя</th>
+            <tr>
+                <th>ID</th>
+                <th>Имя</th>
 
-                    <th>UPDATE</th>
-                    <th>DELETE</th>
-                </tr>
+                <th>UPDATE</th>
+                <th>DELETE</th>
+            </tr>
+            <c:forEach items="${allRoles}" var="role">
                 <tr>
                     <td><c:out value="${role.getId()}"/></td>
                     <td><c:out value="${role.getName()}"/></td>
 
                     <td>
-                        <form method="POST" action="${pageContext.request.contextPath}/admin/update?roleId=${role.getId()}">
+                        <form method="POST"
+                              action="${pageContext.request.contextPath}/admin/role/update?roleId=${role.getId()}">
                             <input type="submit" value="Update"/>
                         </form>
                     </td>
                     <td>
-                        <form method="POST" action="${pageContext.request.contextPath}/admin/delete?roleId=${role.getId()}">
+                        <form method="POST"
+                              action="${pageContext.request.contextPath}/admin/role/delete?roleId=${role.getId()}">
                             <input type="submit" value="Delete"/>
                         </form>
                     </td>
@@ -43,6 +45,9 @@
             </c:forEach>
         </table>
 
+        <form method="POST" action="${pageContext.request.contextPath}/admin/role/add}">
+            <input type="submit" value="Add"/>
+        </form>
 
     </section>
     <%@ include file="/main/pages/comn/footer.jsp" %>

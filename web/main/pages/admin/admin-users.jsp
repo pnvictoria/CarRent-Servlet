@@ -1,4 +1,4 @@
-<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html lang="ru">
 <head>
@@ -17,19 +17,19 @@
     <section class="body">
 
         <table border="1" width="80%" cellpadding="5">
-            <c:forEach items="${allUsers}" var="user">
-                <tr>
-                    <th>ID</th>
-                    <th>Имя</th>
-                    <th>Фамилия</th>
-                    <th>Пол</th>
-                    <th>Дата Рождение</th>
-                    <th>Почта</th>
-                    <th>Роль</th>
+            <tr>
+                <th>ID</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Пол</th>
+                <th>Дата Рождение</th>
+                <th>Почта</th>
+                <th>Роль</th>
 
-                    <th>UPDATE</th>
-                    <th>DELETE</th>
-                </tr>
+                <th>UPDATE</th>
+                <th>DELETE</th>
+            </tr>
+            <c:forEach items="${allUsers}" var="user">
                 <tr>
                     <td><c:out value="${user.getId()}"/></td>
                     <td><c:out value="${user.getName()}"/></td>
@@ -38,14 +38,15 @@
                     <td><c:out value="${user.getDate()}"/></td>
                     <td><c:out value="${user.getEmail()}"/></td>
                     <td><c:out value="${user.getRole().getName()}"/></td>
-
                     <td>
-                        <form method="POST" action="${pageContext.request.contextPath}/admin/update?userId=${user.getId()}">
+                        <form method="POST"
+                              action="${pageContext.request.contextPath}/admin/user/update?userId=${user.getId()}">
                             <input type="submit" value="Update"/>
                         </form>
                     </td>
                     <td>
-                        <form method="POST" action="${pageContext.request.contextPath}/admin/delete?userId=${user.getId()}">
+                        <form method="POST"
+                              action="${pageContext.request.contextPath}/admin/user/delete?userId=${user.getId()}">
                             <input type="submit" value="Delete"/>
                         </form>
                     </td>
@@ -53,7 +54,7 @@
             </c:forEach>
         </table>
 
-        <form method="POST" action="${pageContext.request.contextPath}/admin/add}">
+        <form method="POST" action="${pageContext.request.contextPath}/admin/user/add}">
             <input type="submit" value="Add"/>
         </form>
 
