@@ -1,9 +1,9 @@
-package controller.commands.admin.users;
+package controller.commands.admin.labels;
 
 import controller.interfaces.ServletAction;
-import dao.UsersDAO;
-import entity.Users;
-import service.UsersService;
+import dao.LabelsDAO;
+import entity.Labels;
+import service.LabelsService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,19 +12,19 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class UserHomeServletActionImpl implements ServletAction {
-    private final String ADMIN_USER_PAGE = "/main/pages/admin/admin-users.jsp";
+public class LabelHomeServletActionImpl implements ServletAction {
+    private final String ADMIN_LABEL_PAGE = "/main/pages/admin/admin-labels.jsp";
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Users> allUsers = null;
+        List<Labels> allLabels = null;
         try {
-            allUsers = new UsersService(new UsersDAO()).getObjects();
+            allLabels = new LabelsService(new LabelsDAO()).getObjects();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        req.setAttribute("allUsers", allUsers);
+        req.setAttribute("allLabels", allLabels);
 
-        return ADMIN_USER_PAGE;
+        return ADMIN_LABEL_PAGE;
     }
 }

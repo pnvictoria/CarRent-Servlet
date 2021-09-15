@@ -1,11 +1,11 @@
-package controller.commands.admin.role;
+package controller.commands.admin.labels;
 
 import controller.interfaces.ServletAction;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class RoleAddServletActionImpl implements ServletAction {
+public class LabelAddServletActionImpl implements ServletAction {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
 

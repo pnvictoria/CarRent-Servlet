@@ -1,11 +1,8 @@
-package controller.commands.admin.cars;
+package controller.commands.admin.roles;
 
 import controller.interfaces.ServletAction;
-import dao.CarsDAO;
 import dao.RolesDAO;
-import entity.Cars;
 import entity.Roles;
-import service.CarsService;
 import service.RolesService;
 
 import javax.servlet.ServletException;
@@ -15,19 +12,19 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class CarHomeServletActionImpl implements ServletAction {
-    private final String ADMIN_CARS_PAGE = "/main/pages/admin/admin-cars.jsp";
+public class RoleHomeServletActionImpl implements ServletAction {
+    private final String ADMIN_ROLES_PAGE = "/main/pages/admin/admin-roles.jsp";
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Cars> allCars = null;
+        List<Roles> allRoles = null;
         try {
-            allCars = new CarsService(new CarsDAO()).getObjects();
+            allRoles = new RolesService(new RolesDAO()).getObjects();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        req.setAttribute("allCars", allCars);
+        req.setAttribute("allRoles", allRoles);
 
-        return ADMIN_CARS_PAGE;
+        return ADMIN_ROLES_PAGE;
     }
 }
