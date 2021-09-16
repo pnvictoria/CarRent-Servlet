@@ -1,7 +1,15 @@
 package controller;
 
 import controller.commands.admin.cars.*;
-import controller.commands.admin.role.*;
+import controller.commands.admin.labels.LabelAddServletActionImpl;
+import controller.commands.admin.labels.LabelDeleteServletActionImpl;
+import controller.commands.admin.labels.LabelHomeServletActionImpl;
+import controller.commands.admin.labels.LabelUpdateServletActionImpl;
+import controller.commands.admin.levels.LevelAddServletActionImpl;
+import controller.commands.admin.levels.LevelDeleteServletActionImpl;
+import controller.commands.admin.levels.LevelHomeServletActionImpl;
+import controller.commands.admin.levels.LevelUpdateServletActionImpl;
+import controller.commands.admin.roles.*;
 import controller.commands.admin.users.*;
 import controller.interfaces.ServletAction;
 
@@ -28,6 +36,16 @@ public class CommandManager {
         commands.put("/admin/role/add", new RoleAddServletActionImpl());
         commands.put("/admin/role/update", new RoleUpdateServletActionImpl());
         commands.put("/admin/role/delete", new RoleDeleteServletActionImpl());
+        // label
+        commands.put("/admin/label/home", new LabelHomeServletActionImpl());
+        commands.put("/admin/label/add", new LabelAddServletActionImpl());
+        commands.put("/admin/label/update", new LabelUpdateServletActionImpl());
+        commands.put("/admin/label/delete", new LabelDeleteServletActionImpl());
+        // level
+        commands.put("/admin/level/home", new LevelHomeServletActionImpl());
+        commands.put("/admin/level/add", new LevelAddServletActionImpl());
+        commands.put("/admin/level/update", new LevelUpdateServletActionImpl());
+        commands.put("/admin/level/delete", new LevelDeleteServletActionImpl());
     }
 
     public ServletAction getCommand(HttpServletRequest request) {

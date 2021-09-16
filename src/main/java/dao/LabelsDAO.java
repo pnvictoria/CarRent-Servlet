@@ -14,11 +14,11 @@ import java.util.List;
 
 public class LabelsDAO implements MainDAO<Labels> {
     private Connection connection;
-    private final String INSERT_LABEL = "INSERT INTO car.label(id, name) VALUES (?, ?);";
-    private final String SELECT_ALL_LABEL = "SELECT id, name FROM car.label;";
-    private final String SELECT_LABEL_BY_ID = "SELECT id, name FROM car.label WHERE id = ?;";
-    private final String UPDATE_LABEL_BY_ID = "";
-    private final String DELETE_LABEL_BY_ID = "DELETE FROM car.label WHERE id = ?;";
+    private final String INSERT_LABEL = "INSERT INTO car.labels(name) VALUES (?);";
+    private final String SELECT_ALL_LABEL = "SELECT id, name FROM car.labels;";
+    private final String SELECT_LABEL_BY_ID = "SELECT id, name FROM car.labels WHERE id = ?;";
+    private final String UPDATE_LABEL_BY_ID = "UPDATE car.labels SET name=? WHERE id=?;";
+    private final String DELETE_LABEL_BY_ID = "DELETE FROM car.labels WHERE id = ?;";
 
     public LabelsDAO() {
         connection = DataBaseConnection.initialize();
@@ -28,8 +28,7 @@ public class LabelsDAO implements MainDAO<Labels> {
     public void addObject(Labels obj) {
         try {
             PreparedStatement ps = connection.prepareStatement(INSERT_LABEL);
-            ps.setLong(1, obj.getId());
-            ps.setString(2, obj.getName());
+            ps.setString(1, obj.getName());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -45,9 +44,8 @@ public class LabelsDAO implements MainDAO<Labels> {
     public void updateObject(Labels obj) {
         try {
             PreparedStatement ps = connection.prepareStatement(UPDATE_LABEL_BY_ID);
-            ps.setLong(1, obj.getId());
-            ps.setString(2, obj.getName());
-            ps.setLong(3, obj.getId());
+            ps.setString(1, obj.getName());
+            ps.setLong(2, obj.getId());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

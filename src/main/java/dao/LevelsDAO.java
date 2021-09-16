@@ -16,10 +16,10 @@ import java.util.List;
 
 public class LevelsDAO implements MainDAO<Levels> {
     private Connection connection;
-    private final String INSERT_LEVEL = "INSERT INTO car.levels(id, name) VALUES (?, ?);";
+    private final String INSERT_LEVEL = "INSERT INTO car.levels(name) VALUES (?);";
     private final String SELECT_ALL_LEVEL = "SELECT id, name FROM car.levels;";
     private final String SELECT_LEVEL_BY_ID = "SELECT id, name FROM car.levels WHERE id = ?;";
-    private final String UPDATE_LEVEL_BY_ID = "";
+    private final String UPDATE_LEVEL_BY_ID = "UPDATE car.levels SET name=? WHERE id=?;";
     private final String DELETE_LEVEL_BY_ID = "DELETE FROM car.levels WHERE id = ?;";
 
     public LevelsDAO() {
@@ -30,8 +30,7 @@ public class LevelsDAO implements MainDAO<Levels> {
     public void addObject(Levels obj) {
         try {
             PreparedStatement ps = connection.prepareStatement(INSERT_LEVEL);
-            ps.setLong(1, obj.getId());
-            ps.setString(2, obj.getName());
+            ps.setString(1, obj.getName());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -47,9 +46,8 @@ public class LevelsDAO implements MainDAO<Levels> {
     public void updateObject(Levels obj) {
         try {
             PreparedStatement ps = connection.prepareStatement(UPDATE_LEVEL_BY_ID);
-            ps.setLong(1, obj.getId());
-            ps.setString(2, obj.getName());
-            ps.setLong(3, obj.getId());
+            ps.setString(1, obj.getName());
+            ps.setLong(2, obj.getId());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

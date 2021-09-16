@@ -3,9 +3,7 @@ package dao;
 import dao.interfaces.MainDAO;
 import database.DataBaseConnection;
 import entity.Cars;
-import entity.Users;
 import entity.mapper.CarsMapper;
-import entity.mapper.UsersMapper;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,14 +12,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static utils.constants.SqlQueriesConst.*;
+
 public class CarsDAO implements MainDAO<Cars> {
     private Connection connection;
-    private final String INSERT_CAR = "INSERT INTO car.cars(id, name, price, jpg, level_id, label_id, \"desc\") VALUES (?, ?, ?, ?, ?, ?, ?);";
-    private final String SELECT_ALL_CARS = "SELECT id, name, price, jpg, level_id, label_id, \"desc\" FROM car.cars;";
-    private final String SELECT_CAR_BY_ID = "SELECT id, name, price, jpg, level_id, label_id, \"desc\" FROM car.cars WHERE id = ?;";
-    private final String UPDATE_CAR_BY_ID = "";
-    private final String DELETE_CAR_BY_ID = "DELETE FROM car.cars WHERE id = ?;";
-
     public CarsDAO() {
         connection = DataBaseConnection.initialize();
     }
@@ -30,13 +24,12 @@ public class CarsDAO implements MainDAO<Cars> {
     public void addObject(Cars obj) {
         try {
             PreparedStatement ps = connection.prepareStatement(INSERT_CAR);
-            ps.setLong(1, obj.getId());
-            ps.setString(2, obj.getName());
-            ps.setLong(3, obj.getPrice());
-            ps.setString(4, obj.getJpg());
-            ps.setLong(5, obj.getLevel().getId());
-            ps.setLong(6, obj.getLabel().getId());
-            ps.setString(7, obj.getDesc());
+            ps.setString(1, obj.getName());
+            ps.setLong(2, obj.getPrice());
+            ps.setString(3, obj.getJpg());
+            ps.setLong(4, obj.getLevel().getId());
+            ps.setLong(5, obj.getLabel().getId());
+            ps.setString(6, obj.getDesc());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -52,14 +45,13 @@ public class CarsDAO implements MainDAO<Cars> {
     public void updateObject(Cars obj) {
         try {
             PreparedStatement ps = connection.prepareStatement(UPDATE_CAR_BY_ID);
-            ps.setLong(1, obj.getId());
-            ps.setString(2, obj.getName());
-            ps.setLong(3, obj.getPrice());
-            ps.setString(4, obj.getJpg());
-            ps.setLong(5, obj.getLevel().getId());
-            ps.setLong(6, obj.getLabel().getId());
-            ps.setString(7, obj.getDesc());
-            ps.setLong(8, obj.getId());
+            ps.setString(1, obj.getName());
+            ps.setLong(2, obj.getPrice());
+            ps.setString(3, obj.getJpg());
+            ps.setLong(4, obj.getLevel().getId());
+            ps.setLong(5, obj.getLabel().getId());
+            ps.setString(6, obj.getDesc());
+            ps.setLong(7, obj.getId());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

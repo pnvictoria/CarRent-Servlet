@@ -6,5 +6,5 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public interface ServletAction {
-    String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
+    String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException;
 }

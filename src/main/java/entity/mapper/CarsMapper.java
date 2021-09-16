@@ -14,17 +14,9 @@ public class CarsMapper {
                 .setId(rs.getInt("id"))
                 .setName(rs.getString("name"))
                 .setPrice(rs.getInt("price"))
-                .setJpg(rs.getString("jsp"))
-                .setLevel(
-                        Levels.newBuilder()
-                                .setId(rs.getInt("id"))
-                                .setName(rs.getString("name"))
-                                .build())
-                .setLabel(
-                        Labels.newBuilder()
-                                .setId(rs.getInt("id"))
-                                .setName(rs.getString("name"))
-                                .build())
+                .setJpg(rs.getString("jpg"))
+                .setLevel(LevelsMapper.mapRow(rs))
+                .setLabel(LabelsMapper.mapRow(rs))
                 .setDesc(rs.getString("desc"))
                 .build();
     }
