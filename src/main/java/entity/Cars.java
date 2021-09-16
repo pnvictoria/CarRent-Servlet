@@ -50,36 +50,56 @@ public class Cars {
 
         }
 
-        public void setId(int id) {
+        public Builder setId(int id) {
             Cars.this.id = id;
+            return this;
         }
 
-        public void setName(String name) {
+        public Builder setName(String name) {
             Cars.this.name = name;
+            return this;
         }
 
-        public void setPrice(int price) {
+        public Builder setPrice(int price) {
             Cars.this.price = price;
+            return this;
         }
 
-        public void setJpg(String jpg) {
+        public Builder setJpg(String jpg) {
             Cars.this.jpg = jpg;
+            return this;
         }
 
-        public void setDesc(String desc) {
+        public Builder setDesc(String desc) {
             Cars.this.desc = desc;
+            return this;
         }
 
-        public void setLabel(Labels label) {
+        public Builder setLabel(Labels label) {
             Cars.this.label = label;
+            return this;
         }
 
-        public void setLevel(Levels level) {
+        public Builder setLevel(Levels level) {
             Cars.this.level = level;
+            return this;
         }
 
         public Cars build() {
             return Cars.this;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Cars{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", jpg='" + jpg + '\'' +
+                ", desc='" + desc + '\'' +
+                ", label=" + label +
+                ", level=" + level +
+                '}';
     }
 }

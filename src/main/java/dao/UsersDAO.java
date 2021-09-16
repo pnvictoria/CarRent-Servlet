@@ -9,22 +9,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UsersDAO implements MainDAO<Users> {
-
     private Connection connection;
-
-    private final String INSERT_USER = "INSERT INTO car.\"user\"(\n" +
-            "\tid, email, password)\n" +
-            "\tVALUES (?, ?, ?);";
-    private final String SELECT_ALL_USERS = "SELECT id, email, password\n" +
-            "\tFROM car.\"user\";";
-    private final String SELECT_USER_BY_ID = "SELECT id, email, password\n" +
-            "\tFROM car.\"user\"\n" +
-            "\tWHERE id = ?;";
-    private final String DELETE_USER = "DELETE FROM car.\"user\"\n" +
-            "\tWHERE id = ?;";
+    private final String INSERT_USER = "INSERT INTO car.users(name, surname, sex, date, email, password, role_id) VALUES (?, ?, ?, ?, ?, ?, ?);";
+    private final String SELECT_ALL_USERS = "SELECT id, name, surname, sex, date, email, password, role_id FROM car.users;";
+    private final String SELECT_USER_BY_ID = "SELECT id, name, surname, sex, date, email, password, role_id FROM car.users WHERE id = ?;";
+    private final String UPDATE_USER_BY_ID = "UPDATE car.users SET name=?, surname=?, sex=?, date=?, email=?, password=?, role_id=? WHERE id=?;";
+    private final String DELETE_USER_BY_ID = "DELETE FROM car.users WHERE id = ?;";
 
 
     public UsersDAO() {
@@ -33,38 +27,63 @@ public class UsersDAO implements MainDAO<Users> {
 
     @Override
     public void addObject(Users obj) {
-//        try {
-//            PreparedStatement ps = connection.prepareStatement(INSERT_USER);
-//            ps.setLong(1, obj.getId());
-//            ps.setString(2, obj.getFirstName());
-//            ps.setString(3, obj.getLastName());
-//
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
+        try {
+            PreparedStatement ps = connection.prepareStatement(INSERT_USER);
+            ps.setString(1, obj.getName());
+            ps.setString(2, obj.getSurname());
+            ps.setBoolean(3, obj.isSex());
+            ps.setString(4, obj.getDate());
+            ps.setString(5, obj.getEmail());
+            ps.setString(6, obj.getPassword());
+            ps.setLong(7, obj.getRole().getId());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     @Override
-    public void removeObject(int id) {
-
+    public void deleteObject(int id) throws SQLException {
+        PreparedStatement ps = connection.prepareStatement(DELETE_USER_BY_ID);
+        ps.setLong(1, id);
     }
 
     @Override
     public void updateObject(Users obj) {
-
+        try {
+            PreparedStatement ps = connection.prepareStatement(UPDATE_USER_BY_ID);
+            ps.setString(1, obj.getName());
+            ps.setString(2, obj.getSurname());
+            ps.setBoolean(3, obj.isSex());
+            ps.setString(4, obj.getDate());
+            ps.setString(5, obj.getEmail());
+            ps.setString(6, obj.getPassword());
+            ps.setLong(7, obj.getRole().getId());
+            ps.setLong(8, obj.getId());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     @Override
     public Users getObjectById(int id) throws SQLException {
         PreparedStatement ps = connection.prepareStatement(SELECT_USER_BY_ID);
         ps.setLong(1, id);
-        ResultSet resultSet = ps.executeQuery();
-        return UsersMapper.mapRow(resultSet);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return UsersMapper.mapRow(rs);
+        }
+        return Users.newBuilder().build();
     }
 
     @Override
-    public List<Users> getObjects() {
-        return null;
+    public List<Users> getObjects() throws SQLException {
+        PreparedStatement ps = connection.prepareStatement(SELECT_ALL_USERS);
+        List<Users> usersList = new ArrayList<>();
+        ResultSet resultSet = ps.executeQuery();
+        while (resultSet.next()) {
+            usersList.add(UsersMapper.mapRow(resultSet));
+        }
+        return usersList;
     }
 
     @Override

@@ -39,4 +39,12 @@ public class Roles {
             return Roles.this;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Roles{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

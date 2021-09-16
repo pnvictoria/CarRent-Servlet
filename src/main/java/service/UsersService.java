@@ -16,9 +16,10 @@ public class UsersService implements MainService<Users> {
     }
 
     @Override
-    public boolean addObject(Users obj) {
-        List<Users> byItem = daoUser.getByItem(obj);
-        if(byItem.isEmpty()) {
+    public boolean addObject(Users obj) throws SQLException {
+        //изменить проверку, сделать проверку полностью по обьекту или логину
+        Users user = daoUser.getObjectById(obj.getId());
+        if (user == null) {
             daoUser.addObject(obj);
             return true;
         } else {
@@ -27,13 +28,15 @@ public class UsersService implements MainService<Users> {
     }
 
     @Override
-    public void removeObject(int id) {
-
+    public void deleteObject(int id) throws SQLException {
+        Users user = daoUser.getObjectById(id);
+        if (user == null)
+            daoUser.deleteObject(id);
     }
 
     @Override
     public void updateObject(Users obj) {
-
+        daoUser.updateObject(obj);
     }
 
     @Override
@@ -42,20 +45,12 @@ public class UsersService implements MainService<Users> {
     }
 
     @Override
-    public List<Users> getObjects() {
-        return null;
+    public List<Users> getObjects() throws SQLException {
+        return daoUser.getObjects();
     }
 
     @Override
     public List<Users> getByItem(Users obj) {
         return null;
-    }
-
-    public boolean isUserRegistrated(String login, String password) throws SQLException {
-        Users user = getObjectById(1);
-        if (login.equals(user.getEmail()) && password.equals(user.getPassword()))
-            return true;
-        else
-            return false;
     }
 }

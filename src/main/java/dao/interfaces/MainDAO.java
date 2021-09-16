@@ -14,7 +14,7 @@ public interface MainDAO<T> {
      * the method for deleting Object from Data Base
      * @param id
      */
-    void removeObject(int id);
+    void deleteObject(int id) throws SQLException;
 
     /**
      * the method for update Object in Data Base
@@ -29,7 +29,7 @@ public interface MainDAO<T> {
 
     T getObjectById(int id) throws SQLException;
 
-    List<T> getObjects();
+    List<T> getObjects() throws SQLException;
 
     List<T> getByItem(T obj);
 }
