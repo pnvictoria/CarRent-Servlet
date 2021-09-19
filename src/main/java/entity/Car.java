@@ -1,15 +1,15 @@
 package entity;
 
-public class Cars {
+public class Car {
     private int id;
     private String name;
     private int price;
     private String jpg;
     private String desc;
-    private Labels label;
-    private Levels level;
+    private Label label;
+    private Level level;
 
-    private Cars() {
+    private Car() {
 
     }
 
@@ -33,16 +33,16 @@ public class Cars {
         return desc;
     }
 
-    public Labels getLabel() {
+    public Label getLabel() {
         return label;
     }
 
-    public Levels getLevel() {
+    public Level getLevel() {
         return level;
     }
 
     public static Builder newBuilder() {
-        return new Cars().new Builder();
+        return new Car().new Builder();
     }
 
     public class Builder {
@@ -51,42 +51,42 @@ public class Cars {
         }
 
         public Builder setId(int id) {
-            Cars.this.id = id;
+            Car.this.id = id;
             return this;
         }
 
         public Builder setName(String name) {
-            Cars.this.name = name;
+            Car.this.name = name;
             return this;
         }
 
         public Builder setPrice(int price) {
-            Cars.this.price = price;
+            Car.this.price = price;
             return this;
         }
 
         public Builder setJpg(String jpg) {
-            Cars.this.jpg = jpg;
+            Car.this.jpg = jpg;
             return this;
         }
 
         public Builder setDesc(String desc) {
-            Cars.this.desc = desc;
+            Car.this.desc = desc;
             return this;
         }
 
-        public Builder setLabel(Labels label) {
-            Cars.this.label = label;
+        public Builder setLabel(Label label) {
+            Car.this.label = label;
             return this;
         }
 
-        public Builder setLevel(Levels level) {
-            Cars.this.level = level;
+        public Builder setLevel(Level level) {
+            Car.this.level = level;
             return this;
         }
 
-        public Cars build() {
-            return Cars.this;
+        public Car build() {
+            return Car.this;
         }
     }
 

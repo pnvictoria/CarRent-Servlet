@@ -2,8 +2,9 @@ package controller.commands.admin.roles;
 
 import controller.interfaces.ServletAction;
 import dao.RolesDAO;
-import entity.Roles;
+import entity.Role;
 import service.RolesService;
+import utils.constants.ReadPropertiesFile;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,18 +14,22 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class RoleHomeServletActionImpl implements ServletAction {
-    private final String ADMIN_ROLES_PAGE = "/main/pages/admin/admin-roles.jsp";
+    private final String ADMIN_ROLE_HOME_PAGE;
+
+    public RoleHomeServletActionImpl() {
+        ReadPropertiesFile property = new ReadPropertiesFile();
+        ADMIN_ROLE_HOME_PAGE = property.getPageProperty("ADMIN_ROLE_HOME_PAGE");
+    }
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Roles> allRoles = null;
+        List<Role> allRoles = null;
         try {
             allRoles = new RolesService(new RolesDAO()).getObjects();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         req.setAttribute("allRoles", allRoles);
-
-        return ADMIN_ROLES_PAGE;
+        return ADMIN_ROLE_HOME_PAGE;
     }
 }

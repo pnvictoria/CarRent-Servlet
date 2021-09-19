@@ -2,10 +2,9 @@ package dao;
 
 import dao.interfaces.MainDAO;
 import database.DataBaseConnection;
-import entity.Roles;
-import entity.Users;
-import entity.mapper.RolesMapper;
-import entity.mapper.UsersMapper;
+import entity.Role;
+import entity.mapper.RoleMapper;
+import utils.constants.ReadPropertiesFile;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,20 +13,27 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RolesDAO implements MainDAO<Roles> {
+public class RolesDAO implements MainDAO<Role> {
     private Connection connection;
-    private final String INSERT_ROLE = "INSERT INTO car.roles(name) VALUES (?);";
-    private final String SELECT_ALL_ROLE = "SELECT id, name FROM car.roles;";
-    private final String SELECT_ROLE_BY_ID = "SELECT id, name FROM car.roles WHERE id = ?;";
-    private final String UPDATE_ROLE_BY_ID = "UPDATE car.roles SET name=? WHERE id=?;";
-    private final String DELETE_ROLE_BY_ID = "DELETE FROM car.roles WHERE id = ?;";
+    private final String INSERT_ROLE;
+    private final String SELECT_ALL_ROLE;
+    private final String SELECT_ROLE_BY_ID;
+    private final String UPDATE_ROLE_BY_ID;
+    private final String DELETE_ROLE_BY_ID;
 
     public RolesDAO() {
         connection = DataBaseConnection.initialize();
+
+        ReadPropertiesFile property = new ReadPropertiesFile();
+        INSERT_ROLE = property.getSqlProperty("INSERT_ROLE");
+        SELECT_ALL_ROLE = property.getSqlProperty("SELECT_ALL_ROLE");
+        SELECT_ROLE_BY_ID = property.getSqlProperty("SELECT_ROLE_BY_ID");
+        UPDATE_ROLE_BY_ID = property.getSqlProperty("UPDATE_ROLE_BY_ID");
+        DELETE_ROLE_BY_ID = property.getSqlProperty("DELETE_ROLE_BY_ID");
     }
 
     @Override
-    public void addObject(Roles obj) {
+    public void addObject(Role obj) {
         try {
             PreparedStatement ps = connection.prepareStatement(INSERT_ROLE);
             ps.setString(1, obj.getName());
@@ -43,7 +49,7 @@ public class RolesDAO implements MainDAO<Roles> {
     }
 
     @Override
-    public void updateObject(Roles obj) {
+    public void updateObject(Role obj) {
         try {
             PreparedStatement ps = connection.prepareStatement(UPDATE_ROLE_BY_ID);
             ps.setString(1, obj.getName());
@@ -54,29 +60,29 @@ public class RolesDAO implements MainDAO<Roles> {
     }
 
     @Override
-    public Roles getObjectById(int id) throws SQLException {
+    public Role getObjectById(int id) throws SQLException {
         PreparedStatement ps = connection.prepareStatement(SELECT_ROLE_BY_ID);
         ps.setLong(1, id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            return RolesMapper.mapRow(rs);
+            return RoleMapper.mapRow(rs);
         }
-        return Roles.newBuilder().build();
+        return Role.newBuilder().build();
     }
 
     @Override
-    public List<Roles> getObjects() throws SQLException {
+    public List<Role> getObjects() throws SQLException {
         PreparedStatement ps = connection.prepareStatement(SELECT_ALL_ROLE);
-        List<Roles> rolesList = new ArrayList<>();
+        List<Role> rolesList = new ArrayList<>();
         ResultSet resultSet = ps.executeQuery();
         while (resultSet.next()) {
-            rolesList.add(RolesMapper.mapRow(resultSet));
+            rolesList.add(RoleMapper.mapRow(resultSet));
         }
         return rolesList;
     }
 
     @Override
-    public List<Roles> getByItem(Roles obj) {
+    public List<Role> getByItem(Role obj) {
         return null;
     }
 }

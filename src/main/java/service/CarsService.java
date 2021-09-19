@@ -1,24 +1,24 @@
 package service;
 
 import dao.interfaces.MainDAO;
-import entity.Cars;
+import entity.Car;
 import service.interfaces.MainService;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public class CarsService implements MainService<Cars> {
+public class CarsService implements MainService<Car> {
 
-    private MainDAO<Cars> daoCars;
+    private MainDAO<Car> daoCars;
 
-    public CarsService(MainDAO<Cars> daoCars) {
+    public CarsService(MainDAO<Car> daoCars) {
         this.daoCars = daoCars;
     }
 
     @Override
-    public boolean addObject(Cars obj) throws SQLException {
+    public boolean addObject(Car obj) throws SQLException {
         //изменить проверку, сделать проверку полностью по обьекту или логину
-        Cars car = daoCars.getObjectById(obj.getId());
+        Car car = daoCars.getObjectById(obj.getId());
         if (car == null) {
             daoCars.addObject(obj);
             return true;
@@ -29,28 +29,28 @@ public class CarsService implements MainService<Cars> {
 
     @Override
     public void deleteObject(int id) throws SQLException {
-        Cars car = daoCars.getObjectById(id);
+        Car car = daoCars.getObjectById(id);
         if (car == null)
             daoCars.deleteObject(id);
     }
 
     @Override
-    public void updateObject(Cars obj) {
+    public void updateObject(Car obj) {
         daoCars.updateObject(obj);
     }
 
     @Override
-    public Cars getObjectById(int id) throws SQLException {
+    public Car getObjectById(int id) throws SQLException {
         return daoCars.getObjectById(id);
     }
 
     @Override
-    public List<Cars> getObjects() throws SQLException {
+    public List<Car> getObjects() throws SQLException {
         return daoCars.getObjects();
     }
 
     @Override
-    public List<Cars> getByItem(Cars obj) {
+    public List<Car> getByItem(Car obj) {
         return null;
     }
 }

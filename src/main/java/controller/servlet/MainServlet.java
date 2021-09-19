@@ -1,6 +1,6 @@
 package controller.servlet;
 
-import controller.CommandManager;
+import controller.commands.CommandManager;
 import controller.interfaces.ServletAction;
 
 import javax.servlet.ServletException;
@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/")
 public class MainServlet extends HttpServlet {
     private CommandManager commandManager;
 
@@ -31,5 +30,4 @@ public class MainServlet extends HttpServlet {
         String loadedMapping = command.execute(request, response);
         response.sendRedirect(request.getContextPath() + loadedMapping);
     }
-
 }

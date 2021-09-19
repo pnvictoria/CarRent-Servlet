@@ -21,7 +21,7 @@
                 <div class="form-wrap sign-in">
                     <p class="sign-up">Вход</p>
 
-                    <form action="${pageContext.request.contextPath}/sign-in" method="POST" class="form sign-in">
+                    <form action="${pageContext.request.contextPath}/sign-in/post" method="POST" class="form sign-in">
                         <div class="form__mail item">
                             <label for="email"><span>Электронная почта</span></label>
                             <input class="form__input big" placeholder="Текст" name="email" id="email">

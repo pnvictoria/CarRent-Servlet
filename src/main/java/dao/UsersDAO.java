@@ -2,8 +2,9 @@ package dao;
 
 import dao.interfaces.MainDAO;
 import database.DataBaseConnection;
-import entity.Users;
-import entity.mapper.UsersMapper;
+import entity.User;
+import entity.mapper.UserMapper;
+import utils.constants.ReadPropertiesFile;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,21 +13,27 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsersDAO implements MainDAO<Users> {
+public class UsersDAO implements MainDAO<User> {
     private Connection connection;
-    private final String INSERT_USER = "INSERT INTO car.users(name, surname, sex, date, email, password, role_id) VALUES (?, ?, ?, ?, ?, ?, ?);";
-    private final String SELECT_ALL_USERS = "SELECT id, name, surname, sex, date, email, password, role_id FROM car.users;";
-    private final String SELECT_USER_BY_ID = "SELECT id, name, surname, sex, date, email, password, role_id FROM car.users WHERE id = ?;";
-    private final String UPDATE_USER_BY_ID = "UPDATE car.users SET name=?, surname=?, sex=?, date=?, email=?, password=?, role_id=? WHERE id=?;";
-    private final String DELETE_USER_BY_ID = "DELETE FROM car.users WHERE id = ?;";
-
+    private final String INSERT_USER;
+    private final String SELECT_ALL_USERS;
+    private final String SELECT_USER_BY_ID;
+    private final String UPDATE_USER_BY_ID;
+    private final String DELETE_USER_BY_ID;
 
     public UsersDAO() {
         connection = DataBaseConnection.initialize();
+
+        ReadPropertiesFile property = new ReadPropertiesFile();
+        INSERT_USER = property.getSqlProperty("INSERT_USER");
+        SELECT_ALL_USERS = property.getSqlProperty("SELECT_ALL_USERS");
+        SELECT_USER_BY_ID = property.getSqlProperty("SELECT_USER_BY_ID");
+        UPDATE_USER_BY_ID = property.getSqlProperty("UPDATE_USER_BY_ID");
+        DELETE_USER_BY_ID = property.getSqlProperty("DELETE_USER_BY_ID");
     }
 
     @Override
-    public void addObject(Users obj) {
+    public void addObject(User obj) {
         try {
             PreparedStatement ps = connection.prepareStatement(INSERT_USER);
             ps.setString(1, obj.getName());
@@ -48,7 +55,7 @@ public class UsersDAO implements MainDAO<Users> {
     }
 
     @Override
-    public void updateObject(Users obj) {
+    public void updateObject(User obj) {
         try {
             PreparedStatement ps = connection.prepareStatement(UPDATE_USER_BY_ID);
             ps.setString(1, obj.getName());
@@ -65,29 +72,29 @@ public class UsersDAO implements MainDAO<Users> {
     }
 
     @Override
-    public Users getObjectById(int id) throws SQLException {
+    public User getObjectById(int id) throws SQLException {
         PreparedStatement ps = connection.prepareStatement(SELECT_USER_BY_ID);
         ps.setLong(1, id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            return UsersMapper.mapRow(rs);
+            return UserMapper.mapRow(rs);
         }
-        return Users.newBuilder().build();
+        return User.newBuilder().build();
     }
 
     @Override
-    public List<Users> getObjects() throws SQLException {
+    public List<User> getObjects() throws SQLException {
         PreparedStatement ps = connection.prepareStatement(SELECT_ALL_USERS);
-        List<Users> usersList = new ArrayList<>();
+        List<User> usersList = new ArrayList<>();
         ResultSet resultSet = ps.executeQuery();
         while (resultSet.next()) {
-            usersList.add(UsersMapper.mapRow(resultSet));
+            usersList.add(UserMapper.mapRow(resultSet));
         }
         return usersList;
     }
 
     @Override
-    public List<Users> getByItem(Users obj) {
+    public List<User> getByItem(User obj) {
         return null;
     }
 }

@@ -1,25 +1,24 @@
 package service;
 
 import dao.interfaces.MainDAO;
-import entity.Labels;
-import entity.Roles;
+import entity.Label;
 import service.interfaces.MainService;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public class LabelsService implements MainService<Labels> {
+public class LabelsService implements MainService<Label> {
 
-    private MainDAO<Labels> daoLabels;
+    private MainDAO<Label> daoLabels;
 
-    public LabelsService(MainDAO<Labels> daoLabels) {
+    public LabelsService(MainDAO<Label> daoLabels) {
         this.daoLabels = daoLabels;
     }
 
     @Override
-    public boolean addObject(Labels obj) throws SQLException {
+    public boolean addObject(Label obj) throws SQLException {
         //изменить проверку, сделать проверку полностью по обьекту или имени
-        Labels label = daoLabels.getObjectById(obj.getId());
+        Label label = daoLabels.getObjectById(obj.getId());
         if (label == null) {
             daoLabels.addObject(obj);
             return true;
@@ -30,28 +29,28 @@ public class LabelsService implements MainService<Labels> {
 
     @Override
     public void deleteObject(int id) throws SQLException {
-        Labels label = daoLabels.getObjectById(id);
+        Label label = daoLabels.getObjectById(id);
         if (label == null)
             daoLabels.deleteObject(id);
     }
 
     @Override
-    public void updateObject(Labels obj) {
+    public void updateObject(Label obj) {
         daoLabels.updateObject(obj);
     }
 
     @Override
-    public Labels getObjectById(int id) throws SQLException {
+    public Label getObjectById(int id) throws SQLException {
         return daoLabels.getObjectById(id);
     }
 
     @Override
-    public List<Labels> getObjects() throws SQLException {
+    public List<Label> getObjects() throws SQLException {
         return daoLabels.getObjects();
     }
 
     @Override
-    public List<Labels> getByItem(Labels obj) {
+    public List<Label> getByItem(Label obj) {
         return null;
     }
 }

@@ -1,6 +1,6 @@
 package entity;
 
-public class Users {
+public class User {
     private int id;
     private String name;
     private String surname;
@@ -8,7 +8,7 @@ public class Users {
     private String date;
     private String email;
     private String password;
-    private Roles role;
+    private Role role;
 
     public int getId() {
         return id;
@@ -38,12 +38,12 @@ public class Users {
         return password;
     }
 
-    public Roles getRole() {
+    public Role getRole() {
         return role;
     }
 
     public static Builder newBuilder() {
-        return new Users().new Builder();
+        return new User().new Builder();
     }
 
     public class Builder {
@@ -52,47 +52,47 @@ public class Users {
         }
 
         public Builder setId(int id) {
-            Users.this.id = id;
+            User.this.id = id;
             return this;
         }
 
         public Builder setName(String name) {
-            Users.this.name = name;
+            User.this.name = name;
             return this;
         }
 
         public Builder setSurname(String surname) {
-            Users.this.surname = surname;
+            User.this.surname = surname;
             return this;
         }
 
         public Builder setSex(boolean sex) {
-            Users.this.sex = sex;
+            User.this.sex = sex;
             return this;
         }
 
         public Builder setDate(String date) {
-            Users.this.date = date;
+            User.this.date = date;
             return this;
         }
 
         public Builder setEmail(String email) {
-            Users.this.email = email;
+            User.this.email = email;
             return this;
         }
 
         public Builder setPassword(String password) {
-            Users.this.password = password;
+            User.this.password = password;
             return this;
         }
 
-        public Builder setRole(Roles role) {
-            Users.this.role = role;
+        public Builder setRole(Role role) {
+            User.this.role = role;
             return this;
         }
 
-        public Users build() {
-            return Users.this;
+        public User build() {
+            return User.this;
         }
     }
 
