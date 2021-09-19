@@ -1,25 +1,24 @@
 package service;
 
 import dao.interfaces.MainDAO;
-import entity.Labels;
-import entity.Levels;
+import entity.Level;
 import service.interfaces.MainService;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public class LevelsService implements MainService<Levels> {
+public class LevelsService implements MainService<Level> {
 
-    private MainDAO<Levels> daoLevels;
+    private MainDAO<Level> daoLevels;
 
-    public LevelsService(MainDAO<Levels> daoLabels) {
+    public LevelsService(MainDAO<Level> daoLabels) {
         this.daoLevels = daoLabels;
     }
 
     @Override
-    public boolean addObject(Levels obj) throws SQLException {
+    public boolean addObject(Level obj) throws SQLException {
         //изменить проверку, сделать проверку полностью по обьекту или имени
-        Levels level = daoLevels.getObjectById(obj.getId());
+        Level level = daoLevels.getObjectById(obj.getId());
         if (level == null) {
             daoLevels.addObject(obj);
             return true;
@@ -30,28 +29,28 @@ public class LevelsService implements MainService<Levels> {
 
     @Override
     public void deleteObject(int id) throws SQLException {
-        Levels level = daoLevels.getObjectById(id);
+        Level level = daoLevels.getObjectById(id);
         if (level == null)
             daoLevels.deleteObject(id);
     }
 
     @Override
-    public void updateObject(Levels obj) {
+    public void updateObject(Level obj) {
         daoLevels.updateObject(obj);
     }
 
     @Override
-    public Levels getObjectById(int id) throws SQLException {
+    public Level getObjectById(int id) throws SQLException {
         return daoLevels.getObjectById(id);
     }
 
     @Override
-    public List<Levels> getObjects() throws SQLException {
+    public List<Level> getObjects() throws SQLException {
         return daoLevels.getObjects();
     }
 
     @Override
-    public List<Levels> getByItem(Levels obj) {
+    public List<Level> getByItem(Level obj) {
         return null;
     }
 }

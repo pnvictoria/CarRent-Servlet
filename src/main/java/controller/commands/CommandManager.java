@@ -1,4 +1,4 @@
-package controller;
+package controller.commands;
 
 import controller.commands.admin.cars.*;
 import controller.commands.admin.labels.LabelAddServletActionImpl;
@@ -11,6 +11,10 @@ import controller.commands.admin.levels.LevelHomeServletActionImpl;
 import controller.commands.admin.levels.LevelUpdateServletActionImpl;
 import controller.commands.admin.roles.*;
 import controller.commands.admin.users.*;
+import controller.commands.user.sign_in.SignInGetServletAction;
+import controller.commands.user.sign_in.SignInPostServletAction;
+import controller.commands.user.sign_up.SignUpGetServletAction;
+import controller.commands.user.sign_up.SignUpPostServletAction;
 import controller.interfaces.ServletAction;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +25,12 @@ public class CommandManager {
     private HashMap<String, ServletAction> commands = new HashMap<>();
 
     public CommandManager() {
+        // user
+        commands.put("/sign-in", new SignInGetServletAction());
+        commands.put("/sign-in/post", new SignInPostServletAction());
+        commands.put("/sign-up", new SignUpGetServletAction());
+        commands.put("/sign-un/post", new SignUpPostServletAction());
+
         // user
         commands.put("/admin/user/home", new UserHomeServletActionImpl());
         commands.put("/admin/user/add", new UserAddServletActionImpl());

@@ -1,27 +1,23 @@
 package entity;
 
-public class Levels {
+public class Role {
     private int id;
     private String name;
 
-    public int getId() {
-        return id;
+    private Role() {
+
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getId() {
+        return id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public static Builder newBuilder() {
-        return new Levels().new Builder();
+        return new Role().new Builder();
     }
 
     public class Builder {
@@ -30,23 +26,23 @@ public class Levels {
         }
 
         public Builder setId(int id) {
-            Levels.this.id = id;
+            Role.this.id = id;
             return this;
         }
 
         public Builder setName(String name) {
-            Levels.this.name = name;
+            Role.this.name = name;
             return this;
         }
 
-        public Levels build() {
-            return Levels.this;
+        public Role build() {
+            return Role.this;
         }
     }
 
     @Override
     public String toString() {
-        return "Levels{" +
+        return "Roles{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';

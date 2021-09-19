@@ -1,15 +1,14 @@
 package entity.mapper;
 
-import entity.Roles;
-import entity.Users;
+import entity.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UsersMapper {
+public class UserMapper {
 
-    public static Users mapRow(ResultSet rs) throws SQLException {
-        return Users.newBuilder()
+    public static User mapRow(ResultSet rs) throws SQLException {
+        return User.newBuilder()
                 .setId(rs.getInt("id"))
                 .setName(rs.getString("name"))
                 .setSurname(rs.getString("surname"))
@@ -17,11 +16,7 @@ public class UsersMapper {
                 .setDate(rs.getString("date"))
                 .setEmail(rs.getString("email"))
                 .setPassword(rs.getString("password"))
-                .setRole(
-                        Roles.newBuilder()
-                                .setId(rs.getInt("id"))
-                                .setName(rs.getString("name"))
-                                .build())
+                .setRole(RoleMapper.mapRow(rs))
                 .build();
     }
 }

@@ -20,26 +20,26 @@
                 </div>
                 <div class="form-wrap">
                     <p class="sign-up">Регистрация</p>
-                    <form action="post" class="form">
+                    <form action="${pageContext.request.contextPath}/sign-un/post" method="POST" class="form">
                         <div class="form__name item">
                             <label for="name"><span>Имя</span></label>
                             <input class="form__input big" placeholder="Текст" type="text" id="name" name="name" required>
                         </div>
                         <div class="form__second-name item">
-                            <label for="second-name"><span>Фамилия</span></label>
-                            <input class="form__input big" placeholder="Текст" type="text" id="second-name" name="second-name" required>
+                            <label for="surname"><span>Фамилия</span></label>
+                            <input class="form__input big" placeholder="Текст" type="text" id="surname" name="surname" required>
                         </div>
                         <div class="form__sex item">
                             <span>Пол</span>
                             <div class="form__sex-wrap">
                                 <div>
-                                    <input type="radio" class="radio__female-input" id="female" name="sex" value="female">
+                                    <input type="radio" class="radio__female-input" id="female" name="female" value="female">
                                     <label class="radio__female-label" for="female">
                                         <p class="radio sex">Женский</p>
                                     </label>
                                 </div>
                                 <div>
-                                    <input type="radio" class="radio__male-input" id="male" name="sex" value="male">
+                                    <input type="radio" class="radio__male-input" id="male" name="male" value="male">
                                     <label class="radio__male-label" for="male">
                                         <p class="radio sex">Мужской</p>
                                     </label>
@@ -71,12 +71,12 @@
                             </div>
                         </div>
                         <div class="form__mail item">
-                            <label for="mail"><span>Электронная почта</span></label>
-                            <input class="form__input big" placeholder="Текст" type="email" name="mail" id="mail">
+                            <label for="email"><span>Электронная почта</span></label>
+                            <input class="form__input big" placeholder="Текст" type="email" name="email" id="email">
                         </div>
                         <div class="form__pswd item">
-                            <label for="pswd"><span>Пароль</span></label>
-                            <input class="form__input big" placeholder="Текст" type="password" name="pswd" id="pswd">
+                            <label for="password"><span>Пароль</span></label>
+                            <input class="form__input big" placeholder="Текст" type="password" name="password" id="password">
                         </div>
 <%--                        <div class="form__acc-type item">--%>
 <%--                            <span>Тип аккаунта</span>--%>

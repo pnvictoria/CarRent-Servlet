@@ -1,6 +1,6 @@
 package entity;
 
-public class Labels {
+public class Level {
     private int id;
     private String name;
 
@@ -21,7 +21,7 @@ public class Labels {
     }
 
     public static Builder newBuilder() {
-        return new Labels().new Builder();
+        return new Level().new Builder();
     }
 
     public class Builder {
@@ -30,23 +30,23 @@ public class Labels {
         }
 
         public Builder setId(int id) {
-            Labels.this.id = id;
+            Level.this.id = id;
             return this;
         }
 
         public Builder setName(String name) {
-            Labels.this.name = name;
+            Level.this.name = name;
             return this;
         }
 
-        public Labels build() {
-            return Labels.this;
+        public Level build() {
+            return Level.this;
         }
     }
 
     @Override
     public String toString() {
-        return "Labels{" +
+        return "Levels{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
