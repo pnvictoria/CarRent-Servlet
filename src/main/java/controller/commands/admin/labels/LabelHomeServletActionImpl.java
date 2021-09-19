@@ -17,8 +17,8 @@ public class LabelHomeServletActionImpl implements ServletAction {
     private final String ADMIN_LABEL_HOME_PAGE;
 
     public LabelHomeServletActionImpl() {
-        ReadPropertiesFile property = new ReadPropertiesFile();
-        ADMIN_LABEL_HOME_PAGE = property.getPageProperty("ADMIN_LABEL_HOME_PAGE");
+        ReadPropertiesFile propertyPage = new ReadPropertiesFile();
+        ADMIN_LABEL_HOME_PAGE = propertyPage.getPageProperty("ADMIN_LABEL_HOME_PAGE");
     }
 
     @Override

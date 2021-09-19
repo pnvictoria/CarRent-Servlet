@@ -16,8 +16,8 @@ public class CarHomeServletActionImpl implements ServletAction {
     private final String ADMIN_CAR_HOME_PAGE;
 
     public CarHomeServletActionImpl() {
-        ReadPropertiesFile property = new ReadPropertiesFile();
-        ADMIN_CAR_HOME_PAGE = property.getPageProperty("ADMIN_CAR_HOME_PAGE");
+        ReadPropertiesFile propertyPage = new ReadPropertiesFile();
+        ADMIN_CAR_HOME_PAGE = propertyPage.getPageProperty("ADMIN_CAR_HOME_PAGE");
     }
 
     @Override

@@ -24,12 +24,12 @@ public class RolesDAO implements MainDAO<Role> {
     public RolesDAO() {
         connection = DataBaseConnection.initialize();
 
-        ReadPropertiesFile property = new ReadPropertiesFile();
-        INSERT_ROLE = property.getSqlProperty("INSERT_ROLE");
-        SELECT_ALL_ROLE = property.getSqlProperty("SELECT_ALL_ROLE");
-        SELECT_ROLE_BY_ID = property.getSqlProperty("SELECT_ROLE_BY_ID");
-        UPDATE_ROLE_BY_ID = property.getSqlProperty("UPDATE_ROLE_BY_ID");
-        DELETE_ROLE_BY_ID = property.getSqlProperty("DELETE_ROLE_BY_ID");
+        ReadPropertiesFile propertyPage = new ReadPropertiesFile();
+        INSERT_ROLE = propertyPage.getSqlProperty("INSERT_ROLE");
+        SELECT_ALL_ROLE = propertyPage.getSqlProperty("SELECT_ALL_ROLE");
+        SELECT_ROLE_BY_ID = propertyPage.getSqlProperty("SELECT_ROLE_BY_ID");
+        UPDATE_ROLE_BY_ID = propertyPage.getSqlProperty("UPDATE_ROLE_BY_ID");
+        DELETE_ROLE_BY_ID = propertyPage.getSqlProperty("DELETE_ROLE_BY_ID");
     }
 
     @Override

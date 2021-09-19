@@ -25,12 +25,12 @@ public class CarsDAO implements MainDAO<Car> {
     public CarsDAO() {
         connection = DataBaseConnection.initialize();
 
-        ReadPropertiesFile property = new ReadPropertiesFile();
-        INSERT_CAR = property.getSqlProperty("INSERT_CAR");
-        SELECT_ALL_CARS = property.getSqlProperty("SELECT_ALL_CARS");
-        SELECT_CAR_BY_ID = property.getSqlProperty("SELECT_CAR_BY_ID");
-        UPDATE_CAR_BY_ID = property.getSqlProperty("UPDATE_CAR_BY_ID");
-        DELETE_CAR_BY_ID = property.getSqlProperty("DELETE_CAR_BY_ID");
+        ReadPropertiesFile propertySql = new ReadPropertiesFile();
+        INSERT_CAR = propertySql.getSqlProperty("INSERT_CAR");
+        SELECT_ALL_CARS = propertySql.getSqlProperty("SELECT_ALL_CARS");
+        SELECT_CAR_BY_ID = propertySql.getSqlProperty("SELECT_CAR_BY_ID");
+        UPDATE_CAR_BY_ID = propertySql.getSqlProperty("UPDATE_CAR_BY_ID");
+        DELETE_CAR_BY_ID = propertySql.getSqlProperty("DELETE_CAR_BY_ID");
     }
 
     @Override

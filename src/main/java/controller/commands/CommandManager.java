@@ -13,8 +13,8 @@ import controller.commands.admin.roles.*;
 import controller.commands.admin.users.*;
 import controller.commands.user.sign_in.SignInGetServletAction;
 import controller.commands.user.sign_in.SignInPostServletAction;
-import controller.commands.user.sign_out.SignUpGetServletAction;
-import controller.commands.user.sign_out.SignUpPostServletAction;
+import controller.commands.user.sign_up.SignUpGetServletAction;
+import controller.commands.user.sign_up.SignUpPostServletAction;
 import controller.interfaces.ServletAction;
 
 import javax.servlet.http.HttpServletRequest;

@@ -24,12 +24,12 @@ public class LabelsDAO implements MainDAO<Label> {
     public LabelsDAO() {
         connection = DataBaseConnection.initialize();
 
-        ReadPropertiesFile property = new ReadPropertiesFile();
-        INSERT_LABEL = property.getSqlProperty("INSERT_LABEL");
-        SELECT_ALL_LABEL = property.getSqlProperty("SELECT_ALL_LABEL");
-        SELECT_LABEL_BY_ID = property.getSqlProperty("SELECT_LABEL_BY_ID");
-        UPDATE_LABEL_BY_ID = property.getSqlProperty("UPDATE_LABEL_BY_ID");
-        DELETE_LABEL_BY_ID = property.getSqlProperty("DELETE_LABEL_BY_ID");
+        ReadPropertiesFile propertySql = new ReadPropertiesFile();
+        INSERT_LABEL = propertySql.getSqlProperty("INSERT_LABEL");
+        SELECT_ALL_LABEL = propertySql.getSqlProperty("SELECT_ALL_LABEL");
+        SELECT_LABEL_BY_ID = propertySql.getSqlProperty("SELECT_LABEL_BY_ID");
+        UPDATE_LABEL_BY_ID = propertySql.getSqlProperty("UPDATE_LABEL_BY_ID");
+        DELETE_LABEL_BY_ID = propertySql.getSqlProperty("DELETE_LABEL_BY_ID");
     }
 
     @Override

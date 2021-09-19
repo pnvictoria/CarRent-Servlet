@@ -17,8 +17,8 @@ public class LevelHomeServletActionImpl implements ServletAction {
     private final String ADMIN_LEVEL_HOME_PAGE;
 
     public LevelHomeServletActionImpl() {
-        ReadPropertiesFile property = new ReadPropertiesFile();
-        ADMIN_LEVEL_HOME_PAGE = property.getPageProperty("ADMIN_LEVEL_HOME_PAGE");
+        ReadPropertiesFile propertyPage = new ReadPropertiesFile();
+        ADMIN_LEVEL_HOME_PAGE = propertyPage.getPageProperty("ADMIN_LEVEL_HOME_PAGE");
     }
 
     @Override

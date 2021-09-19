@@ -24,12 +24,12 @@ public class LevelsDAO implements MainDAO<Level> {
     public LevelsDAO() {
         connection = DataBaseConnection.initialize();
 
-        ReadPropertiesFile property = new ReadPropertiesFile();
-        INSERT_LEVEL = property.getSqlProperty("INSERT_LEVEL");
-        SELECT_ALL_LEVEL = property.getSqlProperty("SELECT_ALL_LEVEL");
-        SELECT_LEVEL_BY_ID = property.getSqlProperty("SELECT_LEVEL_BY_ID");
-        UPDATE_LEVEL_BY_ID = property.getSqlProperty("UPDATE_LEVEL_BY_ID");
-        DELETE_LEVEL_BY_ID = property.getSqlProperty("DELETE_LEVEL_BY_ID");
+        ReadPropertiesFile propertySql = new ReadPropertiesFile();
+        INSERT_LEVEL = propertySql.getSqlProperty("INSERT_LEVEL");
+        SELECT_ALL_LEVEL = propertySql.getSqlProperty("SELECT_ALL_LEVEL");
+        SELECT_LEVEL_BY_ID = propertySql.getSqlProperty("SELECT_LEVEL_BY_ID");
+        UPDATE_LEVEL_BY_ID = propertySql.getSqlProperty("UPDATE_LEVEL_BY_ID");
+        DELETE_LEVEL_BY_ID = propertySql.getSqlProperty("DELETE_LEVEL_BY_ID");
     }
 
     @Override

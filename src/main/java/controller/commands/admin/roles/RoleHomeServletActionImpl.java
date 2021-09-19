@@ -17,8 +17,8 @@ public class RoleHomeServletActionImpl implements ServletAction {
     private final String ADMIN_ROLE_HOME_PAGE;
 
     public RoleHomeServletActionImpl() {
-        ReadPropertiesFile property = new ReadPropertiesFile();
-        ADMIN_ROLE_HOME_PAGE = property.getPageProperty("ADMIN_ROLE_HOME_PAGE");
+        ReadPropertiesFile propertyPage = new ReadPropertiesFile();
+        ADMIN_ROLE_HOME_PAGE = propertyPage.getPageProperty("ADMIN_ROLE_HOME_PAGE");
     }
 
     @Override

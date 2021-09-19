@@ -17,8 +17,9 @@ public class SignInPostServletAction implements ServletAction {
     private final String ROLE_ADMIN;
     private final String ROLE_USER;
 
-    private final String SUCCESSFUL_RESULT;
-    private final String NOT_SUCCESSFUL_RESULT;
+    private final String ADMIN_PAGE;
+    private final String MAIN_PAGE;
+    private final String SIGN_IN_PAGE;
 
     private MainService<User> service;
 
@@ -26,12 +27,13 @@ public class SignInPostServletAction implements ServletAction {
         service = new UsersService(new UsersDAO());
 
         ReadPropertiesFile propertyPage = new ReadPropertiesFile();
-        SUCCESSFUL_RESULT = propertyPage.getPageProperty("SUCCESSFUL_RESULT");
-        NOT_SUCCESSFUL_RESULT = propertyPage.getPageProperty("NOT_SUCCESSFUL_RESULT");
+        MAIN_PAGE = propertyPage.getPageProperty("MAIN_PAGE");
+        ADMIN_PAGE = propertyPage.getPageProperty("ADMIN_CAR_HOME_PAGE");
 
-        ReadPropertiesFile propertyRoles= new ReadPropertiesFile();
-        ROLE_ADMIN = propertyRoles.getConstantProperty("ROLE_ADMIN");
-        ROLE_USER = propertyRoles.getConstantProperty("ROLE_USER");
+        ReadPropertiesFile propertyRole= new ReadPropertiesFile();
+        ROLE_ADMIN = propertyRole.getConstantProperty("ROLE_ADMIN");
+        ROLE_USER = propertyRole.getConstantProperty("ROLE_USER");
+        SIGN_IN_PAGE = propertyRole.getConstantProperty("SIGN_IN_PAGE");
     }
 
     @Override
@@ -46,12 +48,12 @@ public class SignInPostServletAction implements ServletAction {
         if ((req.getParameter("email").equals(user.getEmail())
                 && req.getParameter("password").equals(user.getPassword()))) {
             if (ROLE_ADMIN.equals(user.getRole().getName())) {
-                return SUCCESSFUL_RESULT;
+                return ADMIN_PAGE;
             }
             if (ROLE_USER.equals(user.getRole().getName())) {
-                return SUCCESSFUL_RESULT;
+                return MAIN_PAGE;
             }
         }
-        return NOT_SUCCESSFUL_RESULT;
+        return SIGN_IN_PAGE;
     }
 }

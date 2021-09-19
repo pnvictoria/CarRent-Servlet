@@ -17,8 +17,8 @@ public class UserHomeServletActionImpl implements ServletAction {
     private final String ADMIN_USER_HOME_PAGE;
 
     public UserHomeServletActionImpl() {
-        ReadPropertiesFile property = new ReadPropertiesFile();
-        ADMIN_USER_HOME_PAGE = property.getPageProperty("ADMIN_USER_HOME_PAGE");
+        ReadPropertiesFile propertyPage = new ReadPropertiesFile();
+        ADMIN_USER_HOME_PAGE = propertyPage.getPageProperty("ADMIN_USER_HOME_PAGE");
     }
 
     @Override

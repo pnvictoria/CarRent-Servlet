@@ -24,12 +24,12 @@ public class UsersDAO implements MainDAO<User> {
     public UsersDAO() {
         connection = DataBaseConnection.initialize();
 
-        ReadPropertiesFile property = new ReadPropertiesFile();
-        INSERT_USER = property.getSqlProperty("INSERT_USER");
-        SELECT_ALL_USERS = property.getSqlProperty("SELECT_ALL_USERS");
-        SELECT_USER_BY_ID = property.getSqlProperty("SELECT_USER_BY_ID");
-        UPDATE_USER_BY_ID = property.getSqlProperty("UPDATE_USER_BY_ID");
-        DELETE_USER_BY_ID = property.getSqlProperty("DELETE_USER_BY_ID");
+        ReadPropertiesFile propertySql = new ReadPropertiesFile();
+        INSERT_USER = propertySql.getSqlProperty("INSERT_USER");
+        SELECT_ALL_USERS = propertySql.getSqlProperty("SELECT_ALL_USERS");
+        SELECT_USER_BY_ID = propertySql.getSqlProperty("SELECT_USER_BY_ID");
+        UPDATE_USER_BY_ID = propertySql.getSqlProperty("UPDATE_USER_BY_ID");
+        DELETE_USER_BY_ID = propertySql.getSqlProperty("DELETE_USER_BY_ID");
     }
 
     @Override
