@@ -4,7 +4,7 @@ import dao.interfaces.MainDAO;
 import database.DataBaseConnection;
 import entity.Car;
 import entity.mapper.CarMapper;
-import utils.constants.ReadPropertiesFile;
+import utils.ReadPropertiesFile;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarsDAO implements MainDAO<Car> {
+public class CarDAO implements MainDAO<Car> {
     private Connection connection;
 
     private final String INSERT_CAR;
@@ -22,7 +22,7 @@ public class CarsDAO implements MainDAO<Car> {
     private final String UPDATE_CAR_BY_ID;
     private final String DELETE_CAR_BY_ID;
 
-    public CarsDAO() {
+    public CarDAO() {
         connection = DataBaseConnection.initialize();
 
         ReadPropertiesFile propertySql = new ReadPropertiesFile();
@@ -43,6 +43,7 @@ public class CarsDAO implements MainDAO<Car> {
             ps.setLong(4, obj.getLevel().getId());
             ps.setLong(5, obj.getLabel().getId());
             ps.setString(6, obj.getDesc());
+            ps.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -52,6 +53,7 @@ public class CarsDAO implements MainDAO<Car> {
     public void deleteObject(int id) throws SQLException {
         PreparedStatement ps = connection.prepareStatement(DELETE_CAR_BY_ID);
         ps.setLong(1, id);
+        ps.executeUpdate();
     }
 
     @Override
@@ -65,6 +67,7 @@ public class CarsDAO implements MainDAO<Car> {
             ps.setLong(5, obj.getLabel().getId());
             ps.setString(6, obj.getDesc());
             ps.setLong(7, obj.getId());
+            ps.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

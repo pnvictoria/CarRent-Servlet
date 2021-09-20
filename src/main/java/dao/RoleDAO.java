@@ -4,7 +4,7 @@ import dao.interfaces.MainDAO;
 import database.DataBaseConnection;
 import entity.Role;
 import entity.mapper.RoleMapper;
-import utils.constants.ReadPropertiesFile;
+import utils.ReadPropertiesFile;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RolesDAO implements MainDAO<Role> {
+public class RoleDAO implements MainDAO<Role> {
     private Connection connection;
     private final String INSERT_ROLE;
     private final String SELECT_ALL_ROLE;
@@ -21,7 +21,7 @@ public class RolesDAO implements MainDAO<Role> {
     private final String UPDATE_ROLE_BY_ID;
     private final String DELETE_ROLE_BY_ID;
 
-    public RolesDAO() {
+    public RoleDAO() {
         connection = DataBaseConnection.initialize();
 
         ReadPropertiesFile propertyPage = new ReadPropertiesFile();
@@ -37,6 +37,7 @@ public class RolesDAO implements MainDAO<Role> {
         try {
             PreparedStatement ps = connection.prepareStatement(INSERT_ROLE);
             ps.setString(1, obj.getName());
+            ps.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -46,6 +47,7 @@ public class RolesDAO implements MainDAO<Role> {
     public void deleteObject(int id) throws SQLException {
         PreparedStatement ps = connection.prepareStatement(DELETE_ROLE_BY_ID);
         ps.setLong(1, id);
+        ps.executeUpdate();
     }
 
     @Override
@@ -54,6 +56,7 @@ public class RolesDAO implements MainDAO<Role> {
             PreparedStatement ps = connection.prepareStatement(UPDATE_ROLE_BY_ID);
             ps.setString(1, obj.getName());
             ps.setLong(2, obj.getId());
+            ps.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

@@ -7,11 +7,11 @@ import service.interfaces.MainService;
 import java.sql.SQLException;
 import java.util.List;
 
-public class RolesService implements MainService<Role> {
+public class RoleService implements MainService<Role> {
 
     private MainDAO<Role> daoRoles;
 
-    public RolesService(MainDAO<Role> daoRoles) {
+    public RoleService(MainDAO<Role> daoRoles) {
         this.daoRoles = daoRoles;
     }
 

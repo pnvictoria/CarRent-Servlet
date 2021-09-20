@@ -7,11 +7,11 @@ import service.interfaces.MainService;
 import java.sql.SQLException;
 import java.util.List;
 
-public class CarsService implements MainService<Car> {
+public class CarService implements MainService<Car> {
 
     private MainDAO<Car> daoCars;
 
-    public CarsService(MainDAO<Car> daoCars) {
+    public CarService(MainDAO<Car> daoCars) {
         this.daoCars = daoCars;
     }
 

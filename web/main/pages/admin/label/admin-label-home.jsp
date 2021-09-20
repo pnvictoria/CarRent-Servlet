@@ -30,14 +30,14 @@
                     <td><c:out value="${label.getName()}"/></td>
 
                     <td>
-                        <form method="POST"
-                              action="${pageContext.request.contextPath}/admin/label/update?labelId=${label.getId()}">
+                        <a href="${pageContext.request.contextPath}/admin/label/update?id=${label.getId()}"
+                           class="header__link">
                             <input type="submit" value="Update"/>
-                        </form>
+                        </a>
                     </td>
                     <td>
                         <form method="POST"
-                              action="${pageContext.request.contextPath}/admin/label/delete?labelId=${label.getId()}">
+                              action="${pageContext.request.contextPath}/admin/label/delete?id=${label.getId()}">
                             <input type="submit" value="Delete"/>
                         </form>
                     </td>
@@ -45,9 +45,10 @@
             </c:forEach>
         </table>
 
-        <form method="POST" action="${pageContext.request.contextPath}/admin/label/add}">
+
+        <a href="${pageContext.request.contextPath}/admin/label/add" class="header__link">
             <input type="submit" value="Add"/>
-        </form>
+        </a>
 
     </section>
     <%@ include file="/main/pages/comn/footer.jsp" %>

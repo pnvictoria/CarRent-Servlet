@@ -4,7 +4,7 @@ import dao.interfaces.MainDAO;
 import database.DataBaseConnection;
 import entity.Level;
 import entity.mapper.LevelMapper;
-import utils.constants.ReadPropertiesFile;
+import utils.ReadPropertiesFile;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LevelsDAO implements MainDAO<Level> {
+public class LevelDAO implements MainDAO<Level> {
     private Connection connection;
     private final String INSERT_LEVEL;
     private final String SELECT_ALL_LEVEL;
@@ -21,7 +21,7 @@ public class LevelsDAO implements MainDAO<Level> {
     private final String UPDATE_LEVEL_BY_ID;
     private final String DELETE_LEVEL_BY_ID;
 
-    public LevelsDAO() {
+    public LevelDAO() {
         connection = DataBaseConnection.initialize();
 
         ReadPropertiesFile propertySql = new ReadPropertiesFile();
@@ -37,6 +37,7 @@ public class LevelsDAO implements MainDAO<Level> {
         try {
             PreparedStatement ps = connection.prepareStatement(INSERT_LEVEL);
             ps.setString(1, obj.getName());
+            ps.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -46,6 +47,7 @@ public class LevelsDAO implements MainDAO<Level> {
     public void deleteObject(int id) throws SQLException {
         PreparedStatement ps = connection.prepareStatement(DELETE_LEVEL_BY_ID);
         ps.setLong(1, id);
+        ps.executeUpdate();
     }
 
     @Override
@@ -54,6 +56,7 @@ public class LevelsDAO implements MainDAO<Level> {
             PreparedStatement ps = connection.prepareStatement(UPDATE_LEVEL_BY_ID);
             ps.setString(1, obj.getName());
             ps.setLong(2, obj.getId());
+            ps.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

@@ -4,7 +4,7 @@ import dao.interfaces.MainDAO;
 import database.DataBaseConnection;
 import entity.User;
 import entity.mapper.UserMapper;
-import utils.constants.ReadPropertiesFile;
+import utils.ReadPropertiesFile;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsersDAO implements MainDAO<User> {
+public class UserDAO implements MainDAO<User> {
     private Connection connection;
     private final String INSERT_USER;
     private final String SELECT_ALL_USERS;
@@ -21,7 +21,7 @@ public class UsersDAO implements MainDAO<User> {
     private final String UPDATE_USER_BY_ID;
     private final String DELETE_USER_BY_ID;
 
-    public UsersDAO() {
+    public UserDAO() {
         connection = DataBaseConnection.initialize();
 
         ReadPropertiesFile propertySql = new ReadPropertiesFile();
@@ -43,6 +43,7 @@ public class UsersDAO implements MainDAO<User> {
             ps.setString(5, obj.getEmail());
             ps.setString(6, obj.getPassword());
             ps.setLong(7, obj.getRole().getId());
+            ps.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -52,6 +53,7 @@ public class UsersDAO implements MainDAO<User> {
     public void deleteObject(int id) throws SQLException {
         PreparedStatement ps = connection.prepareStatement(DELETE_USER_BY_ID);
         ps.setLong(1, id);
+        ps.executeUpdate();
     }
 
     @Override
@@ -66,6 +68,7 @@ public class UsersDAO implements MainDAO<User> {
             ps.setString(6, obj.getPassword());
             ps.setLong(7, obj.getRole().getId());
             ps.setLong(8, obj.getId());
+            ps.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

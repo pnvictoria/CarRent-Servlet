@@ -1,10 +1,10 @@
 package controller.commands.admin.users;
 
 import controller.interfaces.ServletAction;
-import dao.UsersDAO;
+import dao.UserDAO;
 import entity.User;
-import service.UsersService;
-import utils.constants.ReadPropertiesFile;
+import service.UserService;
+import utils.ReadPropertiesFile;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +25,7 @@ public class UserHomeServletActionImpl implements ServletAction {
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<User> allUsers = null;
         try {
-            allUsers = new UsersService(new UsersDAO()).getObjects();
+            allUsers = new UserService(new UserDAO()).getObjects();
         } catch (SQLException e) {
             e.printStackTrace();
         }

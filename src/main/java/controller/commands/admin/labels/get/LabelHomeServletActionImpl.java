@@ -1,10 +1,10 @@
-package controller.commands.admin.labels;
+package controller.commands.admin.labels.get;
 
 import controller.interfaces.ServletAction;
-import dao.LabelsDAO;
+import dao.LabelDAO;
 import entity.Label;
-import service.LabelsService;
-import utils.constants.ReadPropertiesFile;
+import service.LabelService;
+import utils.ReadPropertiesFile;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +25,7 @@ public class LabelHomeServletActionImpl implements ServletAction {
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Label> allLabels = null;
         try {
-            allLabels = new LabelsService(new LabelsDAO()).getObjects();
+            allLabels = new LabelService(new LabelDAO()).getObjects();
         } catch (SQLException e) {
             e.printStackTrace();
         }

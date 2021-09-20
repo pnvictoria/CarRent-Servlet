@@ -4,7 +4,7 @@ import dao.interfaces.MainDAO;
 import database.DataBaseConnection;
 import entity.Label;
 import entity.mapper.LabelMapper;
-import utils.constants.ReadPropertiesFile;
+import utils.ReadPropertiesFile;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LabelsDAO implements MainDAO<Label> {
+public class LabelDAO implements MainDAO<Label> {
     private Connection connection;
     private final String INSERT_LABEL;
     private final String SELECT_ALL_LABEL;
@@ -21,7 +21,7 @@ public class LabelsDAO implements MainDAO<Label> {
     private final String UPDATE_LABEL_BY_ID ;
     private final String DELETE_LABEL_BY_ID;
 
-    public LabelsDAO() {
+    public LabelDAO() {
         connection = DataBaseConnection.initialize();
 
         ReadPropertiesFile propertySql = new ReadPropertiesFile();
@@ -37,6 +37,7 @@ public class LabelsDAO implements MainDAO<Label> {
         try {
             PreparedStatement ps = connection.prepareStatement(INSERT_LABEL);
             ps.setString(1, obj.getName());
+            ps.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -46,6 +47,7 @@ public class LabelsDAO implements MainDAO<Label> {
     public void deleteObject(int id) throws SQLException {
         PreparedStatement ps = connection.prepareStatement(DELETE_LABEL_BY_ID);
         ps.setLong(1, id);
+        ps.executeUpdate();
     }
 
     @Override
@@ -54,6 +56,7 @@ public class LabelsDAO implements MainDAO<Label> {
             PreparedStatement ps = connection.prepareStatement(UPDATE_LABEL_BY_ID);
             ps.setString(1, obj.getName());
             ps.setLong(2, obj.getId());
+            ps.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

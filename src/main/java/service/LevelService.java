@@ -7,11 +7,11 @@ import service.interfaces.MainService;
 import java.sql.SQLException;
 import java.util.List;
 
-public class LevelsService implements MainService<Level> {
+public class LevelService implements MainService<Level> {
 
     private MainDAO<Level> daoLevels;
 
-    public LevelsService(MainDAO<Level> daoLabels) {
+    public LevelService(MainDAO<Level> daoLabels) {
         this.daoLevels = daoLabels;
     }
 
