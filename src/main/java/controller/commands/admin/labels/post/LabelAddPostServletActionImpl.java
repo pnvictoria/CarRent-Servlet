@@ -13,25 +13,22 @@ import java.sql.SQLException;
 
 public class LabelAddPostServletActionImpl implements ServletAction {
     private MainService<Label> service;
-
     private final String ADMIN_LABEL_HOME_PAGE;
     private final String ADMIN_LABEL_ADD_PAGE;
 
     public LabelAddPostServletActionImpl() {
         service = new LabelService(new LabelDAO());
-
-        ReadPropertiesFile propertyPage = new ReadPropertiesFile();
-        ADMIN_LABEL_HOME_PAGE = propertyPage.getPageProperty("ADMIN_LABEL_HOME_PAGE");
-        ADMIN_LABEL_ADD_PAGE = propertyPage.getPageProperty("ADMIN_LABEL_ADD_PAGE");
+        ReadPropertiesFile property = new ReadPropertiesFile();
+        ADMIN_LABEL_HOME_PAGE = property.getCommandsProperty("ADMIN_LABEL_HOME");
+        ADMIN_LABEL_ADD_PAGE = property.getCommandsProperty("ADMIN_LABEL_ADD");
     }
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
-
-        int id = Integer.parseInt(req.getParameter("id"));
-
         try {
-            Label label = service.getObjectById(id);
+            Label label = Label.newBuilder()
+                    .setName(req.getParameter("name"))
+                    .build();
             if(service.addObject(label)) {
                 return ADMIN_LABEL_HOME_PAGE;
             }

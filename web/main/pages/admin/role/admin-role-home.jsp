@@ -31,13 +31,13 @@
 
                     <td>
                         <form method="POST"
-                              action="${pageContext.request.contextPath}/admin/role/update?roleId=${role.getId()}">
+                              action="${pageContext.request.contextPath}/admin/role/update?id=${role.getId()}">
                             <input type="submit" value="Update"/>
                         </form>
                     </td>
                     <td>
                         <form method="POST"
-                              action="${pageContext.request.contextPath}/admin/role/delete?roleId=${role.getId()}">
+                              action="${pageContext.request.contextPath}/admin/role/delete?id=${role.getId()}">
                             <input type="submit" value="Delete"/>
                         </form>
                     </td>

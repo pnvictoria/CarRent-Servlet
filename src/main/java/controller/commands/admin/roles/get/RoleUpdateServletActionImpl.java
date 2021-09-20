@@ -1,4 +1,4 @@
-package controller.commands.admin.roles;
+package controller.commands.admin.roles.get;
 
 import controller.interfaces.ServletAction;
 

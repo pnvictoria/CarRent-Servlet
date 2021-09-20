@@ -31,13 +31,13 @@
 
                     <td>
                         <form method="POST"
-                              action="${pageContext.request.contextPath}/admin/level/update?levelId=${level.getId()}">
+                              action="${pageContext.request.contextPath}/admin/level/update?id=${level.getId()}">
                             <input type="submit" value="Update"/>
                         </form>
                     </td>
                     <td>
                         <form method="POST"
-                              action="${pageContext.request.contextPath}/admin/level/delete?levelId=${level.getId()}">
+                              action="${pageContext.request.contextPath}/admin/level/delete?id=${level.getId()}">
                             <input type="submit" value="Delete"/>
                         </form>
                     </td>
@@ -45,9 +45,9 @@
             </c:forEach>
         </table>
 
-        <form method="POST" action="${pageContext.request.contextPath}/admin/level/add}">
+        <a href="${pageContext.request.contextPath}/admin/level/add" class="header__link">
             <input type="submit" value="Add"/>
-        </form>
+        </a>
 
     </section>
     <%@ include file="/main/pages/comn/footer.jsp" %>
