@@ -1,7 +1,6 @@
 package controller.commands.user.sign_out;
 
 import controller.interfaces.ServletAction;
-import utils.constants.ReadPropertiesFile;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

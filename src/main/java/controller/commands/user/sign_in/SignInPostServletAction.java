@@ -1,11 +1,13 @@
 package controller.commands.user.sign_in;
 
+import controller.commands.CommandManager;
+import controller.commands.admin.cars.CarHomeServletActionImpl;
 import controller.interfaces.ServletAction;
-import dao.UsersDAO;
+import dao.UserDAO;
 import entity.User;
-import service.UsersService;
+import service.UserService;
 import service.interfaces.MainService;
-import utils.constants.ReadPropertiesFile;
+import utils.ReadPropertiesFile;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +26,7 @@ public class SignInPostServletAction implements ServletAction {
     private MainService<User> service;
 
     public SignInPostServletAction() {
-        service = new UsersService(new UsersDAO());
+        service = new UserService(new UserDAO());
 
         ReadPropertiesFile propertyPage = new ReadPropertiesFile();
         MAIN_PAGE = propertyPage.getPageProperty("MAIN_PAGE");
@@ -48,6 +50,7 @@ public class SignInPostServletAction implements ServletAction {
         if ((req.getParameter("email").equals(user.getEmail())
                 && req.getParameter("password").equals(user.getPassword()))) {
             if (ROLE_ADMIN.equals(user.getRole().getName())) {
+//                return CommandManager.commands.get();
                 return ADMIN_PAGE;
             }
             if (ROLE_USER.equals(user.getRole().getName())) {

@@ -1,7 +1,7 @@
 package controller.commands.user.sign_in;
 
 import controller.interfaces.ServletAction;
-import utils.constants.ReadPropertiesFile;
+import utils.ReadPropertiesFile;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

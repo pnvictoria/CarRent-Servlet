@@ -1,10 +1,10 @@
 package controller.commands.admin.roles;
 
 import controller.interfaces.ServletAction;
-import dao.RolesDAO;
+import dao.RoleDAO;
 import entity.Role;
-import service.RolesService;
-import utils.constants.ReadPropertiesFile;
+import service.RoleService;
+import utils.ReadPropertiesFile;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +25,7 @@ public class RoleHomeServletActionImpl implements ServletAction {
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Role> allRoles = null;
         try {
-            allRoles = new RolesService(new RolesDAO()).getObjects();
+            allRoles = new RoleService(new RoleDAO()).getObjects();
         } catch (SQLException e) {
             e.printStackTrace();
         }

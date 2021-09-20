@@ -7,11 +7,11 @@ import service.interfaces.MainService;
 import java.sql.SQLException;
 import java.util.List;
 
-public class UsersService implements MainService<User> {
+public class UserService implements MainService<User> {
 
     private MainDAO<User> daoUser;
 
-    public UsersService(MainDAO<User> daoUser) {
+    public UserService(MainDAO<User> daoUser) {
         this.daoUser = daoUser;
     }
 
@@ -19,7 +19,8 @@ public class UsersService implements MainService<User> {
     public boolean addObject(User obj) throws SQLException {
         //изменить проверку, сделать проверку полностью по обьекту или логину
         User user = daoUser.getObjectById(obj.getId());
-        if (user == null) {
+//        if (user == null) {
+        if (true) {
             daoUser.addObject(obj);
             return true;
         } else {

@@ -1,12 +1,12 @@
 package controller.commands.user.sign_up;
 
 import controller.interfaces.ServletAction;
-import dao.UsersDAO;
+import dao.UserDAO;
 import entity.Role;
 import entity.User;
-import service.UsersService;
+import service.UserService;
 import service.interfaces.MainService;
-import utils.constants.ReadPropertiesFile;
+import utils.ReadPropertiesFile;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +25,7 @@ public class SignUpPostServletAction implements ServletAction {
     private MainService<User> service;
 
     public SignUpPostServletAction() {
-        service = new UsersService(new UsersDAO());
+        service = new UserService(new UserDAO());
 
         ReadPropertiesFile propertyPage = new ReadPropertiesFile();
         MAIN_PAGE = propertyPage.getPageProperty("MAIN_PAGE");

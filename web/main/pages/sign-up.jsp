@@ -20,7 +20,7 @@
                 </div>
                 <div class="form-wrap">
                     <p class="sign-up">Регистрация</p>
-                    <form action="${pageContext.request.contextPath}/sign-un/post" method="POST" class="form">
+                    <form action="${pageContext.request.contextPath}/sign-up/post" method="POST" class="form">
                         <div class="form__name item">
                             <label for="name"><span>Имя</span></label>
                             <input class="form__input big" placeholder="Текст" type="text" id="name" name="name" required>

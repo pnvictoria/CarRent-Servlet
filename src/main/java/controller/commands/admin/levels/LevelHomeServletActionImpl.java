@@ -1,10 +1,10 @@
 package controller.commands.admin.levels;
 
 import controller.interfaces.ServletAction;
-import dao.LevelsDAO;
+import dao.LevelDAO;
 import entity.Level;
-import service.LevelsService;
-import utils.constants.ReadPropertiesFile;
+import service.LevelService;
+import utils.ReadPropertiesFile;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +25,7 @@ public class LevelHomeServletActionImpl implements ServletAction {
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Level> allLevels = null;
         try {
-            allLevels = new LevelsService(new LevelsDAO()).getObjects();
+            allLevels = new LevelService(new LevelDAO()).getObjects();
         } catch (SQLException e) {
             e.printStackTrace();
         }

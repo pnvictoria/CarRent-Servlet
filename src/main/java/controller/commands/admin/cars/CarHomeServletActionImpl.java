@@ -1,10 +1,10 @@
 package controller.commands.admin.cars;
 
 import controller.interfaces.ServletAction;
-import dao.CarsDAO;
+import dao.CarDAO;
 import entity.Car;
-import service.CarsService;
-import utils.constants.ReadPropertiesFile;
+import service.CarService;
+import utils.ReadPropertiesFile;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +24,7 @@ public class CarHomeServletActionImpl implements ServletAction {
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Car> allCars = null;
         try {
-            allCars = new CarsService(new CarsDAO()).getObjects();
+            allCars = new CarService(new CarDAO()).getObjects();
         } catch (SQLException e) {
             e.printStackTrace();
         }

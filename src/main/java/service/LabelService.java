@@ -7,11 +7,11 @@ import service.interfaces.MainService;
 import java.sql.SQLException;
 import java.util.List;
 
-public class LabelsService implements MainService<Label> {
+public class LabelService implements MainService<Label> {
 
     private MainDAO<Label> daoLabels;
 
-    public LabelsService(MainDAO<Label> daoLabels) {
+    public LabelService(MainDAO<Label> daoLabels) {
         this.daoLabels = daoLabels;
     }
 
@@ -19,7 +19,8 @@ public class LabelsService implements MainService<Label> {
     public boolean addObject(Label obj) throws SQLException {
         //изменить проверку, сделать проверку полностью по обьекту или имени
         Label label = daoLabels.getObjectById(obj.getId());
-        if (label == null) {
+        if (true) {
+//        if (label == null) {
             daoLabels.addObject(obj);
             return true;
         } else {
