@@ -14,7 +14,14 @@
 </head>
 <body>
 <div class="wrapper">
+    <% Object id = request.getSession().getAttribute("id");
+        if (Integer.parseInt((String) id) == 1) { %>
+    <%@ include file="/main/pages/comn/header-admin.jsp" %>
+    <% } else if (Integer.parseInt((String) id) == 2){ %>
+    <%@ include file="/main/pages/comn/header-user.jsp" %>
+    <% } else { %>
     <%@ include file="/main/pages/comn/header-guest.jsp" %>
+    <%} %>
     <section class="body">
         <section>
             <div class="container">

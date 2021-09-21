@@ -17,9 +17,9 @@ public class LevelService implements MainService<Level> {
 
     @Override
     public boolean addObject(Level obj) throws SQLException {
-        //изменить проверку, сделать проверку полностью по обьекту или имени
-        Level level = daoLevels.getObjectById(obj.getId());
-        if (level == null) {
+//         TODO: изменить проверку, сделать проверку полностью по обьекту или имени
+//        Level level = daoLevels.getByItem(obj.getId());
+        if (true) {
             daoLevels.addObject(obj);
             return true;
         } else {

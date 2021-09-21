@@ -6,9 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="main/css/footer.css" rel="stylesheet">
-    <link href="main/css/header-auth.css" rel="stylesheet">
-    <link href="main/css/global.css" rel="stylesheet">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/main/css/admin-page.css">
     <title>Admin</title>
 </head>
 <body>

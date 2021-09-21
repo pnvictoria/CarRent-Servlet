@@ -1,9 +1,9 @@
-package controller.commands.admin.roles;
+package controller.commands.admin.users.get;
 
 import controller.interfaces.ServletAction;
-import dao.RoleDAO;
-import entity.Role;
-import service.RoleService;
+import dao.UserDAO;
+import entity.User;
+import service.UserService;
 import utils.ReadPropertiesFile;
 
 import javax.servlet.ServletException;
@@ -13,23 +13,23 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class RoleHomeServletActionImpl implements ServletAction {
-    private final String ADMIN_ROLE_HOME_PAGE;
+public class UserHomeServletActionImpl implements ServletAction {
+    private final String ADMIN_USER_HOME_PAGE;
 
-    public RoleHomeServletActionImpl() {
+    public UserHomeServletActionImpl() {
         ReadPropertiesFile propertyPage = new ReadPropertiesFile();
-        ADMIN_ROLE_HOME_PAGE = propertyPage.getPageProperty("ADMIN_ROLE_HOME_PAGE");
+        ADMIN_USER_HOME_PAGE = propertyPage.getPageProperty("ADMIN_USER_HOME_PAGE");
     }
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Role> allRoles = null;
+        List<User> allUsers = null;
         try {
-            allRoles = new RoleService(new RoleDAO()).getObjects();
+            allUsers = new UserService(new UserDAO()).getObjects();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        req.setAttribute("allRoles", allRoles);
-        return ADMIN_ROLE_HOME_PAGE;
+        req.setAttribute("allUsers", allUsers);
+        return ADMIN_USER_HOME_PAGE;
     }
 }
