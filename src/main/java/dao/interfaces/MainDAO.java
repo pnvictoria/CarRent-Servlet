@@ -31,5 +31,5 @@ public interface MainDAO<T> {
 
     List<T> getObjects() throws SQLException;
 
-    List<T> getByItem(T obj);
+    List<T> getByItem(T obj) throws SQLException;
 }

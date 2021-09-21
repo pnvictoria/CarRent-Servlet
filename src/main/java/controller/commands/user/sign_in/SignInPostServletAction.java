@@ -10,8 +10,10 @@ import utils.ReadPropertiesFile;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 public class SignInPostServletAction implements ServletAction {
     private final String ROLE_ADMIN;
@@ -38,21 +40,24 @@ public class SignInPostServletAction implements ServletAction {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = null;
+        List<User> users = null;
         try {
-            //CHANGE, just test
-            user = service.getObjectById(1);
+            users = service.getByItem(User.newBuilder().setEmail(req.getParameter("email")).build());
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        if ((req.getParameter("email").equals(user.getEmail())
-                && req.getParameter("password").equals(user.getPassword()))) {
-            if (ROLE_ADMIN.equals(user.getRole().getName())) {
-//                return CommandManager.commands.get();
-                return ADMIN_PAGE;
-            }
-            if (ROLE_USER.equals(user.getRole().getName())) {
-                return MAIN_PAGE;
+        if(users != null && !users.isEmpty()) {
+            User user = users.get(0);
+            if ((req.getParameter("email").equals(user.getEmail())
+                    && req.getParameter("password").equals(user.getPassword()))) {
+                if (ROLE_ADMIN.equals(user.getRole().getName())) {
+                    return ADMIN_PAGE;
+                }
+                if (ROLE_USER.equals(user.getRole().getName())) {
+                    HttpSession session = req.getSession();
+                    session.setAttribute("id", user.getRole().getId());
+                    return MAIN_PAGE;
+                }
             }
         }
         return SIGN_IN_PAGE;

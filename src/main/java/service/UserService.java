@@ -17,8 +17,8 @@ public class UserService implements MainService<User> {
 
     @Override
     public boolean addObject(User obj) throws SQLException {
-        //изменить проверку, сделать проверку полностью по обьекту или логину
-        User user = daoUser.getObjectById(obj.getId());
+        //TODO: изменить проверку, сделать проверку полностью по обьекту или логину
+//        User user = daoUser.getObjectById(obj.getId());
 //        if (user == null) {
         if (true) {
             daoUser.addObject(obj);
@@ -51,7 +51,7 @@ public class UserService implements MainService<User> {
     }
 
     @Override
-    public List<User> getByItem(User obj) {
-        return null;
+    public List<User> getByItem(User obj) throws SQLException {
+        return daoUser.getByItem(obj);
     }
 }

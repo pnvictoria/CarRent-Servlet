@@ -20,6 +20,7 @@ public class UserDAO implements MainDAO<User> {
     private final String SELECT_USER_BY_ID;
     private final String UPDATE_USER_BY_ID;
     private final String DELETE_USER_BY_ID;
+    private final String SELECT_USER_BY_EMAIL;
 
     public UserDAO() {
         connection = DataBaseConnection.initialize();
@@ -30,6 +31,7 @@ public class UserDAO implements MainDAO<User> {
         SELECT_USER_BY_ID = propertySql.getSqlProperty("SELECT_USER_BY_ID");
         UPDATE_USER_BY_ID = propertySql.getSqlProperty("UPDATE_USER_BY_ID");
         DELETE_USER_BY_ID = propertySql.getSqlProperty("DELETE_USER_BY_ID");
+        SELECT_USER_BY_EMAIL = propertySql.getSqlProperty("SELECT_USER_BY_EMAIL");
     }
 
     @Override
@@ -97,7 +99,14 @@ public class UserDAO implements MainDAO<User> {
     }
 
     @Override
-    public List<User> getByItem(User obj) {
-        return null;
+    public List<User> getByItem(User obj) throws SQLException {
+        PreparedStatement ps = connection.prepareStatement(SELECT_USER_BY_EMAIL);
+        ps.setString(1, obj.getEmail());
+        List<User> usersList = new ArrayList<>();
+        ResultSet resultSet = ps.executeQuery();
+        while (resultSet.next()) {
+            usersList.add(UserMapper.mapRow(resultSet));
+        }
+        return usersList;
     }
 }

@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="wrapper">
-        <%@ include file="/main/pages/comn/header-auth.jsp" %>
+        <%@ include file="/main/pages/comn/header-user.jsp" %>
         <section class="body">
             <div class="container">
                 <div class="about">

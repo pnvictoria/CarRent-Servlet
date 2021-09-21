@@ -1,4 +1,4 @@
-package controller.commands.user.sign_out;
+package controller.commands.user.page;
 
 import controller.interfaces.ServletAction;
 import utils.ReadPropertiesFile;
@@ -8,17 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class UserSignOutServletAction implements ServletAction {
-    private final String SIGN_OUT_PAGE;
+public class UserPageGetServletAction implements ServletAction {
+    private final String userPage;
 
-    public UserSignOutServletAction() {
+    public UserPageGetServletAction() {
         ReadPropertiesFile propertyPage = new ReadPropertiesFile();
-        SIGN_OUT_PAGE = propertyPage.getPageProperty("MAIN_PAGE");
+        userPage = propertyPage.getPageProperty("USER_PAGE");
     }
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getSession().removeAttribute("id");
-        return SIGN_OUT_PAGE;
+        return userPage;
     }
 }
