@@ -57,7 +57,7 @@
         </form>
 
     </section>
-    <%@ include file="/main/pages/comn/footer.jsp" %>
+    <%@ include file="/main/pages/comn/footer-user.jsp" %>
 </div>
 </body>
 </html>

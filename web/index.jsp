@@ -17,7 +17,7 @@
     <% Object id = request.getSession().getAttribute("id");
         if (Integer.parseInt((String) id) == 1) { %>
     <%@ include file="/main/pages/comn/header-admin.jsp" %>
-    <% } else if (Integer.parseInt((String) id) == 2){ %>
+    <% } else if (Integer.parseInt((String) id) == 2) { %>
     <%@ include file="/main/pages/comn/header-user.jsp" %>
     <% } else { %>
     <%@ include file="/main/pages/comn/header-guest.jsp" %>
@@ -92,7 +92,7 @@
             </div>
         </section>
     </section>
-    <%@ include file="/main/pages/comn/footer.jsp" %>
+    <%@ include file="/main/pages/comn/footer-user.jsp" %>
 </div>
 </body>
 </html>

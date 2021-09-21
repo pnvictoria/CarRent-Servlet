@@ -23,10 +23,11 @@ public class LabelUpdateGetServletActionImpl implements ServletAction {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String labelId = request.getParameter("id");
+        String id = request.getParameter("id");
         try {
-            Label objectById = labelService.getObjectById(Integer.parseInt(labelId));
-            request.setAttribute("label", objectById);
+            Label label = labelService.getObjectById(Integer.parseInt(id));
+            request.setAttribute("label", label);
+            System.out.println(label);
         } catch (SQLException e) {
             e.printStackTrace();
         }

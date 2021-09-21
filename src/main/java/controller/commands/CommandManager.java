@@ -16,10 +16,12 @@ import controller.commands.admin.levels.get.LevelUpdateGetServletActionImpl;
 import controller.commands.admin.levels.post.LevelAddPostServletActionImpl;
 import controller.commands.admin.levels.post.LevelDeleteServletActionImpl;
 import controller.commands.admin.levels.post.LevelUpdatePostServletActionImpl;
-import controller.commands.admin.roles.get.RoleAddServletActionImpl;
+import controller.commands.admin.roles.get.RoleAddGetServletActionImpl;
 import controller.commands.admin.roles.get.RoleHomeServletActionImpl;
-import controller.commands.admin.roles.get.RoleUpdateServletActionImpl;
+import controller.commands.admin.roles.get.RoleUpdateGetServletActionImpl;
+import controller.commands.admin.roles.post.RoleAddPostServletActionImpl;
 import controller.commands.admin.roles.post.RoleDeleteServletActionImpl;
+import controller.commands.admin.roles.post.RoleUpdatePostServletActionImpl;
 import controller.commands.admin.users.get.UserAddServletActionImpl;
 import controller.commands.admin.users.get.UserHomeServletActionImpl;
 import controller.commands.admin.users.get.UserUpdateServletActionImpl;
@@ -61,8 +63,10 @@ public class CommandManager {
         commands.put(pr.getCommandsProperty("ADMIN_CAR_DELETE"), new CarDeleteServletActionImpl());
         // role
         commands.put(pr.getCommandsProperty("ADMIN_ROLE_HOME"), new RoleHomeServletActionImpl());
-        commands.put(pr.getCommandsProperty("ADMIN_ROLE_ADD"), new RoleAddServletActionImpl());
-        commands.put(pr.getCommandsProperty("ADMIN_ROLE_UPDATE"), new RoleUpdateServletActionImpl());
+        commands.put(pr.getCommandsProperty("ADMIN_ROLE_ADD"), new RoleAddGetServletActionImpl());
+        commands.put(pr.getCommandsProperty("ADMIN_ROLE_ADD_POST"), new RoleAddPostServletActionImpl());
+        commands.put(pr.getCommandsProperty("ADMIN_ROLE_UPDATE"), new RoleUpdateGetServletActionImpl());
+        commands.put(pr.getCommandsProperty("ADMIN_ROLE_UPDATE_POST"), new RoleUpdatePostServletActionImpl());
         commands.put(pr.getCommandsProperty("ADMIN_ROLE_DELETE"), new RoleDeleteServletActionImpl());
         // label
         commands.put(pr.getCommandsProperty("ADMIN_LABEL_HOME"), new LabelHomeServletActionImpl());
