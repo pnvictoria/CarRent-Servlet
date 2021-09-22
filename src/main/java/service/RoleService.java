@@ -19,7 +19,7 @@ public class RoleService implements MainService<Role> {
     public boolean addObject(Role obj) throws SQLException {
         //изменить проверку, сделать проверку полностью по обьекту или имени
         Role role = daoRoles.getObjectById(obj.getId());
-        if (role == null) {
+        if (true) {
             daoRoles.addObject(obj);
             return true;
         } else {
@@ -30,7 +30,7 @@ public class RoleService implements MainService<Role> {
     @Override
     public void deleteObject(int id) throws SQLException {
         Role role = daoRoles.getObjectById(id);
-        if (role == null)
+        if (role != null)
             daoRoles.deleteObject(id);
     }
 

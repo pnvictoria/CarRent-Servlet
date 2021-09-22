@@ -30,7 +30,7 @@ public class LevelService implements MainService<Level> {
     @Override
     public void deleteObject(int id) throws SQLException {
         Level level = daoLevels.getObjectById(id);
-        if (level == null)
+        if (level != null)
             daoLevels.deleteObject(id);
     }
 

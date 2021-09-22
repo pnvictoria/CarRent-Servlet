@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class ReadPropertiesFile {
+    private Properties propertyDB;
     private Properties propertySql;
     private Properties propertyPageMapping;
     private Properties propertiesConstant;
     private Properties propertiesCommands;
+    private static final String dbFileProperties = "/properties/DB.properties";
     private static final String sqlFileProperties = "/properties/sqlQueries.properties";
     private static final String pageMappingFileProperties = "/properties/page-mapping.properties";
     private static final String constantsFileProperties = "/properties/constants.properties";
@@ -15,10 +17,12 @@ public class ReadPropertiesFile {
 
     public ReadPropertiesFile() {
         try {
+            propertyDB = new Properties();
             propertySql = new Properties();
             propertyPageMapping = new Properties();
             propertiesConstant = new Properties();
             propertiesCommands = new Properties();
+            propertyDB.load(this.getClass().getResourceAsStream(dbFileProperties));
             propertySql.load(this.getClass().getResourceAsStream(sqlFileProperties));
             propertyPageMapping.load(this.getClass().getResourceAsStream(pageMappingFileProperties));
             propertiesConstant.load(this.getClass().getResourceAsStream(constantsFileProperties));
@@ -41,5 +45,9 @@ public class ReadPropertiesFile {
 
     public String getCommandsProperty(String name) {
         return propertiesCommands.getProperty(name);
+    }
+
+    public String getDbProperty(String name) {
+        return propertyDB.getProperty(name);
     }
 }

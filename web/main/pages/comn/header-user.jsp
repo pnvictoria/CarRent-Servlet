@@ -25,7 +25,7 @@
                 <% User userObj = (User) request.getSession().getAttribute("user");
                     if(userObj == null || userObj.getAvatar() == null || userObj.getAvatar().isEmpty()) {
                 %>
-                <img src="${pageContext.request.contextPath}/main/images/avatar.png" alt="avatar">
+                <img src="${pageContext.request.contextPath}/main/images/avatar.png" width="40px" height="40px" alt="avatar">
                 <%} else {%>
                 <%--TODO: сделать аватар круглым через стили --%>
                 <img src="${pageContext.request.contextPath}/main/upload/${user.getAvatar()}" width="40px" height="40px" alt="avatar">

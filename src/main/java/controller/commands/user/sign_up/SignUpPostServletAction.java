@@ -19,7 +19,7 @@ public class SignUpPostServletAction implements ServletAction {
     private final int ROLE_USER_ID;
     private final String ROLE_USER;
 
-    private final String MAIN_PAGE;
+    private final String SIGN_IN_PAGE;
     private final String SIGN_UP_PAGE;
 
     private MainService<User> service;
@@ -28,8 +28,8 @@ public class SignUpPostServletAction implements ServletAction {
         service = new UserService(new UserDAO());
 
         ReadPropertiesFile propertyPage = new ReadPropertiesFile();
-        MAIN_PAGE = propertyPage.getPageProperty("MAIN");
-        SIGN_UP_PAGE = propertyPage.getPageProperty("SIGN_UP_PAGE");
+        SIGN_IN_PAGE = propertyPage.getCommandsProperty("SIGN_IN");
+        SIGN_UP_PAGE = propertyPage.getCommandsProperty("SIGN_UP");
 
         ReadPropertiesFile propertyRole = new ReadPropertiesFile();
         ROLE_USER_ID = Integer.parseInt(propertyRole.getConstantProperty("ROLE_USER_ID"));
@@ -53,7 +53,7 @@ public class SignUpPostServletAction implements ServletAction {
                 .build();
         try {
             if(service.addObject(user)) {
-                return MAIN_PAGE;
+                return SIGN_IN_PAGE;
             }
         } catch (SQLException e) {
             e.printStackTrace();

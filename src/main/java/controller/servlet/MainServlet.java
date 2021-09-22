@@ -15,7 +15,7 @@ public class MainServlet extends HttpServlet {
     private CommandManager commandManager;
 
     @Override
-    public void init() throws ServletException {
+    public void init() {
         commandManager = new CommandManager();
     }
 

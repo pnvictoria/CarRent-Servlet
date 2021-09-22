@@ -29,13 +29,13 @@ public class SignInPostServletAction implements ServletAction {
         service = new UserService(new UserDAO());
 
         ReadPropertiesFile propertyPage = new ReadPropertiesFile();
-        MAIN_PAGE = propertyPage.getPageProperty("MAIN");
-        ADMIN_PAGE = propertyPage.getPageProperty("ADMIN_CAR_HOME_PAGE");
+        MAIN_PAGE = propertyPage.getCommandsProperty("MAIN");
+        ADMIN_PAGE = propertyPage.getCommandsProperty("ADMIN_CAR_HOME");
+        SIGN_IN_PAGE = propertyPage.getCommandsProperty("SIGN_IN");
 
         ReadPropertiesFile propertyRole= new ReadPropertiesFile();
         ROLE_ADMIN = propertyRole.getConstantProperty("ROLE_ADMIN");
         ROLE_USER = propertyRole.getConstantProperty("ROLE_USER");
-        SIGN_IN_PAGE = propertyRole.getConstantProperty("SIGN_IN_PAGE");
     }
 
     @Override
@@ -48,14 +48,16 @@ public class SignInPostServletAction implements ServletAction {
         }
         if(users != null && !users.isEmpty()) {
             User user = users.get(0);
+
             if ((req.getParameter("email").equals(user.getEmail())
                     && req.getParameter("password").equals(user.getPassword()))) {
                 HttpSession session = req.getSession();
                 session.setAttribute("user", user);
-                if (ROLE_ADMIN.equals(user.getRole().getName())) {
+                String roleName = user.getRole().getName();
+                if (ROLE_ADMIN.equals(roleName)) {
                     return ADMIN_PAGE;
                 }
-                if (ROLE_USER.equals(user.getRole().getName())) {
+                if (ROLE_USER.equals(roleName)) {
                     return MAIN_PAGE;
                 }
             }

@@ -36,8 +36,6 @@ public class MainPageGetServletActionImpl implements ServletAction {
             allLevels = levelService.getObjects();
             req.setAttribute("allLabels", allLabels);
             req.setAttribute("allLevels", allLevels);
-            System.out.println(allLabels);
-            System.out.println(allLevels);
         } catch (SQLException e) {
             e.printStackTrace();
         }

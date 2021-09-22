@@ -24,9 +24,7 @@ import controller.commands.admin.role.get.RoleUpdateGetServletActionImpl;
 import controller.commands.admin.role.post.RoleAddPostServletActionImpl;
 import controller.commands.admin.role.post.RoleDeleteServletActionImpl;
 import controller.commands.admin.role.post.RoleUpdatePostServletActionImpl;
-import controller.commands.admin.user.get.UserAddServletActionImpl;
 import controller.commands.admin.user.get.UserHomeServletActionImpl;
-import controller.commands.admin.user.get.UserUpdateServletActionImpl;
 import controller.commands.admin.user.post.UserDeleteServletActionImpl;
 import controller.commands.general.get.MainPageGetServletActionImpl;
 import controller.commands.general.post.ImageUploadServletActionImpl;
@@ -54,13 +52,11 @@ public class CommandManager {
         commands.put(pr.getCommandsProperty("SIGN_IN_POST"), new SignInPostServletAction());
         commands.put(pr.getCommandsProperty("SIGN_UP"), new SignUpGetServletAction());
         commands.put(pr.getCommandsProperty("SIGN_UP_POST"), new SignUpPostServletAction());
-        commands.put(pr.getCommandsProperty("USER_PAGE"), new UserPageGetServletAction());
+        commands.put(pr.getCommandsProperty("USER_MAIN"), new UserPageGetServletAction());
         commands.put(pr.getCommandsProperty("SIGN_OUT"), new UserSignOutServletAction());
         commands.put(pr.getCommandsProperty("UPLOAD_IMAGE_POST"), new ImageUploadServletActionImpl());
         // user
         commands.put(pr.getCommandsProperty("ADMIN_USER_HOME"), new UserHomeServletActionImpl());
-        commands.put(pr.getCommandsProperty("ADMIN_USER_ADD"), new UserAddServletActionImpl());
-        commands.put(pr.getCommandsProperty("ADMIN_USER_UPDATE"), new UserUpdateServletActionImpl());
         commands.put(pr.getCommandsProperty("ADMIN_USER_DELETE"), new UserDeleteServletActionImpl());
         // car
         commands.put(pr.getCommandsProperty("ADMIN_CAR_HOME"), new CarHomeServletActionImpl());

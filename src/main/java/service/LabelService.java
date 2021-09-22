@@ -30,7 +30,7 @@ public class LabelService implements MainService<Label> {
     @Override
     public void deleteObject(int id) throws SQLException {
         Label label = daoLabels.getObjectById(id);
-        if (label == null)
+        if (label != null)
             daoLabels.deleteObject(id);
     }
 
