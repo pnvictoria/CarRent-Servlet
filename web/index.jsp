@@ -93,7 +93,12 @@
             </div>
         </section>
     </section>
+    <% if (user != null && user.getRole().getId() == 1) { %>
+    <%@ include file="/main/pages/comn/footer-admin.jsp" %>
+    <% } else { %>
     <%@ include file="/main/pages/comn/footer-user.jsp" %>
+    <%} %>
+
 </div>
 </body>
 </html>

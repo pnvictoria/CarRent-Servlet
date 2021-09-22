@@ -50,12 +50,12 @@ public class SignInPostServletAction implements ServletAction {
             User user = users.get(0);
             if ((req.getParameter("email").equals(user.getEmail())
                     && req.getParameter("password").equals(user.getPassword()))) {
+                HttpSession session = req.getSession();
+                session.setAttribute("user", user);
                 if (ROLE_ADMIN.equals(user.getRole().getName())) {
                     return ADMIN_PAGE;
                 }
                 if (ROLE_USER.equals(user.getRole().getName())) {
-                    HttpSession session = req.getSession();
-                    session.setAttribute("user", user);
                     return MAIN_PAGE;
                 }
             }
