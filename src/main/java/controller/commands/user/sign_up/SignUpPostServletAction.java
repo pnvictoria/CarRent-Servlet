@@ -28,7 +28,7 @@ public class SignUpPostServletAction implements ServletAction {
         service = new UserService(new UserDAO());
 
         ReadPropertiesFile propertyPage = new ReadPropertiesFile();
-        MAIN_PAGE = propertyPage.getPageProperty("MAIN_PAGE");
+        MAIN_PAGE = propertyPage.getPageProperty("MAIN");
         SIGN_UP_PAGE = propertyPage.getPageProperty("SIGN_UP_PAGE");
 
         ReadPropertiesFile propertyRole = new ReadPropertiesFile();

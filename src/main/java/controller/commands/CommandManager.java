@@ -28,7 +28,8 @@ import controller.commands.admin.user.get.UserAddServletActionImpl;
 import controller.commands.admin.user.get.UserHomeServletActionImpl;
 import controller.commands.admin.user.get.UserUpdateServletActionImpl;
 import controller.commands.admin.user.post.UserDeleteServletActionImpl;
-import controller.commands.general.ImageUploadActionImpl;
+import controller.commands.general.get.MainPageGetServletActionImpl;
+import controller.commands.general.post.ImageUploadServletActionImpl;
 import controller.commands.user.page.UserPageGetServletAction;
 import controller.commands.user.sign_in.SignInGetServletAction;
 import controller.commands.user.sign_in.SignInPostServletAction;
@@ -48,13 +49,14 @@ public class CommandManager {
     public CommandManager() {
         ReadPropertiesFile pr = new ReadPropertiesFile();
         // general
+        commands.put(pr.getCommandsProperty("MAIN"), new MainPageGetServletActionImpl());
         commands.put(pr.getCommandsProperty("SIGN_IN"), new SignInGetServletAction());
         commands.put(pr.getCommandsProperty("SIGN_IN_POST"), new SignInPostServletAction());
         commands.put(pr.getCommandsProperty("SIGN_UP"), new SignUpGetServletAction());
         commands.put(pr.getCommandsProperty("SIGN_UP_POST"), new SignUpPostServletAction());
         commands.put(pr.getCommandsProperty("USER_PAGE"), new UserPageGetServletAction());
         commands.put(pr.getCommandsProperty("SIGN_OUT"), new UserSignOutServletAction());
-        commands.put(pr.getCommandsProperty("UPLOAD_IMAGE_POST"), new ImageUploadActionImpl());
+        commands.put(pr.getCommandsProperty("UPLOAD_IMAGE_POST"), new ImageUploadServletActionImpl());
         // user
         commands.put(pr.getCommandsProperty("ADMIN_USER_HOME"), new UserHomeServletActionImpl());
         commands.put(pr.getCommandsProperty("ADMIN_USER_ADD"), new UserAddServletActionImpl());
@@ -100,6 +102,9 @@ public class CommandManager {
 
     public String getMapping(HttpServletRequest request) {
         String mapping = request.getRequestURI().substring(request.getContextPath().length());
+        if (mapping.isEmpty()) {
+            return "/";
+        }
         if (mapping.endsWith("/")) {
             mapping = mapping.substring(0, mapping.length() - 1);
         }

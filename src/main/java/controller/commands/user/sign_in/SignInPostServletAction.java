@@ -29,7 +29,7 @@ public class SignInPostServletAction implements ServletAction {
         service = new UserService(new UserDAO());
 
         ReadPropertiesFile propertyPage = new ReadPropertiesFile();
-        MAIN_PAGE = propertyPage.getPageProperty("MAIN_PAGE");
+        MAIN_PAGE = propertyPage.getPageProperty("MAIN");
         ADMIN_PAGE = propertyPage.getPageProperty("ADMIN_CAR_HOME_PAGE");
 
         ReadPropertiesFile propertyRole= new ReadPropertiesFile();

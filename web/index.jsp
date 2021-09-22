@@ -11,7 +11,7 @@
     <link href="main/css/global.css" rel="stylesheet">
     <link href="main/css/items.css" rel="stylesheet">
     <link href="main/css/global.css" rel="stylesheet">
-    <title>Sign Up</title>
+    <title>CarRent</title>
 </head>
 <body>
 <div class="wrapper">
@@ -31,13 +31,21 @@
                         <div class="filter__params">
                             <input type="text" placeholder="поиск за именем">
                             <div class="select">
-                                <select name="" id="">
-                                    <option value="">фильтрация за маркой</option>
+                                <select id="label_name">
+                                    <c:forEach items="${allLabels}" var="label_name">
+                                        <option value = "<c:out value="${label.getId()}"/>" name="<c:out value="${label.getName()}"/>">
+                                            <c:out value="${label.getName()}"/>
+                                        </option>
+                                    </c:forEach>
                                 </select>
                             </div>
                             <div class="select">
-                                <select name="" id="">
-                                    <option value="">фильтрация за качеством</option>
+                                <select id="level_name">
+                                    <c:forEach items="${allLevels}" var="level_name">
+                                        <option value = "<c:out value="${level.getId()}"/>" name="<c:out value="${level.getName()}"/>">
+                                            <c:out value="${level.getName()}"/>
+                                        </option>
+                                    </c:forEach>
                                 </select>
                             </div>
                         </div>

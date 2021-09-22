@@ -1,4 +1,4 @@
-package controller.commands.general;
+package controller.commands.general.post;
 
 import controller.interfaces.ServletAction;
 import dao.UserDAO;
@@ -17,11 +17,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class ImageUploadActionImpl implements ServletAction {
+public class ImageUploadServletActionImpl implements ServletAction {
     private String USER_PAGE;
     private MainService<User> userService;
 
-    public ImageUploadActionImpl() {
+    public ImageUploadServletActionImpl() {
         userService = new UserService(new UserDAO());
         ReadPropertiesFile propertyPage = new ReadPropertiesFile();
         USER_PAGE = propertyPage.getCommandsProperty("USER_PAGE");
