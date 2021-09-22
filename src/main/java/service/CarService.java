@@ -19,7 +19,7 @@ public class CarService implements MainService<Car> {
     public boolean addObject(Car obj) throws SQLException {
         //изменить проверку, сделать проверку полностью по обьекту или логину
         Car car = daoCars.getObjectById(obj.getId());
-        if (car == null) {
+        if (true) {
             daoCars.addObject(obj);
             return true;
         } else {

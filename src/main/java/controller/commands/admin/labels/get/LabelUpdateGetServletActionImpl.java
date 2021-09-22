@@ -27,7 +27,6 @@ public class LabelUpdateGetServletActionImpl implements ServletAction {
         try {
             Label label = labelService.getObjectById(Integer.parseInt(id));
             request.setAttribute("label", label);
-            System.out.println(label);
         } catch (SQLException e) {
             e.printStackTrace();
         }

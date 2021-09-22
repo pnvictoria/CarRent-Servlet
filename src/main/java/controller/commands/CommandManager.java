@@ -3,7 +3,9 @@ package controller.commands;
 import controller.commands.admin.cars.get.CarAddGetServletActionImpl;
 import controller.commands.admin.cars.get.CarHomeServletActionImpl;
 import controller.commands.admin.cars.get.CarUpdateGetServletActionImpl;
+import controller.commands.admin.cars.post.CarAddPostServletActionImpl;
 import controller.commands.admin.cars.post.CarDeleteServletActionImpl;
+import controller.commands.admin.cars.post.CarUpdatePostServletActionImpl;
 import controller.commands.admin.labels.get.LabelAddGetServletActionImpl;
 import controller.commands.admin.labels.get.LabelHomeServletActionImpl;
 import controller.commands.admin.labels.get.LabelUpdateGetServletActionImpl;
@@ -61,7 +63,9 @@ public class CommandManager {
         // car
         commands.put(pr.getCommandsProperty("ADMIN_CAR_HOME"), new CarHomeServletActionImpl());
         commands.put(pr.getCommandsProperty("ADMIN_CAR_ADD"), new CarAddGetServletActionImpl());
+        commands.put(pr.getCommandsProperty("ADMIN_CAR_ADD_POST"), new CarAddPostServletActionImpl());
         commands.put(pr.getCommandsProperty("ADMIN_CAR_UPDATE"), new CarUpdateGetServletActionImpl());
+        commands.put(pr.getCommandsProperty("ADMIN_CAR_UPDATE_POST"), new CarUpdatePostServletActionImpl());
         commands.put(pr.getCommandsProperty("ADMIN_CAR_DELETE"), new CarDeleteServletActionImpl());
         // role
         commands.put(pr.getCommandsProperty("ADMIN_ROLE_HOME"), new RoleHomeServletActionImpl());
