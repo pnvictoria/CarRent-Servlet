@@ -1,3 +1,4 @@
+<%@ page import="entity.User" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html lang="ru">
 <head>
@@ -17,9 +18,17 @@
             <div class="container">
                 <div class="about">
                     <div class="about__wrapper">
-                        <img src="${pageContext.request.contextPath}resources/images/big-avatar.png" alt="avatar" class="about__avatar">
+                        <%if(userObj.getAvatar() == null || userObj.getAvatar().isEmpty()) {%>
+                            <img src="${pageContext.request.contextPath}/main/images/avatar.png" alt="avatar" class="about__avatar">
+                        <%} else {%>
+                             <img src="${pageContext.request.contextPath}/main/upload/${user.getAvatar()}" alt="avatar" class="about__avatar" width="250" height="250">
+                        <%}%>
+                        <form action="${pageContext.request.contextPath}/upload/post" method="post" enctype="multipart/form-data">
+                            <input type="file" name="file" />
+                            <input type="submit" value="Upload" />
+                        </form>
                         <div class="about__info">
-                            <h1>Сергей Василевсикий</h1>
+                            <h1>${user.getName()} ${user.getSurname()}</h1>
                             <p>Украина, соискатель</p>
                         </div>
                     </div>
@@ -35,27 +44,12 @@
                         <div class="setting__info">
                             <div class="setting__item">
                                 <p>Имя</p>
-                                <p>Сергей Василевский</p>
-                                <span>Изменить</span>
-                            </div>
-                            <div class="setting__item">
-                                <p>Пароль</p>
-                                <p>Обновлен 1 неделю назад</p>
+                                <p>${user.getName()} ${user.getSurname()}</p>
                                 <span>Изменить</span>
                             </div>
                             <div class="setting__item">
                                 <p>Email</p>
-                                <p>s/vasilevskyi@mail.com</p>
-                                <span>Изменить</span>
-                            </div>
-                            <div class="setting__item">
-                                <p>Мобильный телефон</p>
-                                <p>+ 375 (29) 223 - 32 -32</p>
-                                <span>Изменить</span>
-                            </div>
-                            <div class="setting__item">
-                                <p>Место проживания</p>
-                                <p>Украина, Киев</p>
+                                <p>${user.getEmail()}</p>
                                 <span>Изменить</span>
                             </div>
                         </div>

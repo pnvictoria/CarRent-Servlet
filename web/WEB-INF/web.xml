@@ -13,6 +13,10 @@
         <servlet-name>default</servlet-name>
         <url-pattern>/main/images/*</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/main/upload/*</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>MainServlet</servlet-name>

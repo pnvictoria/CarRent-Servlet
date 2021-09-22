@@ -8,6 +8,7 @@ public class User {
     private String date;
     private String email;
     private String password;
+    private String avatar;
     private Role role;
 
     public int getId() {
@@ -38,6 +39,10 @@ public class User {
         return password;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
     public Role getRole() {
         return role;
     }
@@ -45,6 +50,7 @@ public class User {
     public static Builder newBuilder() {
         return new User().new Builder();
     }
+
 
     public class Builder {
         private Builder() {
@@ -86,6 +92,11 @@ public class User {
             return this;
         }
 
+        public Builder setAvatar(String avatar) {
+            User.this.avatar = avatar;
+            return this;
+        }
+
         public Builder setRole(Role role) {
             User.this.role = role;
             return this;
@@ -98,7 +109,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "Users{" +
+        return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
@@ -106,6 +117,7 @@ public class User {
                 ", date='" + date + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", avatar='" + avatar + '\'' +
                 ", role=" + role +
                 '}';
     }

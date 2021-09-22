@@ -1,3 +1,4 @@
+<%@ page import="entity.User" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html lang="ru">
 <head>
@@ -14,10 +15,10 @@
 </head>
 <body>
 <div class="wrapper">
-    <% Object id = request.getSession().getAttribute("id");
-        if (Integer.parseInt((String) id) == 1) { %>
+    <% User user = (User) request.getSession().getAttribute("user");
+        if (user != null && user.getRole().getId() == 1) { %>
     <%@ include file="/main/pages/comn/header-admin.jsp" %>
-    <% } else if (Integer.parseInt((String) id) == 2) { %>
+    <% } else if (user != null && user.getRole().getId() == 2){ %>
     <%@ include file="/main/pages/comn/header-user.jsp" %>
     <% } else { %>
     <%@ include file="/main/pages/comn/header-guest.jsp" %>

@@ -18,7 +18,7 @@ public class UserSignOutServletAction implements ServletAction {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getSession().removeAttribute("id");
+        req.getSession().removeAttribute("user");
         return SIGN_OUT_PAGE;
     }
 }

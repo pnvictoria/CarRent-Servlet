@@ -26,6 +26,7 @@ import controller.commands.admin.users.get.UserAddServletActionImpl;
 import controller.commands.admin.users.get.UserHomeServletActionImpl;
 import controller.commands.admin.users.get.UserUpdateServletActionImpl;
 import controller.commands.admin.users.post.UserDeleteServletActionImpl;
+import controller.commands.general.ImageUploadActionImpl;
 import controller.commands.user.page.UserPageGetServletAction;
 import controller.commands.user.sign_in.SignInGetServletAction;
 import controller.commands.user.sign_in.SignInPostServletAction;
@@ -51,6 +52,7 @@ public class CommandManager {
         commands.put(pr.getCommandsProperty("SIGN_UP_POST"), new SignUpPostServletAction());
         commands.put(pr.getCommandsProperty("USER_PAGE"), new UserPageGetServletAction());
         commands.put(pr.getCommandsProperty("SIGN_OUT"), new UserSignOutServletAction());
+        commands.put(pr.getCommandsProperty("UPLOAD_IMAGE_POST"), new ImageUploadActionImpl());
         // user
         commands.put(pr.getCommandsProperty("ADMIN_USER_HOME"), new UserHomeServletActionImpl());
         commands.put(pr.getCommandsProperty("ADMIN_USER_ADD"), new UserAddServletActionImpl());

@@ -23,7 +23,14 @@
         </nav>
         <div class="header__avatar">
             <a href="${pageContext.request.contextPath}/user-page">
+                <% User userObj = (User) request.getSession().getAttribute("user");
+                    if(userObj == null || userObj.getAvatar() == null || userObj.getAvatar().isEmpty()) {
+                %>
                 <img src="${pageContext.request.contextPath}/main/images/avatar.png" alt="avatar">
+                <%} else {%>
+                <%--TODO: сделать аватар круглым через стили --%>
+                <img src="${pageContext.request.contextPath}/main/upload/${user.getAvatar()}" width="40px" height="40px" alt="avatar">
+                <%}%>
             </a>
         </div>
     </div>
