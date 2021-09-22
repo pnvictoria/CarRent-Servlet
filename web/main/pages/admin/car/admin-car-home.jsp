@@ -13,51 +13,45 @@
 <div class="wrapper">
     <%@ include file="/main/pages/comn/header-admin.jsp" %>
     <section class="body">
-
-        <table border="1" width="80%" cellpadding="5">
-            <tr>
-                <th>ID</th>
-                <th>Имя</th>
-                <th>Цена за час</th>
-                <th>Фото</th>
-                <th>Описание</th>
-                <th>Марка</th>
-                <th>Качество</th>
-
-                <th>UPDATE</th>
-                <th>DELETE</th>
-            </tr>
-            <c:forEach items="${allCars}" var="car">
-                <tr>
-                    <td><c:out value="${car.getId()}"/></td>
-                    <td><c:out value="${car.getName()}"/></td>
-                    <td><c:out value="${car.getPrice()}"/></td>
-                    <td><c:out value="${car.getJpg()}"/></td>
-                    <td><c:out value="${car.getDesc()}"/></td>
-                    <td><c:out value="${car.getLabel().getName()}"/></td>
-                    <td><c:out value="${car.getLevel().getName()}"/></td>
-                    <td>
-                        <form method="POST"
-                              action="${pageContext.request.contextPath}/admin/car/update?carId=${car.getId()}">
-                            <input type="submit" value="Update"/>
-                        </form>
-                    </td>
-                    <td>
-                        <form method="POST"
-                              action="${pageContext.request.contextPath}/admin/car/delete?carId=${car.getId()}">
-                            <input type="submit" value="Delete"/>
-                        </form>
-                    </td>
-                </tr>
-            </c:forEach>
-        </table>
-
-        <form method="POST" action="${pageContext.request.contextPath}/admin/car/add}">
-            <input type="submit" value="Add"/>
-        </form>
-
+        <div class="container">
+            <div class="edit">
+                <div class="edit__item head">
+                    <p class="small">№</p>
+                    <p class="small">Имя</p>
+                    <p class="small">Цена(за час)</p>
+                    <p class="small">Фото</p>
+                    <p class="big">Описание</p>
+                    <p class="small">Марка</p>
+                    <p class="small">Качество</p>
+                    <a href="${pageContext.request.contextPath}/admin/car/add" class="header__link">
+                        <p class="add">Добавить</p>
+                    </a>
+                </div>
+                <c:forEach items="${allCars}" var="car">
+                    <div class="edit__item">
+                        <p class="small"><c:out value="${car.getId()}"/></p>
+                        <p class="small"><c:out value="${car.getName()}"/></p>
+                        <p class="small"><c:out value="${car.getPrice()}"/></p>
+                        <p class="small"><c:out value="${car.getJpg()}"/></p>
+                        <p class="big"><c:out value="${car.getDesc()}"/></p>
+                        <p class="small"><c:out value="${car.getLabel().getName()}"/></p>
+                        <p class="small"><c:out value="${car.getLevel().getName()}"/></p>
+                        <div class="edit__set">
+                            <a href="${pageContext.request.contextPath}/admin/car/update?id=${car.getId()}"
+                               class="header__link">
+                                <input type="submit" class="edit_btn" value="Редактировать"/>
+                            </a>
+                            <form method="POST"
+                                  action="${pageContext.request.contextPath}/admin/car/delete?id=${car.getId()}">
+                                <input type="submit" class="delete" value="Удалить">
+                            </form>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
     </section>
-    <%@ include file="/main/pages/comn/footer.jsp" %>
+    <%@ include file="/main/pages/comn/footer-user.jsp" %>
 </div>
 </body>
 </html>

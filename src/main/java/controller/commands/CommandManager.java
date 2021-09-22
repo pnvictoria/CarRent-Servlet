@@ -3,7 +3,9 @@ package controller.commands;
 import controller.commands.admin.cars.get.CarAddGetServletActionImpl;
 import controller.commands.admin.cars.get.CarHomeServletActionImpl;
 import controller.commands.admin.cars.get.CarUpdateGetServletActionImpl;
+import controller.commands.admin.cars.post.CarAddPostServletActionImpl;
 import controller.commands.admin.cars.post.CarDeleteServletActionImpl;
+import controller.commands.admin.cars.post.CarUpdatePostServletActionImpl;
 import controller.commands.admin.labels.get.LabelAddGetServletActionImpl;
 import controller.commands.admin.labels.get.LabelHomeServletActionImpl;
 import controller.commands.admin.labels.get.LabelUpdateGetServletActionImpl;
@@ -16,14 +18,17 @@ import controller.commands.admin.levels.get.LevelUpdateGetServletActionImpl;
 import controller.commands.admin.levels.post.LevelAddPostServletActionImpl;
 import controller.commands.admin.levels.post.LevelDeleteServletActionImpl;
 import controller.commands.admin.levels.post.LevelUpdatePostServletActionImpl;
-import controller.commands.admin.roles.get.RoleAddServletActionImpl;
+import controller.commands.admin.roles.get.RoleAddGetServletActionImpl;
 import controller.commands.admin.roles.get.RoleHomeServletActionImpl;
-import controller.commands.admin.roles.get.RoleUpdateServletActionImpl;
+import controller.commands.admin.roles.get.RoleUpdateGetServletActionImpl;
+import controller.commands.admin.roles.post.RoleAddPostServletActionImpl;
 import controller.commands.admin.roles.post.RoleDeleteServletActionImpl;
+import controller.commands.admin.roles.post.RoleUpdatePostServletActionImpl;
 import controller.commands.admin.users.get.UserAddServletActionImpl;
 import controller.commands.admin.users.get.UserHomeServletActionImpl;
 import controller.commands.admin.users.get.UserUpdateServletActionImpl;
 import controller.commands.admin.users.post.UserDeleteServletActionImpl;
+import controller.commands.general.ImageUploadActionImpl;
 import controller.commands.user.page.UserPageGetServletAction;
 import controller.commands.user.sign_in.SignInGetServletAction;
 import controller.commands.user.sign_in.SignInPostServletAction;
@@ -49,6 +54,7 @@ public class CommandManager {
         commands.put(pr.getCommandsProperty("SIGN_UP_POST"), new SignUpPostServletAction());
         commands.put(pr.getCommandsProperty("USER_PAGE"), new UserPageGetServletAction());
         commands.put(pr.getCommandsProperty("SIGN_OUT"), new UserSignOutServletAction());
+        commands.put(pr.getCommandsProperty("UPLOAD_IMAGE_POST"), new ImageUploadActionImpl());
         // user
         commands.put(pr.getCommandsProperty("ADMIN_USER_HOME"), new UserHomeServletActionImpl());
         commands.put(pr.getCommandsProperty("ADMIN_USER_ADD"), new UserAddServletActionImpl());
@@ -57,12 +63,16 @@ public class CommandManager {
         // car
         commands.put(pr.getCommandsProperty("ADMIN_CAR_HOME"), new CarHomeServletActionImpl());
         commands.put(pr.getCommandsProperty("ADMIN_CAR_ADD"), new CarAddGetServletActionImpl());
+        commands.put(pr.getCommandsProperty("ADMIN_CAR_ADD_POST"), new CarAddPostServletActionImpl());
         commands.put(pr.getCommandsProperty("ADMIN_CAR_UPDATE"), new CarUpdateGetServletActionImpl());
+        commands.put(pr.getCommandsProperty("ADMIN_CAR_UPDATE_POST"), new CarUpdatePostServletActionImpl());
         commands.put(pr.getCommandsProperty("ADMIN_CAR_DELETE"), new CarDeleteServletActionImpl());
         // role
         commands.put(pr.getCommandsProperty("ADMIN_ROLE_HOME"), new RoleHomeServletActionImpl());
-        commands.put(pr.getCommandsProperty("ADMIN_ROLE_ADD"), new RoleAddServletActionImpl());
-        commands.put(pr.getCommandsProperty("ADMIN_ROLE_UPDATE"), new RoleUpdateServletActionImpl());
+        commands.put(pr.getCommandsProperty("ADMIN_ROLE_ADD"), new RoleAddGetServletActionImpl());
+        commands.put(pr.getCommandsProperty("ADMIN_ROLE_ADD_POST"), new RoleAddPostServletActionImpl());
+        commands.put(pr.getCommandsProperty("ADMIN_ROLE_UPDATE"), new RoleUpdateGetServletActionImpl());
+        commands.put(pr.getCommandsProperty("ADMIN_ROLE_UPDATE_POST"), new RoleUpdatePostServletActionImpl());
         commands.put(pr.getCommandsProperty("ADMIN_ROLE_DELETE"), new RoleDeleteServletActionImpl());
         // label
         commands.put(pr.getCommandsProperty("ADMIN_LABEL_HOME"), new LabelHomeServletActionImpl());

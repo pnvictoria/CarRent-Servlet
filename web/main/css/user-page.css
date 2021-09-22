@@ -74,7 +74,6 @@
 .body .setting__nav-item.active {
   color: #322b57;
   border-bottom: 3px solid #322b57;
-  width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
 }
@@ -126,6 +125,10 @@
   -webkit-box-flex: 0;
       -ms-flex: 0 1 60%;
           flex: 0 1 60%;
+}
+.user_photo {
+  margin-top: 15px;
+  flex: 0 1 70%;
 }
 .body .setting__item:not(:last-child) {
   border-bottom: 1px solid rgba(50, 43, 87, 0.2);

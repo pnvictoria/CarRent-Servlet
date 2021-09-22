@@ -16,6 +16,7 @@ public class UserMapper {
                 .setDate(rs.getString("date"))
                 .setEmail(rs.getString("email"))
                 .setPassword(rs.getString("password"))
+                .setAvatar(rs.getString("avatar"))
                 .setRole(RoleMapper.mapRow(rs))
                 .build();
     }

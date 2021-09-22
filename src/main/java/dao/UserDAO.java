@@ -68,8 +68,9 @@ public class UserDAO implements MainDAO<User> {
             ps.setString(4, obj.getDate());
             ps.setString(5, obj.getEmail());
             ps.setString(6, obj.getPassword());
-            ps.setLong(7, obj.getRole().getId());
-            ps.setLong(8, obj.getId());
+            ps.setString(7, obj.getAvatar());
+            ps.setLong(8, obj.getRole().getId());
+            ps.setLong(9, obj.getId());
             ps.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
