@@ -2,7 +2,9 @@ package dao;
 
 import dao.interfaces.MainDAO;
 import database.DataBaseConnection;
+import entity.Label;
 import entity.Level;
+import entity.mapper.LabelMapper;
 import entity.mapper.LevelMapper;
 import utils.ReadPropertiesFile;
 
@@ -18,6 +20,7 @@ public class LevelDAO implements MainDAO<Level> {
     private final String INSERT_LEVEL;
     private final String SELECT_ALL_LEVEL;
     private final String SELECT_LEVEL_BY_ID;
+    private final String SELECT_LEVEL_BY_NAME;
     private final String UPDATE_LEVEL_BY_ID;
     private final String DELETE_LEVEL_BY_ID;
 
@@ -28,6 +31,7 @@ public class LevelDAO implements MainDAO<Level> {
         INSERT_LEVEL = propertySql.getSqlProperty("INSERT_LEVEL");
         SELECT_ALL_LEVEL = propertySql.getSqlProperty("SELECT_ALL_LEVEL");
         SELECT_LEVEL_BY_ID = propertySql.getSqlProperty("SELECT_LEVEL_BY_ID");
+        SELECT_LEVEL_BY_NAME = propertySql.getSqlProperty("SELECT_LEVEL_BY_NAME");
         UPDATE_LEVEL_BY_ID = propertySql.getSqlProperty("UPDATE_LEVEL_BY_ID");
         DELETE_LEVEL_BY_ID = propertySql.getSqlProperty("DELETE_LEVEL_BY_ID");
     }
@@ -85,7 +89,19 @@ public class LevelDAO implements MainDAO<Level> {
     }
 
     @Override
-    public List<Level> getByItem(Level obj) {
-        return null;
+    public List<Level> getByItem(Level obj) throws SQLException {
+        PreparedStatement ps = null;
+        List<Level> levelList = new ArrayList<>();
+        try {
+            ps = connection.prepareStatement(SELECT_LEVEL_BY_NAME);
+            ps.setString(1, obj.getName());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ResultSet resultSet = ps.executeQuery();
+        while (resultSet.next()) {
+            levelList.add(LevelMapper.mapRow(resultSet));
+        }
+        return levelList;
     }
 }

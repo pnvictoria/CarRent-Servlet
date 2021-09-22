@@ -50,7 +50,7 @@ public class CarService implements MainService<Car> {
     }
 
     @Override
-    public List<Car> getByItem(Car obj) {
-        return null;
+    public List<Car> getByItem(Car obj) throws SQLException {
+        return daoCars.getByItem(obj);
     }
 }

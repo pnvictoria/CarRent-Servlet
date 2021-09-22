@@ -55,9 +55,6 @@
                             </select>
                         </div>
                     </div>
-
-
-
                     <div class="edit-three__set">
                         <button class="add" type="submit">Добавить</button>
                     </div>

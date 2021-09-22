@@ -79,9 +79,9 @@
                                 <svg width="8" height="11" viewBox="0 0 8 11" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <line x1="1.54344" y1="1.02639" x2="6.71428" y2="6.19723" stroke="white"
-                                          stroke-width="2.33947" stroke-linejoin="round"/>
+                                          stroke-width="2.33947" stroke-linejoin="round"></line>
                                     <line x1="6.22117" y1="5.02024" x2="1.54222" y2="9.69919" stroke="white"
-                                          stroke-width="2.33947" stroke-linejoin="round"/>
+                                          stroke-width="2.33947" stroke-linejoin="round"></line>
                                 </svg>
                             </div>
                             <p>NEXT</p>
@@ -98,7 +98,6 @@
     <% } else { %>
     <%@ include file="/main/pages/comn/footer-user.jsp" %>
     <%} %>
-
 </div>
 </body>
 </html>
