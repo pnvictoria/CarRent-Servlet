@@ -15,8 +15,8 @@ public class RoleUpdateGetServletActionImpl implements ServletAction {
     private final String ADMIN_ROLE_UPDATE_PAGE;
     private final MainService<Role> roleService;
 
-    public RoleUpdateGetServletActionImpl() {
-        this.roleService = new RoleService(new RoleDAO());
+    public RoleUpdateGetServletActionImpl(MainService<Role> roleService) {
+        this.roleService = roleService;
         ReadPropertiesFile propertyPage = new ReadPropertiesFile();
         ADMIN_ROLE_UPDATE_PAGE = propertyPage.getPageProperty("ADMIN_ROLE_UPDATE_PAGE");
     }

@@ -13,11 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class LabelUpdatePostServletActionImpl implements ServletAction {
-    private MainService<Label> service;
+    private MainService<Label> labelService;
     private final String ADMIN_LABEL_HOME_PAGE;
 
-    public LabelUpdatePostServletActionImpl() {
-        service = new LabelService(new LabelDAO());
+    public LabelUpdatePostServletActionImpl(MainService<Label> labelService) {
+        this.labelService = labelService;
         ReadPropertiesFile propertyPage = new ReadPropertiesFile();
         ADMIN_LABEL_HOME_PAGE = propertyPage.getCommandsProperty("ADMIN_LABEL_HOME");
     }
@@ -28,7 +28,7 @@ public class LabelUpdatePostServletActionImpl implements ServletAction {
                 .setId(Integer.parseInt(req.getParameter("id")))
                 .setName(req.getParameter("name"))
                 .build();
-        service.updateObject(label);
+        labelService.updateObject(label);
         return ADMIN_LABEL_HOME_PAGE;
     }
 }

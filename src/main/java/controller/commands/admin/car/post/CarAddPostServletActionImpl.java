@@ -25,10 +25,12 @@ public class CarAddPostServletActionImpl implements ServletAction {
     private final String ADMIN_CAR_HOME_PAGE;
     private final String ADMIN_CAR_ADD_PAGE;
 
-    public CarAddPostServletActionImpl() {
-        this.labelService = new LabelService(new LabelDAO());
-        this.levelService = new LevelService(new LevelDAO());
-        service = new CarService(new CarDAO());
+    public CarAddPostServletActionImpl(MainService<Car> carService,
+                                       MainService<Label> labelService,
+                                       MainService<Level> levelService) {
+        this.carService = carService;
+        this.labelService = labelService;
+        this.levelService = levelService;
         ReadPropertiesFile property = new ReadPropertiesFile();
         ADMIN_CAR_HOME_PAGE = property.getCommandsProperty("ADMIN_CAR_HOME");
         ADMIN_CAR_ADD_PAGE = property.getCommandsProperty("ADMIN_CAR_ADD");
@@ -45,7 +47,7 @@ public class CarAddPostServletActionImpl implements ServletAction {
                     .setLabel(getLabelFromList(req.getParameter("level_name")))
                     .setDesc(req.getParameter("desc"))
                     .build();
-            if(service.addObject(car)) {
+            if(carService.addObject(car)) {
                 return ADMIN_CAR_HOME_PAGE;
             }
         } catch (SQLException e) {

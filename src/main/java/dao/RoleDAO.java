@@ -24,8 +24,8 @@ public class RoleDAO implements MainDAO<Role> {
     private final String UPDATE_ROLE_BY_ID;
     private final String DELETE_ROLE_BY_ID;
 
-    public RoleDAO() {
-        connection = DataBaseConnection.initialize();
+    public RoleDAO(Connection connection) {
+        this.connection = connection;
 
         ReadPropertiesFile propertyPage = new ReadPropertiesFile();
         INSERT_ROLE = propertyPage.getSqlProperty("INSERT_ROLE");

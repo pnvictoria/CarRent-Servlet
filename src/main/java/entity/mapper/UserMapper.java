@@ -9,14 +9,14 @@ public class UserMapper {
 
     public static User mapRow(ResultSet rs) throws SQLException {
         return User.newBuilder()
-                .setId(rs.getInt("id"))
-                .setName(rs.getString("name"))
-                .setSurname(rs.getString("surname"))
-                .setSex(rs.getBoolean("sex"))
-                .setDate(rs.getString("date"))
-                .setEmail(rs.getString("email"))
-                .setPassword(rs.getString("password"))
-                .setAvatar(rs.getString("avatar"))
+                .setId(rs.getInt("user_id"))
+                .setName(rs.getString("user_name"))
+                .setSurname(rs.getString("user_surname"))
+                .setSex(rs.getBoolean("user_sex"))
+                .setDate(rs.getString("user_date"))
+                .setEmail(rs.getString("user_email"))
+                .setPassword(rs.getString("user_password"))
+                .setAvatar(rs.getString("user_avatar"))
                 .setRole(RoleMapper.mapRow(rs))
                 .build();
     }

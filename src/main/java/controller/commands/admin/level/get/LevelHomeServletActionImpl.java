@@ -4,6 +4,7 @@ import controller.interfaces.ServletAction;
 import dao.LevelDAO;
 import entity.Level;
 import service.LevelService;
+import service.interfaces.MainService;
 import utils.ReadPropertiesFile;
 
 import javax.servlet.ServletException;
@@ -16,7 +17,8 @@ import java.util.List;
 public class LevelHomeServletActionImpl implements ServletAction {
     private final String ADMIN_LEVEL_HOME_PAGE;
 
-    public LevelHomeServletActionImpl() {
+    public LevelHomeServletActionImpl(MainService<Level> levelService) {
+        this.levelService = levelService;
         ReadPropertiesFile propertyPage = new ReadPropertiesFile();
         ADMIN_LEVEL_HOME_PAGE = propertyPage.getPageProperty("ADMIN_LEVEL_HOME_PAGE");
     }
@@ -25,7 +27,7 @@ public class LevelHomeServletActionImpl implements ServletAction {
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Level> allLevels = null;
         try {
-            allLevels = new LevelService(new LevelDAO()).getObjects();
+            allLevels = levelService.getObjects();
         } catch (SQLException e) {
             e.printStackTrace();
         }

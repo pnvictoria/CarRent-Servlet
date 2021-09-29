@@ -13,11 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class LevelUpdatePostServletActionImpl implements ServletAction {
-    private MainService<Level> service;
+    private MainService<Level> levelService;
     private final String ADMIN_LEVEL_HOME_PAGE;
 
-    public LevelUpdatePostServletActionImpl() {
-        service = new LevelService(new LevelDAO());
+    public LevelUpdatePostServletActionImpl(MainService<Level> levelService) {
+        this.levelService = levelService;
         ReadPropertiesFile propertyPage = new ReadPropertiesFile();
         ADMIN_LEVEL_HOME_PAGE = propertyPage.getCommandsProperty("ADMIN_LEVEL_HOME");
     }
@@ -28,7 +28,7 @@ public class LevelUpdatePostServletActionImpl implements ServletAction {
                 .setId(Integer.parseInt(req.getParameter("id")))
                 .setName(req.getParameter("name"))
                 .build();
-        service.updateObject(Level);
+        levelService.updateObject(Level);
         return ADMIN_LEVEL_HOME_PAGE;
     }
 }

@@ -12,11 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 
 public class RoleDeleteServletActionImpl implements ServletAction {
-    private MainService<Role> service;
+    private MainService<Role> roleService;
     private final String ADMIN_ROLE_HOME_PAGE;
 
-    public RoleDeleteServletActionImpl() {
-        this.service = new RoleService(new RoleDAO());
+    public RoleDeleteServletActionImpl(MainService<Role> roleService) {
+        this.roleService = roleService;
         ReadPropertiesFile property = new ReadPropertiesFile();
         ADMIN_ROLE_HOME_PAGE = property.getCommandsProperty("ADMIN_ROLE_HOME");
     }
@@ -24,7 +24,7 @@ public class RoleDeleteServletActionImpl implements ServletAction {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         try {
-            service.deleteObject(Integer.parseInt(request.getParameter("id")));
+            roleService.deleteObject(Integer.parseInt(request.getParameter("id")));
         } catch (SQLException e) {
             e.printStackTrace();
         }

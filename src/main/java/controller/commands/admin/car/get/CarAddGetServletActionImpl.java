@@ -20,9 +20,9 @@ public class CarAddGetServletActionImpl implements ServletAction {
     private final MainService<Level> levelService;
     private final String ADMIN_CAR_ADD_PAGE;
 
-    public CarAddGetServletActionImpl() {
-        this.labelService = new LabelService(new LabelDAO());
-        this.levelService = new LevelService(new LevelDAO());
+    public CarAddGetServletActionImpl(MainService<Label> labelService, MainService<Level> levelService) {
+        this.labelService = labelService;
+        this.levelService = levelService;
         ReadPropertiesFile propertyPage = new ReadPropertiesFile();
         ADMIN_CAR_ADD_PAGE = propertyPage.getPageProperty("ADMIN_CAR_ADD_PAGE");
     }

@@ -21,8 +21,8 @@ public class ImageUploadServletActionImpl implements ServletAction {
     private String USER_PAGE;
     private MainService<User> userService;
 
-    public ImageUploadServletActionImpl() {
-        userService = new UserService(new UserDAO());
+    public ImageUploadServletActionImpl(MainService<User> userService) {
+        this.userService = userService;
         ReadPropertiesFile propertyPage = new ReadPropertiesFile();
         USER_PAGE = propertyPage.getCommandsProperty("USER_MAIN");
     }

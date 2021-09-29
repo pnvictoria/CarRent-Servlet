@@ -15,11 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 
 public class LevelDeleteServletActionImpl implements ServletAction {
-    private MainService<Level> service;
+    private MainService<Level> levelService;
     private final String ADMIN_LEVEL_HOME_PAGE;
 
-    public LevelDeleteServletActionImpl() {
-        this.service = new LevelService(new LevelDAO());
+    public LevelDeleteServletActionImpl(MainService<Level> levelService) {
+        this.levelService = levelService;
         ReadPropertiesFile property = new ReadPropertiesFile();
         ADMIN_LEVEL_HOME_PAGE = property.getCommandsProperty("ADMIN_LEVEL_HOME");
     }
@@ -27,7 +27,7 @@ public class LevelDeleteServletActionImpl implements ServletAction {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         try {
-            service.deleteObject(Integer.parseInt(request.getParameter("id")));
+            levelService.deleteObject(Integer.parseInt(request.getParameter("id")));
         } catch (SQLException e) {
             e.printStackTrace();
         }

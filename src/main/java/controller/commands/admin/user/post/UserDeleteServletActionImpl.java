@@ -12,11 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 
 public class UserDeleteServletActionImpl implements ServletAction {
-    private MainService<User> service;
+    private MainService<User> userService;
     private final String ADMIN_USER_HOME_PAGE;
 
-    public UserDeleteServletActionImpl() {
-        this.service = new UserService(new UserDAO());
+    public UserDeleteServletActionImpl(MainService<User> userService) {
+        this.userService = userService;
         ReadPropertiesFile property = new ReadPropertiesFile();
         ADMIN_USER_HOME_PAGE = property.getCommandsProperty("ADMIN_USER_HOME");
     }
@@ -24,7 +24,7 @@ public class UserDeleteServletActionImpl implements ServletAction {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         try {
-            service.deleteObject(Integer.parseInt(request.getParameter("id")));
+            userService.deleteObject(Integer.parseInt(request.getParameter("id")));
         } catch (SQLException e) {
             e.printStackTrace();
         }

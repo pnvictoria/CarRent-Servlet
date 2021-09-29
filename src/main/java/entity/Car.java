@@ -8,6 +8,7 @@ public class Car {
     private String desc;
     private Label label;
     private Level level;
+    private boolean isBlock;
 
     private Car() {
 
@@ -39,6 +40,10 @@ public class Car {
 
     public Level getLevel() {
         return level;
+    }
+
+    public boolean isBlock() {
+        return isBlock;
     }
 
     public static Builder newBuilder() {
@@ -82,6 +87,11 @@ public class Car {
 
         public Builder setLevel(Level level) {
             Car.this.level = level;
+            return this;
+        }
+
+        public Builder setBlock(boolean block) {
+            Car.this.isBlock = block;
             return this;
         }
 

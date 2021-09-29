@@ -22,8 +22,8 @@ public class LabelDAO implements MainDAO<Label> {
     private final String UPDATE_LABEL_BY_ID ;
     private final String DELETE_LABEL_BY_ID;
 
-    public LabelDAO() {
-        connection = DataBaseConnection.initialize();
+    public LabelDAO(Connection connection) {
+        this.connection = connection;
 
         ReadPropertiesFile propertySql = new ReadPropertiesFile();
         INSERT_LABEL = propertySql.getSqlProperty("INSERT_LABEL");

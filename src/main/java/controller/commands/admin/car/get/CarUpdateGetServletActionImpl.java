@@ -24,10 +24,12 @@ public class CarUpdateGetServletActionImpl implements ServletAction {
     private final MainService<Label> labelService;
     private final MainService<Level> levelService;
 
-    public CarUpdateGetServletActionImpl() {
-        this.carService = new CarService(new CarDAO());
-        this.labelService = new LabelService(new LabelDAO());
-        this.levelService = new LevelService(new LevelDAO());
+    public CarUpdateGetServletActionImpl(MainService<Car> carService,
+                                         MainService<Label> labelService,
+                                         MainService<Level> levelService) {
+        this.carService = carService;
+        this.labelService = labelService;
+        this.levelService = levelService;
         ReadPropertiesFile propertyPage = new ReadPropertiesFile();
         ADMIN_CAR_UPDATE_PAGE = propertyPage.getPageProperty("ADMIN_CAR_UPDATE_PAGE");
     }

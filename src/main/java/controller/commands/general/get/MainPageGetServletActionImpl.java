@@ -20,9 +20,9 @@ public class MainPageGetServletActionImpl implements ServletAction {
     private final MainService<Level> levelService;
     private final String MAIN_PAGE;
 
-    public MainPageGetServletActionImpl() {
-        this.labelService = new LabelService(new LabelDAO());
-        this.levelService = new LevelService(new LevelDAO());
+    public MainPageGetServletActionImpl(MainService<Label> labelService, MainService<Level> levelService) {
+        this.labelService = labelService;
+        this.levelService = levelService;
         ReadPropertiesFile propertyPage = new ReadPropertiesFile();
         MAIN_PAGE = propertyPage.getPageProperty("MAIN_PAGE");
     }

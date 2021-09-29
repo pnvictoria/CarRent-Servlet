@@ -16,8 +16,8 @@ public class RoleAddPostServletActionImpl implements ServletAction {
     private final String ADMIN_ROLE_HOME_PAGE;
     private final String ADMIN_ROLE_ADD_PAGE;
 
-    public RoleAddPostServletActionImpl() {
-        service = new RoleService(new RoleDAO());
+    public RoleAddPostServletActionImpl(MainService<Role> roleService) {
+        this.roleService = roleService;
         ReadPropertiesFile property = new ReadPropertiesFile();
         ADMIN_ROLE_HOME_PAGE = property.getCommandsProperty("ADMIN_ROLE_HOME");
         ADMIN_ROLE_ADD_PAGE = property.getCommandsProperty("ADMIN_ROLE_ADD");
@@ -29,7 +29,7 @@ public class RoleAddPostServletActionImpl implements ServletAction {
             Role role = Role.newBuilder()
                     .setName(req.getParameter("name"))
                     .build();
-            if(service.addObject(role)) {
+            if(roleService.addObject(role)) {
                 return ADMIN_ROLE_HOME_PAGE;
             }
         } catch (SQLException e) {

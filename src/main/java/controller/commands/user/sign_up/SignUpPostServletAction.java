@@ -22,10 +22,10 @@ public class SignUpPostServletAction implements ServletAction {
     private final String SIGN_IN_PAGE;
     private final String SIGN_UP_PAGE;
 
-    private MainService<User> service;
+    private MainService<User> userService;
 
-    public SignUpPostServletAction() {
-        service = new UserService(new UserDAO());
+    public SignUpPostServletAction(MainService<User> userService) {
+        this.userService = userService;
 
         ReadPropertiesFile propertyPage = new ReadPropertiesFile();
         SIGN_IN_PAGE = propertyPage.getCommandsProperty("SIGN_IN");
@@ -52,7 +52,7 @@ public class SignUpPostServletAction implements ServletAction {
                                 .build())
                 .build();
         try {
-            if(service.addObject(user)) {
+            if(userService.addObject(user)) {
                 return SIGN_IN_PAGE;
             }
         } catch (SQLException e) {

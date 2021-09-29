@@ -24,8 +24,8 @@ public class LevelDAO implements MainDAO<Level> {
     private final String UPDATE_LEVEL_BY_ID;
     private final String DELETE_LEVEL_BY_ID;
 
-    public LevelDAO() {
-        connection = DataBaseConnection.initialize();
+    public LevelDAO(Connection connection) {
+        this.connection = connection;
 
         ReadPropertiesFile propertySql = new ReadPropertiesFile();
         INSERT_LEVEL = propertySql.getSqlProperty("INSERT_LEVEL");

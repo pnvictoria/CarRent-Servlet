@@ -13,11 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class CarUpdatePostServletActionImpl implements ServletAction {
-    private MainService<Car> service;
+    private MainService<Car> carService;
     private final String ADMIN_CAR_HOME_PAGE;
 
-    public CarUpdatePostServletActionImpl() {
-        service = new CarService(new CarDAO());
+    public CarUpdatePostServletActionImpl(MainService<Car> carService) {
+        this.carService = carService;
         ReadPropertiesFile property = new ReadPropertiesFile();
         ADMIN_CAR_HOME_PAGE = property.getCommandsProperty("ADMIN_CAR_HOME");
     }
@@ -38,7 +38,7 @@ public class CarUpdatePostServletActionImpl implements ServletAction {
                         .build())
                 .setDesc(req.getParameter("desc"))
                 .build();
-        service.updateObject(car);
+        carService.updateObject(car);
         return ADMIN_CAR_HOME_PAGE;
     }
 }

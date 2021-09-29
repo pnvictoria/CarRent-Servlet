@@ -32,6 +32,31 @@
                 </div>
             </div>
             <div class="setting">
+                <c:forEach items="${orderList}" var="order">
+                    <div class="items">
+                        <div class="items__item">
+                            <div class="items__img">
+                                    <%--<img src="${pageContext.request.contextPath}/main/images/oil.png" alt="oil">--%>
+                            </div>
+                            <div class="items__info">
+                                <p><span>Car: </span> <c:out value="${order.getCar().getName()}"/></p>
+                                <p><span>Phone: </span> <c:out value="${order.getPhone()}"/></p>
+<%--                                <p><span>State: </span> <c:out value="${order.()}"/></p>--%>
+                            </div>
+                            <div class="items__price">
+                                <div>
+                                    <p><span><c:out value="${car.getPrice()}"/>  UAN </span>/ 1h</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+
+
+
+
+            <div class="setting">
                 <div class="setting__wrapper">
                     <h2>Настройки</h2>
                     <div class="setting__images" hidden>

@@ -15,11 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 
 public class LabelDeletePostServletActionImpl implements ServletAction {
-    private MainService<Label> service;
+    private MainService<Label> labelService;
     private final String ADMIN_LABEL_HOME_PAGE;
 
-    public LabelDeletePostServletActionImpl() {
-        this.service = new LabelService(new LabelDAO());
+    public LabelDeletePostServletActionImpl(MainService<Label> labelService) {
+        this.labelService = labelService;
         ReadPropertiesFile property = new ReadPropertiesFile();
         ADMIN_LABEL_HOME_PAGE = property.getCommandsProperty("ADMIN_LABEL_HOME");
     }
@@ -27,7 +27,7 @@ public class LabelDeletePostServletActionImpl implements ServletAction {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         try {
-            service.deleteObject(Integer.parseInt(request.getParameter("id")));
+            labelService.deleteObject(Integer.parseInt(request.getParameter("id")));
         } catch (SQLException e) {
             e.printStackTrace();
         }

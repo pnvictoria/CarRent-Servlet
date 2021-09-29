@@ -23,10 +23,9 @@ public class SignInPostServletAction implements ServletAction {
     private final String MAIN_PAGE;
     private final String SIGN_IN_PAGE;
 
-    private MainService<User> service;
 
-    public SignInPostServletAction() {
-        service = new UserService(new UserDAO());
+    public SignInPostServletAction(MainService<User> userService) {
+        this.userService = userService;
 
         ReadPropertiesFile propertyPage = new ReadPropertiesFile();
         MAIN_PAGE = propertyPage.getCommandsProperty("MAIN");
@@ -42,7 +41,7 @@ public class SignInPostServletAction implements ServletAction {
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<User> users = null;
         try {
-            users = service.getByItem(User.newBuilder().setEmail(req.getParameter("email")).build());
+            users = userService.getByItem(User.newBuilder().setEmail(req.getParameter("email")).build());
         } catch (SQLException e) {
             e.printStackTrace();
         }

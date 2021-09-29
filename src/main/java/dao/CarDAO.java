@@ -3,7 +3,9 @@ package dao;
 import dao.interfaces.MainDAO;
 import database.DataBaseConnection;
 import entity.Car;
+import entity.Label;
 import entity.mapper.CarMapper;
+import entity.mapper.LevelMapper;
 import utils.ReadPropertiesFile;
 
 import java.sql.Connection;
@@ -19,16 +21,18 @@ public class CarDAO implements MainDAO<Car> {
     private final String INSERT_CAR;
     private final String SELECT_ALL_CARS;
     private final String SELECT_CAR_BY_ID;
+    private final String SELECT_CAR_BY_NAME;
     private final String UPDATE_CAR_BY_ID;
     private final String DELETE_CAR_BY_ID;
 
-    public CarDAO() {
-        connection = DataBaseConnection.initialize();
+    public CarDAO(Connection connection) {
+        this.connection = connection;
 
         ReadPropertiesFile propertySql = new ReadPropertiesFile();
         INSERT_CAR = propertySql.getSqlProperty("INSERT_CAR");
         SELECT_ALL_CARS = propertySql.getSqlProperty("SELECT_ALL_CARS");
         SELECT_CAR_BY_ID = propertySql.getSqlProperty("SELECT_CAR_BY_ID");
+        SELECT_CAR_BY_NAME = propertySql.getSqlProperty("SELECT_CAR_BY_NAME");
         UPDATE_CAR_BY_ID = propertySql.getSqlProperty("UPDATE_CAR_BY_ID");
         DELETE_CAR_BY_ID = propertySql.getSqlProperty("DELETE_CAR_BY_ID");
     }
@@ -96,7 +100,14 @@ public class CarDAO implements MainDAO<Car> {
     }
 
     @Override
-    public List<Car> getByItem(Car obj) {
-        return null;
+    public List<Car> getByItem(Car obj) throws SQLException {
+        PreparedStatement ps = connection.prepareStatement(SELECT_CAR_BY_NAME);
+        ps.setString(1, obj.getName());
+        ResultSet rs = ps.executeQuery();
+        List<Car> carList = new ArrayList<>();
+        while (rs.next()) {
+            carList.add(CarMapper.mapRow(rs));
+        }
+        return carList;
     }
 }

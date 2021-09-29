@@ -12,11 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 
 public class CarDeleteServletActionImpl implements ServletAction {
-    private MainService<Car> service;
+    private MainService<Car> carService;
     private final String ADMIN_CAR_HOME_PAGE;
 
-    public CarDeleteServletActionImpl() {
-        this.service = new CarService(new CarDAO());
+    public CarDeleteServletActionImpl(MainService<Car> carService) {
+        this.carService = carService;
         ReadPropertiesFile property = new ReadPropertiesFile();
         ADMIN_CAR_HOME_PAGE = property.getCommandsProperty("ADMIN_CAR_HOME");
     }
@@ -24,7 +24,7 @@ public class CarDeleteServletActionImpl implements ServletAction {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         try {
-            service.deleteObject(Integer.parseInt(request.getParameter("id")));
+            carService.deleteObject(Integer.parseInt(request.getParameter("id")));
         } catch (SQLException e) {
             e.printStackTrace();
         }

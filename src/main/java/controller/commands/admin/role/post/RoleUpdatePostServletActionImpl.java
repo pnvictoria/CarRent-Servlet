@@ -13,11 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class RoleUpdatePostServletActionImpl implements ServletAction {
-    private MainService<Role> service;
+    private MainService<Role> roleService;
     private final String ADMIN_ROLE_HOME_PAGE;
 
-    public RoleUpdatePostServletActionImpl() {
-        service = new RoleService(new RoleDAO());
+    public RoleUpdatePostServletActionImpl(MainService<Role> roleService) {
+        this.roleService = roleService;
         ReadPropertiesFile propertyPage = new ReadPropertiesFile();
         ADMIN_ROLE_HOME_PAGE = propertyPage.getCommandsProperty("ADMIN_ROLE_HOME");
     }
@@ -28,7 +28,7 @@ public class RoleUpdatePostServletActionImpl implements ServletAction {
                 .setId(Integer.parseInt(req.getParameter("id")))
                 .setName(req.getParameter("name"))
                 .build();
-        service.updateObject(role);
+        roleService.updateObject(role);
         return ADMIN_ROLE_HOME_PAGE;
     }
 }

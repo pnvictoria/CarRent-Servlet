@@ -51,7 +51,6 @@ public class User {
         return new User().new Builder();
     }
 
-
     public class Builder {
         private Builder() {
 

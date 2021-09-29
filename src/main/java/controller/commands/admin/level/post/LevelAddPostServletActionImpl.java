@@ -16,8 +16,8 @@ public class LevelAddPostServletActionImpl implements ServletAction {
     private final String ADMIN_LEVEL_HOME_PAGE;
     private final String ADMIN_LEVEL_ADD_PAGE;
 
-    public LevelAddPostServletActionImpl() {
-        service = new LevelService(new LevelDAO());
+    public LevelAddPostServletActionImpl(MainService<Level> levelService) {
+        this.levelService = levelService;
         ReadPropertiesFile property = new ReadPropertiesFile();
         ADMIN_LEVEL_HOME_PAGE = property.getCommandsProperty("ADMIN_LEVEL_HOME");
         ADMIN_LEVEL_ADD_PAGE = property.getCommandsProperty("ADMIN_LEVEL_ADD");
@@ -29,7 +29,7 @@ public class LevelAddPostServletActionImpl implements ServletAction {
             Level level = Level.newBuilder()
                     .setName(req.getParameter("name"))
                     .build();
-            if(service.addObject(level)) {
+            if(levelService.addObject(level)) {
                 return ADMIN_LEVEL_HOME_PAGE;
             }
         } catch (SQLException e) {

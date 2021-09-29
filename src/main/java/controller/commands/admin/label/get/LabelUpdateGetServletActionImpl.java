@@ -15,8 +15,8 @@ public class LabelUpdateGetServletActionImpl implements ServletAction {
     private final String ADMIN_LABEL_UPDATE_PAGE;
     private final MainService<Label> labelService;
 
-    public LabelUpdateGetServletActionImpl() {
-        this.labelService = new LabelService(new LabelDAO());
+    public LabelUpdateGetServletActionImpl(MainService<Label> labelService) {
+        this.labelService = labelService;
         ReadPropertiesFile propertyPage = new ReadPropertiesFile();
         ADMIN_LABEL_UPDATE_PAGE = propertyPage.getPageProperty("ADMIN_LABEL_UPDATE_PAGE");
     }

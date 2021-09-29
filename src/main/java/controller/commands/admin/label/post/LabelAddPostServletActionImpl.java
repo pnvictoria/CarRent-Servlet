@@ -16,8 +16,8 @@ public class LabelAddPostServletActionImpl implements ServletAction {
     private final String ADMIN_LABEL_HOME_PAGE;
     private final String ADMIN_LABEL_ADD_PAGE;
 
-    public LabelAddPostServletActionImpl() {
-        service = new LabelService(new LabelDAO());
+    public LabelAddPostServletActionImpl(MainService<Label> labelService) {
+        this.labelService = labelService;
         ReadPropertiesFile property = new ReadPropertiesFile();
         ADMIN_LABEL_HOME_PAGE = property.getCommandsProperty("ADMIN_LABEL_HOME");
         ADMIN_LABEL_ADD_PAGE = property.getCommandsProperty("ADMIN_LABEL_ADD");
@@ -29,7 +29,7 @@ public class LabelAddPostServletActionImpl implements ServletAction {
             Label label = Label.newBuilder()
                     .setName(req.getParameter("name"))
                     .build();
-            if(service.addObject(label)) {
+            if(labelService.addObject(label)) {
                 return ADMIN_LABEL_HOME_PAGE;
             }
         } catch (SQLException e) {

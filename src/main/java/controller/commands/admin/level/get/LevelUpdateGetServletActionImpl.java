@@ -15,8 +15,8 @@ public class LevelUpdateGetServletActionImpl implements ServletAction {
     private final String ADMIN_LEVEL_UPDATE_PAGE;
     private final MainService<Level> levelService;
 
-    public LevelUpdateGetServletActionImpl() {
-        this.levelService = new LevelService(new LevelDAO());
+    public LevelUpdateGetServletActionImpl(MainService<Level> levelService) {
+        this.levelService = levelService;
         ReadPropertiesFile propertyPage = new ReadPropertiesFile();
         ADMIN_LEVEL_UPDATE_PAGE = propertyPage.getPageProperty("ADMIN_LEVEL_UPDATE_PAGE");
     }

@@ -28,64 +28,99 @@ import controller.commands.admin.user.get.UserHomeServletActionImpl;
 import controller.commands.admin.user.post.UserDeleteServletActionImpl;
 import controller.commands.general.get.MainPageGetServletActionImpl;
 import controller.commands.general.post.ImageUploadServletActionImpl;
+import controller.commands.user.rent.CarRentGetServletActionImpl;
 import controller.commands.user.page.UserPageGetServletAction;
+import controller.commands.user.rent.CarRentPostServletActionImpl;
 import controller.commands.user.sign_in.SignInGetServletAction;
 import controller.commands.user.sign_in.SignInPostServletAction;
 import controller.commands.user.sign_out.UserSignOutServletAction;
 import controller.commands.user.sign_up.SignUpGetServletAction;
 import controller.commands.user.sign_up.SignUpPostServletAction;
 import controller.interfaces.ServletAction;
+import dao.*;
+import dao.dto.CarFilterDAO;
+import database.DataBaseConnection;
+import dto.CarFilterDTO;
+import entity.*;
+import service.*;
+import service.dto.CarFilterService;
+import service.interfaces.FilterService;
+import service.interfaces.MainService;
 import utils.ReadPropertiesFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.Connection;
 import java.util.HashMap;
 
 public class CommandManager {
+    private Connection connection;
+    private MainService<Label> labelService;
+    private MainService<Level> levelService;
+    private MainService<Role> roleService;
+    private MainService<Car> carService;
+    private MainService<User> userService;
+    private MainService<Order> orderService;
+
+    private FilterService<Car, CarFilterDTO> filterService;
 
     public static final HashMap<String, ServletAction> commands = new HashMap<>();
 
     public CommandManager() {
+        connection = DataBaseConnection.initialize();
+        this.labelService = new LabelService(new LabelDAO(connection));
+        this.levelService = new LevelService(new LevelDAO(connection));
+        this.roleService = new RoleService(new RoleDAO(connection));
+        this.carService = new CarService(new CarDAO(connection));
+        this.userService = new UserService(new UserDAO(connection));
+        this.orderService = new OrderService(new OrderDAO(connection));
+
+        this.filterService = new CarFilterService(new CarFilterDAO(connection));
+
         ReadPropertiesFile pr = new ReadPropertiesFile();
         // general
-        commands.put(pr.getCommandsProperty("MAIN"), new MainPageGetServletActionImpl());
+        commands.put(pr.getCommandsProperty("MAIN"), new MainPageGetServletActionImpl(labelService,levelService));
         commands.put(pr.getCommandsProperty("SIGN_IN"), new SignInGetServletAction());
-        commands.put(pr.getCommandsProperty("SIGN_IN_POST"), new SignInPostServletAction());
+        commands.put(pr.getCommandsProperty("SIGN_IN_POST"), new SignInPostServletAction(userService));
         commands.put(pr.getCommandsProperty("SIGN_UP"), new SignUpGetServletAction());
-        commands.put(pr.getCommandsProperty("SIGN_UP_POST"), new SignUpPostServletAction());
-        commands.put(pr.getCommandsProperty("USER_MAIN"), new UserPageGetServletAction());
+        commands.put(pr.getCommandsProperty("SIGN_UP_POST"), new SignUpPostServletAction(userService));
+        commands.put(pr.getCommandsProperty("USER_MAIN"), new UserPageGetServletAction(orderService, carService));
+        commands.put(pr.getCommandsProperty("CAR_RENT"), new CarRentGetServletActionImpl(carService));
+        commands.put(pr.getCommandsProperty("CAR_RENT_POST"), new CarRentPostServletActionImpl(orderService, carService));
+
+
         commands.put(pr.getCommandsProperty("SIGN_OUT"), new UserSignOutServletAction());
         commands.put(pr.getCommandsProperty("UPLOAD_IMAGE_POST"), new ImageUploadServletActionImpl());
         // user
-        commands.put(pr.getCommandsProperty("ADMIN_USER_HOME"), new UserHomeServletActionImpl());
-        commands.put(pr.getCommandsProperty("ADMIN_USER_DELETE"), new UserDeleteServletActionImpl());
+        commands.put(pr.getCommandsProperty("ADMIN_USER_HOME"), new UserHomeServletActionImpl(userService));
+        commands.put(pr.getCommandsProperty("ADMIN_USER_DELETE"), new UserDeleteServletActionImpl(userService));
         // car
-        commands.put(pr.getCommandsProperty("ADMIN_CAR_HOME"), new CarHomeServletActionImpl());
-        commands.put(pr.getCommandsProperty("ADMIN_CAR_ADD"), new CarAddGetServletActionImpl());
-        commands.put(pr.getCommandsProperty("ADMIN_CAR_ADD_POST"), new CarAddPostServletActionImpl());
-        commands.put(pr.getCommandsProperty("ADMIN_CAR_UPDATE"), new CarUpdateGetServletActionImpl());
-        commands.put(pr.getCommandsProperty("ADMIN_CAR_UPDATE_POST"), new CarUpdatePostServletActionImpl());
-        commands.put(pr.getCommandsProperty("ADMIN_CAR_DELETE"), new CarDeleteServletActionImpl());
+        commands.put(pr.getCommandsProperty("ADMIN_CAR_HOME"), new CarHomeServletActionImpl(carService));
+        commands.put(pr.getCommandsProperty("ADMIN_CAR_ADD"), new CarAddGetServletActionImpl(labelService,levelService));
+        commands.put(pr.getCommandsProperty("ADMIN_CAR_ADD_POST"), new CarAddPostServletActionImpl(carService,labelService,levelService));
+        commands.put(pr.getCommandsProperty("ADMIN_CAR_UPDATE"), new CarUpdateGetServletActionImpl(carService,labelService,levelService));
+        commands.put(pr.getCommandsProperty("ADMIN_CAR_UPDATE_POST"), new CarUpdatePostServletActionImpl(carService));
+        commands.put(pr.getCommandsProperty("ADMIN_CAR_DELETE"), new CarDeleteServletActionImpl(carService));
         // role
-        commands.put(pr.getCommandsProperty("ADMIN_ROLE_HOME"), new RoleHomeServletActionImpl());
+        commands.put(pr.getCommandsProperty("ADMIN_ROLE_HOME"), new RoleHomeServletActionImpl(roleService));
         commands.put(pr.getCommandsProperty("ADMIN_ROLE_ADD"), new RoleAddGetServletActionImpl());
-        commands.put(pr.getCommandsProperty("ADMIN_ROLE_ADD_POST"), new RoleAddPostServletActionImpl());
-        commands.put(pr.getCommandsProperty("ADMIN_ROLE_UPDATE"), new RoleUpdateGetServletActionImpl());
-        commands.put(pr.getCommandsProperty("ADMIN_ROLE_UPDATE_POST"), new RoleUpdatePostServletActionImpl());
-        commands.put(pr.getCommandsProperty("ADMIN_ROLE_DELETE"), new RoleDeleteServletActionImpl());
+        commands.put(pr.getCommandsProperty("ADMIN_ROLE_ADD_POST"), new RoleAddPostServletActionImpl(roleService));
+        commands.put(pr.getCommandsProperty("ADMIN_ROLE_UPDATE"), new RoleUpdateGetServletActionImpl(roleService));
+        commands.put(pr.getCommandsProperty("ADMIN_ROLE_UPDATE_POST"), new RoleUpdatePostServletActionImpl(roleService));
+        commands.put(pr.getCommandsProperty("ADMIN_ROLE_DELETE"), new RoleDeleteServletActionImpl(roleService));
         // label
-        commands.put(pr.getCommandsProperty("ADMIN_LABEL_HOME"), new LabelHomeServletActionImpl());
+        commands.put(pr.getCommandsProperty("ADMIN_LABEL_HOME"), new LabelHomeServletActionImpl(labelService));
         commands.put(pr.getCommandsProperty("ADMIN_LABEL_ADD"), new LabelAddGetServletActionImpl());
-        commands.put(pr.getCommandsProperty("ADMIN_LABEL_ADD_POST"), new LabelAddPostServletActionImpl());
-        commands.put(pr.getCommandsProperty("ADMIN_LABEL_UPDATE"), new LabelUpdateGetServletActionImpl());
-        commands.put(pr.getCommandsProperty("ADMIN_LABEL_UPDATE_POST"), new LabelUpdatePostServletActionImpl());
-        commands.put(pr.getCommandsProperty("ADMIN_LABEL_DELETE"), new LabelDeletePostServletActionImpl());
+        commands.put(pr.getCommandsProperty("ADMIN_LABEL_ADD_POST"), new LabelAddPostServletActionImpl(labelService));
+        commands.put(pr.getCommandsProperty("ADMIN_LABEL_UPDATE"), new LabelUpdateGetServletActionImpl(labelService));
+        commands.put(pr.getCommandsProperty("ADMIN_LABEL_UPDATE_POST"), new LabelUpdatePostServletActionImpl(labelService));
+        commands.put(pr.getCommandsProperty("ADMIN_LABEL_DELETE"), new LabelDeletePostServletActionImpl(labelService));
         // level
-        commands.put(pr.getCommandsProperty("ADMIN_LEVEL_HOME"), new LevelHomeServletActionImpl());
+        commands.put(pr.getCommandsProperty("ADMIN_LEVEL_HOME"), new LevelHomeServletActionImpl(levelService));
         commands.put(pr.getCommandsProperty("ADMIN_LEVEL_ADD"), new LevelAddGetServletActionImpl());
-        commands.put(pr.getCommandsProperty("ADMIN_LEVEL_ADD_POST"), new LevelAddPostServletActionImpl());
-        commands.put(pr.getCommandsProperty("ADMIN_LEVEL_UPDATE"), new LevelUpdateGetServletActionImpl());
-        commands.put(pr.getCommandsProperty("ADMIN_LEVEL_UPDATE_POST"), new LevelUpdatePostServletActionImpl());
-        commands.put(pr.getCommandsProperty("ADMIN_LEVEL_DELETE"), new LevelDeleteServletActionImpl());
+        commands.put(pr.getCommandsProperty("ADMIN_LEVEL_ADD_POST"), new LevelAddPostServletActionImpl(levelService));
+        commands.put(pr.getCommandsProperty("ADMIN_LEVEL_UPDATE"), new LevelUpdateGetServletActionImpl(levelService));
+        commands.put(pr.getCommandsProperty("ADMIN_LEVEL_UPDATE_POST"), new LevelUpdatePostServletActionImpl(levelService));
+        commands.put(pr.getCommandsProperty("ADMIN_LEVEL_DELETE"), new LevelDeleteServletActionImpl(levelService));
     }
 
     public ServletAction getCommand(HttpServletRequest request) {

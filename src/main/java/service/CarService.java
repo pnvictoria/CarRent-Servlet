@@ -29,9 +29,7 @@ public class CarService implements MainService<Car> {
 
     @Override
     public void deleteObject(int id) throws SQLException {
-        Car car = daoCars.getObjectById(id);
-        if (car != null)
-            daoCars.deleteObject(id);
+       daoCars.deleteObject(id);
     }
 
     @Override

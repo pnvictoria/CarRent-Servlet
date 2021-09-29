@@ -4,6 +4,7 @@ import controller.interfaces.ServletAction;
 import dao.RoleDAO;
 import entity.Role;
 import service.RoleService;
+import service.interfaces.MainService;
 import utils.ReadPropertiesFile;
 
 import javax.servlet.ServletException;
@@ -16,7 +17,8 @@ import java.util.List;
 public class RoleHomeServletActionImpl implements ServletAction {
     private final String ADMIN_ROLE_HOME_PAGE;
 
-    public RoleHomeServletActionImpl() {
+    public RoleHomeServletActionImpl(MainService<Role> roleService) {
+        this.roleService = roleService;
         ReadPropertiesFile propertyPage = new ReadPropertiesFile();
         ADMIN_ROLE_HOME_PAGE = propertyPage.getPageProperty("ADMIN_ROLE_HOME_PAGE");
     }
@@ -25,7 +27,7 @@ public class RoleHomeServletActionImpl implements ServletAction {
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Role> allRoles = null;
         try {
-            allRoles = new RoleService(new RoleDAO()).getObjects();
+            allRoles = roleService.getObjects();
         } catch (SQLException e) {
             e.printStackTrace();
         }
