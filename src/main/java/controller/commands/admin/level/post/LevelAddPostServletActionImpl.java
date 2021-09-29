@@ -3,6 +3,8 @@ package controller.commands.admin.level.post;
 import controller.interfaces.ServletAction;
 import dao.LevelDAO;
 import entity.Level;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import service.LevelService;
 import service.interfaces.MainService;
 import utils.ReadPropertiesFile;
@@ -12,7 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 
 public class LevelAddPostServletActionImpl implements ServletAction {
-    private MainService<Level> service;
+    private static final Logger LOG = LoggerFactory.getLogger(LevelAddPostServletActionImpl.class);
+
+    private MainService<Level> levelService;
     private final String ADMIN_LEVEL_HOME_PAGE;
     private final String ADMIN_LEVEL_ADD_PAGE;
 
@@ -33,7 +37,7 @@ public class LevelAddPostServletActionImpl implements ServletAction {
                 return ADMIN_LEVEL_HOME_PAGE;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("Exception: {}", e.getMessage(), e);
         }
         return ADMIN_LEVEL_ADD_PAGE;
     }

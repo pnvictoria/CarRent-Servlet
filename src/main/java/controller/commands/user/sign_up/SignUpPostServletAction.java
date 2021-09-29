@@ -4,6 +4,8 @@ import controller.interfaces.ServletAction;
 import dao.UserDAO;
 import entity.Role;
 import entity.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import service.UserService;
 import service.interfaces.MainService;
 import utils.ReadPropertiesFile;
@@ -16,6 +18,8 @@ import java.sql.SQLException;
 import java.util.Objects;
 
 public class SignUpPostServletAction implements ServletAction {
+    private static final Logger LOG = LoggerFactory.getLogger(SignUpPostServletAction.class);
+
     private final int ROLE_USER_ID;
     private final String ROLE_USER;
 
@@ -56,7 +60,7 @@ public class SignUpPostServletAction implements ServletAction {
                 return SIGN_IN_PAGE;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("Exception: {}", e.getMessage(), e);
         }
         return SIGN_UP_PAGE;
     }

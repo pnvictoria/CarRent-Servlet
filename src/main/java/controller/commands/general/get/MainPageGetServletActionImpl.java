@@ -1,10 +1,13 @@
 package controller.commands.general.get;
 
+import controller.commands.admin.car.post.CarAddPostServletActionImpl;
 import controller.interfaces.ServletAction;
 import dao.LabelDAO;
 import dao.LevelDAO;
 import entity.Label;
 import entity.Level;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import service.LabelService;
 import service.LevelService;
 import service.interfaces.MainService;
@@ -16,6 +19,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class MainPageGetServletActionImpl implements ServletAction {
+    private static final Logger LOG = LoggerFactory.getLogger(MainPageGetServletActionImpl.class);
+
     private final MainService<Label> labelService;
     private final MainService<Level> levelService;
     private final String MAIN_PAGE;
@@ -37,7 +42,7 @@ public class MainPageGetServletActionImpl implements ServletAction {
             req.setAttribute("allLabels", allLabels);
             req.setAttribute("allLevels", allLevels);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("Exception: {}", e.getMessage(), e);
         }
         return MAIN_PAGE;
     }

@@ -1,5 +1,6 @@
 package controller.commands.admin.car.post;
 
+import controller.commands.admin.car.get.CarAddGetServletActionImpl;
 import controller.interfaces.ServletAction;
 import dao.CarDAO;
 import dao.LabelDAO;
@@ -7,6 +8,8 @@ import dao.LevelDAO;
 import entity.Car;
 import entity.Label;
 import entity.Level;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import service.CarService;
 import service.LabelService;
 import service.LevelService;
@@ -19,7 +22,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class CarAddPostServletActionImpl implements ServletAction {
-    private MainService<Car> service;
+    private static final Logger LOG = LoggerFactory.getLogger(CarAddPostServletActionImpl.class);
+
+    private final MainService<Car> carService;
     private final MainService<Label> labelService;
     private final MainService<Level> levelService;
     private final String ADMIN_CAR_HOME_PAGE;
@@ -44,43 +49,34 @@ public class CarAddPostServletActionImpl implements ServletAction {
                     .setPrice(Integer.parseInt(req.getParameter("price")))
                     .setJpg(req.getParameter("jpg"))
                     .setLevel(getLevelFromList(req.getParameter("level_name")))
-                    .setLabel(getLabelFromList(req.getParameter("level_name")))
+                    .setLabel(getLabelFromList(req.getParameter("label_name")))
                     .setDesc(req.getParameter("desc"))
                     .build();
             if(carService.addObject(car)) {
                 return ADMIN_CAR_HOME_PAGE;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("Exception: {}", e.getMessage(), e);
         }
         return ADMIN_CAR_ADD_PAGE;
     }
 
-    public Label getLabelFromList(String level_name){
-        List<Label> label = null;
+    private Label getLabelFromList(String labelId){
         try {
-            label = labelService.getByItem(
-                    Label.newBuilder()
-                            .setName(level_name)
-                            .build()
-            );
+            return labelService.getObjectById(Integer.parseInt(labelId));
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("Exception: {}", e.getMessage(), e);
         }
-        return label.get(1);
+        return Label.newBuilder().build();
     }
 
-    public Level getLevelFromList(String label_name){
-        List<Level> label = null;
+    public Level getLevelFromList(String levelId){
         try {
-            label = levelService.getByItem(
-                    Level.newBuilder()
-                            .setName(label_name)
-                            .build()
-            );
+            return levelService.getObjectById(Integer.parseInt(levelId));
+
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("Exception: {}", e.getMessage(), e);
         }
-        return label.get(1);
+        return Level.newBuilder().build();
     }
 }

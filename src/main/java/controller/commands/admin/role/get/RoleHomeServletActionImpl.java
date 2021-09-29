@@ -3,6 +3,8 @@ package controller.commands.admin.role.get;
 import controller.interfaces.ServletAction;
 import dao.RoleDAO;
 import entity.Role;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import service.RoleService;
 import service.interfaces.MainService;
 import utils.ReadPropertiesFile;
@@ -15,6 +17,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class RoleHomeServletActionImpl implements ServletAction {
+    private static final Logger LOG = LoggerFactory.getLogger(RoleHomeServletActionImpl.class);
+
+    private MainService<Role> roleService;
     private final String ADMIN_ROLE_HOME_PAGE;
 
     public RoleHomeServletActionImpl(MainService<Role> roleService) {
@@ -29,7 +34,7 @@ public class RoleHomeServletActionImpl implements ServletAction {
         try {
             allRoles = roleService.getObjects();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("Exception: {}", e.getMessage(), e);
         }
         req.setAttribute("allRoles", allRoles);
         return ADMIN_ROLE_HOME_PAGE;

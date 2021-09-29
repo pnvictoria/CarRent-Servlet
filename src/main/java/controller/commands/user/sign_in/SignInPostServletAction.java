@@ -3,6 +3,8 @@ package controller.commands.user.sign_in;
 import controller.interfaces.ServletAction;
 import dao.UserDAO;
 import entity.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import service.UserService;
 import service.interfaces.MainService;
 import utils.ReadPropertiesFile;
@@ -16,6 +18,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class SignInPostServletAction implements ServletAction {
+    private static final Logger LOG = LoggerFactory.getLogger(SignInPostServletAction.class);
+    private MainService<User> userService;
     private final String ROLE_ADMIN;
     private final String ROLE_USER;
 
@@ -43,7 +47,7 @@ public class SignInPostServletAction implements ServletAction {
         try {
             users = userService.getByItem(User.newBuilder().setEmail(req.getParameter("email")).build());
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("Exception: {}", e.getMessage(), e);
         }
         if(users != null && !users.isEmpty()) {
             User user = users.get(0);

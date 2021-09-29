@@ -7,6 +7,8 @@ import dao.LevelDAO;
 import entity.Car;
 import entity.Label;
 import entity.Level;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import service.CarService;
 import service.LabelService;
 import service.LevelService;
@@ -19,6 +21,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class CarUpdateGetServletActionImpl implements ServletAction {
+    private static final Logger LOG = LoggerFactory.getLogger(CarUpdateGetServletActionImpl.class);
+
     private final String ADMIN_CAR_UPDATE_PAGE;
     private final MainService<Car> carService;
     private final MainService<Label> labelService;
@@ -47,7 +51,7 @@ public class CarUpdateGetServletActionImpl implements ServletAction {
             req.setAttribute("allLabels", allLabels);
             req.setAttribute("allLevels", allLevels);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("Exception: {}", e.getMessage(), e);
         }
         return ADMIN_CAR_UPDATE_PAGE;
     }

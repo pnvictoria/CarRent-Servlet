@@ -1,8 +1,11 @@
 package controller.commands.admin.user.get;
 
+import controller.commands.admin.role.post.RoleAddPostServletActionImpl;
 import controller.interfaces.ServletAction;
 import dao.UserDAO;
 import entity.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import service.UserService;
 import service.interfaces.MainService;
 import utils.ReadPropertiesFile;
@@ -15,6 +18,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class UserHomeServletActionImpl implements ServletAction {
+    private static final Logger LOG = LoggerFactory.getLogger(UserHomeServletActionImpl.class);
+    private final MainService<User> userService;
     private final String ADMIN_USER_HOME_PAGE;
 
     public UserHomeServletActionImpl(MainService<User> userService) {
@@ -29,7 +34,7 @@ public class UserHomeServletActionImpl implements ServletAction {
         try {
             allUsers = userService.getObjects();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("Exception: {}", e.getMessage(), e);
         }
         req.setAttribute("allUsers", allUsers);
         return ADMIN_USER_HOME_PAGE;

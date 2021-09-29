@@ -1,8 +1,11 @@
 package controller.commands.general.post;
 
+import controller.commands.general.get.MainPageGetServletActionImpl;
 import controller.interfaces.ServletAction;
 import dao.UserDAO;
 import entity.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import service.UserService;
 import service.interfaces.MainService;
 import utils.ReadPropertiesFile;
@@ -18,6 +21,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class ImageUploadServletActionImpl implements ServletAction {
+    private static final Logger LOG = LoggerFactory.getLogger(ImageUploadServletActionImpl.class);
+
     private String USER_PAGE;
     private MainService<User> userService;
 
@@ -42,9 +47,9 @@ public class ImageUploadServletActionImpl implements ServletAction {
 
             try {
                 filePart.write(uploadPath + File.separator + fileName);
-            } catch (FileNotFoundException fne) {
-                fne.printStackTrace();
-                req.setAttribute("message", "There was an error: " + fne.getMessage());
+            } catch (FileNotFoundException e) {
+                LOG.error("Exception: {}", e.getMessage(), e);
+                req.setAttribute("message", "There was an error: " + e.getMessage());
             }
             User user = (User) req.getSession().getAttribute("user");
             User updatedUser = User.newBuilder()
@@ -64,7 +69,7 @@ public class ImageUploadServletActionImpl implements ServletAction {
 
             return USER_PAGE;
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.error("Exception: {}", e.getMessage(), e);
             return USER_PAGE;
         }
     }

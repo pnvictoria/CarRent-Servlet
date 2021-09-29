@@ -4,6 +4,8 @@ import dao.interfaces.MainDAO;
 import database.DataBaseConnection;
 import entity.Label;
 import entity.mapper.LabelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import utils.ReadPropertiesFile;
 
 import java.sql.Connection;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LabelDAO implements MainDAO<Label> {
+    private static final Logger LOG = LoggerFactory.getLogger(LabelDAO.class);
     private Connection connection;
     private final String INSERT_LABEL;
     private final String SELECT_ALL_LABEL;
@@ -95,7 +98,7 @@ public class LabelDAO implements MainDAO<Label> {
             ps = connection.prepareStatement(SELECT_LABEL_BY_NAME);
             ps.setString(1, obj.getName());
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("Exception: {}", e.getMessage(), e);
         }
         ResultSet resultSet = ps.executeQuery();
         while (resultSet.next()) {

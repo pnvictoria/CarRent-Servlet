@@ -1,11 +1,17 @@
 package database;
 import utils.ReadPropertiesFile;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import utils.ReadPropertiesFile;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DataBaseConnection {
+    private static final Logger LOG = LoggerFactory.getLogger(DataBaseConnection.class);
+
     private static Connection connection = null;
     public static String DB_DRIVER;
     public static String DB_URL;

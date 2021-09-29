@@ -2,10 +2,10 @@ package dao;
 
 import dao.interfaces.MainDAO;
 import database.DataBaseConnection;
-import entity.Level;
 import entity.Role;
-import entity.mapper.LevelMapper;
 import entity.mapper.RoleMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import utils.ReadPropertiesFile;
 
 import java.sql.Connection;
@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoleDAO implements MainDAO<Role> {
+    private static final Logger LOG = LoggerFactory.getLogger(RoleDAO.class);
+
     private Connection connection;
     private final String INSERT_ROLE;
     private final String SELECT_ALL_ROLE;
@@ -96,7 +98,7 @@ public class RoleDAO implements MainDAO<Role> {
             ps = connection.prepareStatement(SELECT_ROLE_BY_NAME);
             ps.setString(1, obj.getName());
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("Exception: {}", e.getMessage(), e);
         }
         ResultSet resultSet = ps.executeQuery();
         while (resultSet.next()) {

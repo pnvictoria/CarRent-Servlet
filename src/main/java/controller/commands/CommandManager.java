@@ -27,6 +27,7 @@ import controller.commands.admin.role.post.RoleUpdatePostServletActionImpl;
 import controller.commands.admin.user.get.UserHomeServletActionImpl;
 import controller.commands.admin.user.post.UserDeleteServletActionImpl;
 import controller.commands.general.get.MainPageGetServletActionImpl;
+import controller.commands.general.post.CarFilterServletActionImpl;
 import controller.commands.general.post.ImageUploadServletActionImpl;
 import controller.commands.user.rent.CarRentGetServletActionImpl;
 import controller.commands.user.page.UserPageGetServletAction;
@@ -89,7 +90,8 @@ public class CommandManager {
 
 
         commands.put(pr.getCommandsProperty("SIGN_OUT"), new UserSignOutServletAction());
-        commands.put(pr.getCommandsProperty("UPLOAD_IMAGE_POST"), new ImageUploadServletActionImpl());
+        commands.put(pr.getCommandsProperty("UPLOAD_IMAGE_POST"), new ImageUploadServletActionImpl(userService));
+        commands.put(pr.getCommandsProperty("FILTER_CARS"), new CarFilterServletActionImpl(filterService));
         // user
         commands.put(pr.getCommandsProperty("ADMIN_USER_HOME"), new UserHomeServletActionImpl(userService));
         commands.put(pr.getCommandsProperty("ADMIN_USER_DELETE"), new UserDeleteServletActionImpl(userService));
@@ -126,12 +128,12 @@ public class CommandManager {
     public ServletAction getCommand(HttpServletRequest request) {
         String command = getMapping(request);
         if (commands.get(command) == null) {
-            return commands.get("/");
+            return commands.get("/main");
         }
         return commands.get(command);
     }
 
-    public String getMapping(HttpServletRequest request) {
+    private String getMapping(HttpServletRequest request) {
         String mapping = request.getRequestURI().substring(request.getContextPath().length());
         if (mapping.isEmpty()) {
             return "/";

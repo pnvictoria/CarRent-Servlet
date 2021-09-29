@@ -6,6 +6,8 @@ import entity.Label;
 import entity.Level;
 import entity.mapper.LabelMapper;
 import entity.mapper.LevelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import utils.ReadPropertiesFile;
 
 import java.sql.Connection;
@@ -16,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LevelDAO implements MainDAO<Level> {
+    private static final Logger LOG = LoggerFactory.getLogger(LevelDAO.class);
+
     private Connection connection;
     private final String INSERT_LEVEL;
     private final String SELECT_ALL_LEVEL;
@@ -96,7 +100,7 @@ public class LevelDAO implements MainDAO<Level> {
             ps = connection.prepareStatement(SELECT_LEVEL_BY_NAME);
             ps.setString(1, obj.getName());
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("Exception: {}", e.getMessage(), e);
         }
         ResultSet resultSet = ps.executeQuery();
         while (resultSet.next()) {

@@ -1,9 +1,14 @@
 package utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.util.Properties;
 
 public class ReadPropertiesFile {
+    private static final Logger LOG = LoggerFactory.getLogger(ReadPropertiesFile.class);
+
     private Properties propertyDB;
     private Properties propertySql;
     private Properties propertyPageMapping;
@@ -28,7 +33,7 @@ public class ReadPropertiesFile {
             propertiesConstant.load(this.getClass().getResourceAsStream(constantsFileProperties));
             propertiesCommands.load(this.getClass().getResourceAsStream(commandsFileProperties));
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.error("Exception: {}", e.getMessage(), e);
         }
     }
     public String getSqlProperty(String name) {
