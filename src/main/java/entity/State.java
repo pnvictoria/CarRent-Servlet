@@ -1,6 +1,6 @@
 package entity;
 
-public class Level {
+public class State {
     private int id;
     private String name;
 
@@ -20,13 +20,13 @@ public class Level {
         this.name = name;
     }
 
-    public static Builder newBuilder() {
-        return new Level().new Builder();
+    public static State.Builder newBuilder() {
+        return new State().new Builder();
     }
 
     @Override
     public String toString() {
-        return "Level{" +
+        return "State{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
@@ -37,18 +37,19 @@ public class Level {
 
         }
 
-        public Builder setId(int id) {
-            Level.this.id = id;
+        public State.Builder setId(int id) {
+            State.this.id = id;
             return this;
         }
 
-        public Builder setName(String name) {
-            Level.this.name = name;
+        public State.Builder setName(String name) {
+            State.this.name = name;
             return this;
         }
 
-        public Level build() {
-            return Level.this;
+        public State build() {
+            return State.this;
         }
     }
+
 }

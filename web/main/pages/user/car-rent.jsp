@@ -15,7 +15,7 @@
 </head>
 <body>
 <div class="wrapper">
-    <%@ include file="/main/pages/comn/header-guest.jsp" %>
+    <%@ include file="/main/pages/comn/header-user.jsp" %>
     <section class="body">
         <section>
             <div class="items">

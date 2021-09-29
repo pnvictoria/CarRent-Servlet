@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="entity.User" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html lang="ru">
@@ -31,27 +32,21 @@
                     </div>
                 </div>
             </div>
-            <div class="setting">
+
+            <section class="setting">
                 <c:forEach items="${orderList}" var="order">
                     <div class="items">
                         <div class="items__item">
-                            <div class="items__img">
-                                    <%--<img src="${pageContext.request.contextPath}/main/images/oil.png" alt="oil">--%>
-                            </div>
                             <div class="items__info">
+                                <p><span>ORDER ID: </span> <c:out value="${order.getId()}"/></p>
                                 <p><span>Car: </span> <c:out value="${order.getCar().getName()}"/></p>
                                 <p><span>Phone: </span> <c:out value="${order.getPhone()}"/></p>
-<%--                                <p><span>State: </span> <c:out value="${order.()}"/></p>--%>
-                            </div>
-                            <div class="items__price">
-                                <div>
-                                    <p><span><c:out value="${car.getPrice()}"/>  UAN </span>/ 1h</p>
-                                </div>
+                                <p><span>State: </span> <c:out value="${order.getState().getName()}"/></p>
                             </div>
                         </div>
                     </div>
                 </c:forEach>
-            </div>
+            </section>
 
 
 

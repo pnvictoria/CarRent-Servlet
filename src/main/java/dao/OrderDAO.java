@@ -1,9 +1,7 @@
 package dao;
 
 import dao.interfaces.MainDAO;
-import entity.Level;
 import entity.Order;
-import entity.mapper.LevelMapper;
 import entity.mapper.OrderMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +20,7 @@ public class OrderDAO implements MainDAO<Order> {
     private Connection connection;
     private final String INSERT_ORDER;
     private final String SELECT_ALL_ORDER;
-    private final String SELECT_ORDER_BY_ID;
+    private final String SELECT_ORDER_BY_USER_ID;
     private final String UPDATE_ORDER_BY_ID;
     private final String DELETE_ORDER_BY_ID;
 
@@ -32,7 +30,7 @@ public class OrderDAO implements MainDAO<Order> {
         ReadPropertiesFile propertySql = new ReadPropertiesFile();
         INSERT_ORDER = propertySql.getSqlProperty("INSERT_ORDER");
         SELECT_ALL_ORDER = propertySql.getSqlProperty("SELECT_ALL_ORDER");
-        SELECT_ORDER_BY_ID = propertySql.getSqlProperty("SELECT_ORDER_BY_ID");;
+        SELECT_ORDER_BY_USER_ID = propertySql.getSqlProperty("SELECT_ORDER_BY_USER_ID");;
         UPDATE_ORDER_BY_ID = propertySql.getSqlProperty("UPDATE_ORDER_BY_ID");
         DELETE_ORDER_BY_ID = propertySql.getSqlProperty("DELETE_ORDER_BY_ID");
     }
@@ -44,6 +42,7 @@ public class OrderDAO implements MainDAO<Order> {
             ps.setLong(1, obj.getUser().getId());
             ps.setString(2, obj.getPhone());
             ps.setLong(3, obj.getCar().getId());
+            ps.setLong(4, obj.getState().getId());
             ps.executeUpdate();
         } catch (SQLException e) {
             LOG.error("Exception: {}", e.getMessage(), e);
@@ -78,6 +77,13 @@ public class OrderDAO implements MainDAO<Order> {
 
     @Override
     public List<Order> getByItem(Order obj) throws SQLException {
-        return null;
+        PreparedStatement ps = connection.prepareStatement(SELECT_ORDER_BY_USER_ID);
+        ps.setLong(1, obj.getUser().getId());
+        List<Order> orderList = new ArrayList<>();
+        ResultSet resultSet = ps.executeQuery();
+        while (resultSet.next()) {
+            orderList.add(OrderMapper.mapRow(resultSet));
+        }
+        return orderList;
     }
 }

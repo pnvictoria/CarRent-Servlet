@@ -84,7 +84,7 @@ public class CommandManager {
         commands.put(pr.getCommandsProperty("SIGN_IN_POST"), new SignInPostServletAction(userService));
         commands.put(pr.getCommandsProperty("SIGN_UP"), new SignUpGetServletAction());
         commands.put(pr.getCommandsProperty("SIGN_UP_POST"), new SignUpPostServletAction(userService));
-        commands.put(pr.getCommandsProperty("USER_MAIN"), new UserPageGetServletAction(orderService, carService));
+        commands.put(pr.getCommandsProperty("USER_MAIN"), new UserPageGetServletAction(orderService));
         commands.put(pr.getCommandsProperty("CAR_RENT"), new CarRentGetServletActionImpl(carService));
         commands.put(pr.getCommandsProperty("CAR_RENT_POST"), new CarRentPostServletActionImpl(orderService, carService));
 

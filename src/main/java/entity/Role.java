@@ -20,6 +20,14 @@ public class Role {
         return new Role().new Builder();
     }
 
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     public class Builder {
         private Builder() {
 
@@ -38,13 +46,5 @@ public class Role {
         public Role build() {
             return Role.this;
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Roles{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
     }
 }

@@ -11,7 +11,8 @@ public class OrderMapper {
                 .setId(rs.getInt("order_id"))
                 .setUser(UserMapper.mapRow(rs))
                 .setCar(CarMapper.mapRow(rs))
-                .setPhone(rs.getString("phone"))
+                .setPhone(rs.getString("order_phone"))
+                .setState(StateMapper.mapRow(rs))
                 .build();
     }
 }

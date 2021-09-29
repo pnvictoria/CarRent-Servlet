@@ -46,6 +46,20 @@ public class Car {
         return isBlock;
     }
 
+    @Override
+    public String toString() {
+        return "Car{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", jpg='" + jpg + '\'' +
+                ", desc='" + desc + '\'' +
+                ", label=" + label +
+                ", level=" + level +
+                ", isBlock=" + isBlock +
+                '}';
+    }
+
     public static Builder newBuilder() {
         return new Car().new Builder();
     }
@@ -98,18 +112,5 @@ public class Car {
         public Car build() {
             return Car.this;
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Cars{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", jpg='" + jpg + '\'' +
-                ", desc='" + desc + '\'' +
-                ", label=" + label +
-                ", level=" + level +
-                '}';
     }
 }

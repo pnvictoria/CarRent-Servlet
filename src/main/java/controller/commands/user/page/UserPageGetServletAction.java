@@ -3,6 +3,7 @@ package controller.commands.user.page;
 import controller.interfaces.ServletAction;
 import entity.Car;
 import entity.Order;
+import entity.User;
 import service.interfaces.MainService;
 import utils.ReadPropertiesFile;
 
@@ -16,32 +17,27 @@ import java.util.List;
 
 public class UserPageGetServletAction implements ServletAction {
     private MainService<Order> orderService;
-    private MainService<Car> carService;
     private final String USER_MAIN_PAGE;
 
-    public UserPageGetServletAction(MainService<Order> orderService, MainService<Car> carService) {
+    public UserPageGetServletAction(MainService<Order> orderService) {
         this.orderService = orderService;
-        this.carService = carService;
         ReadPropertiesFile propertyPage = new ReadPropertiesFile();
         USER_MAIN_PAGE = propertyPage.getPageProperty("USER_MAIN_PAGE");
     }
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Car> carFromOrders = new ArrayList<>();
+        List<Order> orderList = null;
+        Order order = Order.newBuilder()
+                .setUser((User) req.getSession().getAttribute("user"))
+                .build();
         try {
-            for (Order order : orderService.getObjects()) {
-                if(order != null){
-                    carFromOrders.add(carService.getObjectById(order.getId()));
-                }
-            }
+            orderList = orderService.getByItem(order);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        req.setAttribute("carFromOrders", carFromOrders);
-
-
+        req.setAttribute("orderList", orderList);
+        System.out.println(orderList);
         return USER_MAIN_PAGE;
     }
 }

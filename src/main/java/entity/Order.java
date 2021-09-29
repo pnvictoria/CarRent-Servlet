@@ -5,6 +5,7 @@ public class Order {
     private User user;
     private Car car;
     private String phone;
+    private State state;
 
     public int getId() {
         return id;
@@ -24,6 +25,21 @@ public class Order {
 
     public static Order.Builder newBuilder() {
         return new Order().new Builder();
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", user=" + user +
+                ", car=" + car +
+                ", phone='" + phone + '\'' +
+                ", state=" + state +
+                '}';
     }
 
     public class Builder {
@@ -48,6 +64,11 @@ public class Order {
 
         public Builder setPhone(String phone) {
             Order.this.phone = phone;
+            return this;
+        }
+
+        public Builder setState(State state) {
+            Order.this.state = state;
             return this;
         }
 
