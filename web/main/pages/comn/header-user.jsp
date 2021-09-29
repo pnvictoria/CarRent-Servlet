@@ -17,11 +17,10 @@
                 </svg>
             </div>
             <a href="${pageContext.request.contextPath}/" class="header__link">Главная</a>
-            <a href="#main" class="header__link"></a>
-            <a href="#main" class="header__link"></a>
+            <a href="${pageContext.request.contextPath}/user/rent" class="header__link">Заказы</a>
         </nav>
         <div class="header__avatar">
-            <a href="${pageContext.request.contextPath}/user-page">
+            <a href="${pageContext.request.contextPath}/user/page">
                 <% User userObj = (User) request.getSession().getAttribute("user");
                     if(userObj == null || userObj.getAvatar() == null || userObj.getAvatar().isEmpty()) {
                 %>

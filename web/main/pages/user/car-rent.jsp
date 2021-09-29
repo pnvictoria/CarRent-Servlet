@@ -42,7 +42,7 @@
             <div class="items">
                 <div class="items__item">
                     <div class="container sign-in">
-                        <form action="${pageContext.request.contextPath}/car-rent/post" method="POST"
+                        <form action="${pageContext.request.contextPath}/user/car-rent/post" method="POST"
                               class="form sign-in">
                             <div class="form__mail item">
                                 <input class="form__input big" name="car_id" id="car_id" value="${car.getId()}" type="hidden">
