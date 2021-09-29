@@ -29,8 +29,11 @@
 
     <filter>
         <filter-name>LoginFilter</filter-name>
-        <filter-class>controller.filter.LoginFilter</filter-class>
+        <filter-class>filter.LoginFilter</filter-class>
     </filter>
+    <welcome-file-list>
+        <welcome-file>/main</welcome-file>
+    </welcome-file-list>
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
         <url-pattern>/admin/*</url-pattern>

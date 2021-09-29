@@ -24,6 +24,14 @@ public class Label {
         return new Label().new Builder();
     }
 
+    @Override
+    public String toString() {
+        return "Label{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     public class Builder {
         private Builder() {
 
@@ -42,13 +50,5 @@ public class Label {
         public Label build() {
             return Label.this;
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Labels{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
     }
 }

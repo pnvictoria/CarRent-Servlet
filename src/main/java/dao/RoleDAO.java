@@ -4,6 +4,8 @@ import dao.interfaces.MainDAO;
 import database.DataBaseConnection;
 import entity.Role;
 import entity.mapper.RoleMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import utils.ReadPropertiesFile;
 
 import java.sql.Connection;
@@ -14,20 +16,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoleDAO implements MainDAO<Role> {
+    private static final Logger LOG = LoggerFactory.getLogger(RoleDAO.class);
+
     private Connection connection;
     private final String INSERT_ROLE;
     private final String SELECT_ALL_ROLE;
     private final String SELECT_ROLE_BY_ID;
+    private final String SELECT_ROLE_BY_NAME;
     private final String UPDATE_ROLE_BY_ID;
     private final String DELETE_ROLE_BY_ID;
 
-    public RoleDAO() {
-        connection = DataBaseConnection.initialize();
+    public RoleDAO(Connection connection) {
+        this.connection = connection;
 
         ReadPropertiesFile propertyPage = new ReadPropertiesFile();
         INSERT_ROLE = propertyPage.getSqlProperty("INSERT_ROLE");
         SELECT_ALL_ROLE = propertyPage.getSqlProperty("SELECT_ALL_ROLE");
         SELECT_ROLE_BY_ID = propertyPage.getSqlProperty("SELECT_ROLE_BY_ID");
+        SELECT_ROLE_BY_NAME = propertyPage.getSqlProperty("SELECT_ROLE_BY_NAME");
         UPDATE_ROLE_BY_ID = propertyPage.getSqlProperty("UPDATE_ROLE_BY_ID");
         DELETE_ROLE_BY_ID = propertyPage.getSqlProperty("DELETE_ROLE_BY_ID");
     }
@@ -85,7 +91,19 @@ public class RoleDAO implements MainDAO<Role> {
     }
 
     @Override
-    public List<Role> getByItem(Role obj) {
-        return null;
+    public List<Role> getByItem(Role obj) throws SQLException {
+        PreparedStatement ps = null;
+        List<Role> roleList = new ArrayList<>();
+        try {
+            ps = connection.prepareStatement(SELECT_ROLE_BY_NAME);
+            ps.setString(1, obj.getName());
+        } catch (SQLException e) {
+            LOG.error("Exception: {}", e.getMessage(), e);
+        }
+        ResultSet resultSet = ps.executeQuery();
+        while (resultSet.next()) {
+            roleList.add(RoleMapper.mapRow(resultSet));
+        }
+        return roleList;
     }
 }

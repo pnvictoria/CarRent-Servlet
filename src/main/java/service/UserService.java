@@ -31,7 +31,7 @@ public class UserService implements MainService<User> {
     @Override
     public void deleteObject(int id) throws SQLException {
         User user = daoUser.getObjectById(id);
-        if (user == null)
+        if (user != null)
             daoUser.deleteObject(id);
     }
 

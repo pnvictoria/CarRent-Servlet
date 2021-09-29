@@ -51,6 +51,20 @@ public class User {
         return new User().new Builder();
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", sex=" + sex +
+                ", date='" + date + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", role=" + role +
+                '}';
+    }
 
     public class Builder {
         private Builder() {
@@ -105,20 +119,5 @@ public class User {
         public User build() {
             return User.this;
         }
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", sex=" + sex +
-                ", date='" + date + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", avatar='" + avatar + '\'' +
-                ", role=" + role +
-                '}';
     }
 }

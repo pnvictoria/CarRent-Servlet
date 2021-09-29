@@ -34,8 +34,8 @@
                     <div class="item">
                         <label for="label_name">Марки машин</label>
                         <div class="select">
-                            <select id="label_name" class="form__month form__input small">
-                                <c:forEach items="${allLabels}" var="label_name">
+                            <select name="label_name" class="form__month form__input small">
+                                <c:forEach items="${allLabels}" var="label">
                                     <option value = "<c:out value="${label.getId()}"/>" name="<c:out value="${label.getName()}"/>">
                                         <c:out value="${label.getName()}"/>
                                     </option>
@@ -46,8 +46,8 @@
                     <div class="item">
                         <label for="level_name">Классы машин</label>
                         <div class="select">
-                            <select id="level_name" class="form__month form__input small">
-                                <c:forEach items="${allLevels}" var="level_name">
+                            <select name="level_name" class="form__month form__input small">
+                                <c:forEach items="${allLevels}" var="level">
                                     <option value = "<c:out value="${level.getId()}"/>" name="<c:out value="${level.getName()}"/>">
                                         <c:out value="${level.getName()}"/>
                                     </option>
@@ -55,9 +55,6 @@
                             </select>
                         </div>
                     </div>
-
-
-
                     <div class="edit-three__set">
                         <button class="add" type="submit">Добавить</button>
                     </div>

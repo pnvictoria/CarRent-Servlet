@@ -22,8 +22,8 @@ public class UserDAO implements MainDAO<User> {
     private final String DELETE_USER_BY_ID;
     private final String SELECT_USER_BY_EMAIL;
 
-    public UserDAO() {
-        connection = DataBaseConnection.initialize();
+    public UserDAO(Connection connection) {
+        this.connection = connection;
 
         ReadPropertiesFile propertySql = new ReadPropertiesFile();
         INSERT_USER = propertySql.getSqlProperty("INSERT_USER");

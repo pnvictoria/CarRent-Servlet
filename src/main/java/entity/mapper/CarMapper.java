@@ -8,13 +8,14 @@ import java.sql.SQLException;
 public class CarMapper {
     public static Car mapRow(ResultSet rs) throws SQLException {
         return Car.newBuilder()
-                .setId(rs.getInt("id"))
-                .setName(rs.getString("name"))
-                .setPrice(rs.getInt("price"))
-                .setJpg(rs.getString("jpg"))
+                .setId(rs.getInt("car_id"))
+                .setName(rs.getString("car_name"))
+                .setPrice(rs.getInt("car_price"))
+                .setJpg(rs.getString("car_jpg"))
                 .setLevel(LevelMapper.mapRow(rs))
                 .setLabel(LabelMapper.mapRow(rs))
-                .setDesc(rs.getString("desc"))
+                .setDesc(rs.getString("car_desc"))
+                .setBlock(rs.getBoolean("car_block"))
                 .build();
     }
 }

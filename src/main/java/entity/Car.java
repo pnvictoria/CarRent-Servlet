@@ -8,6 +8,7 @@ public class Car {
     private String desc;
     private Label label;
     private Level level;
+    private boolean isBlock;
 
     private Car() {
 
@@ -39,6 +40,24 @@ public class Car {
 
     public Level getLevel() {
         return level;
+    }
+
+    public boolean isBlock() {
+        return isBlock;
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", jpg='" + jpg + '\'' +
+                ", desc='" + desc + '\'' +
+                ", label=" + label +
+                ", level=" + level +
+                ", isBlock=" + isBlock +
+                '}';
     }
 
     public static Builder newBuilder() {
@@ -85,21 +104,13 @@ public class Car {
             return this;
         }
 
+        public Builder setBlock(boolean block) {
+            Car.this.isBlock = block;
+            return this;
+        }
+
         public Car build() {
             return Car.this;
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Cars{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", jpg='" + jpg + '\'' +
-                ", desc='" + desc + '\'' +
-                ", label=" + label +
-                ", level=" + level +
-                '}';
     }
 }

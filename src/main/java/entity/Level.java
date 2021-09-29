@@ -24,6 +24,14 @@ public class Level {
         return new Level().new Builder();
     }
 
+    @Override
+    public String toString() {
+        return "Level{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     public class Builder {
         private Builder() {
 
@@ -42,13 +50,5 @@ public class Level {
         public Level build() {
             return Level.this;
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Levels{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
     }
 }

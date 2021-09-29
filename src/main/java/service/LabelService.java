@@ -20,7 +20,6 @@ public class LabelService implements MainService<Label> {
         //изменить проверку, сделать проверку полностью по обьекту или имени
         Label label = daoLabels.getObjectById(obj.getId());
         if (true) {
-//        if (label == null) {
             daoLabels.addObject(obj);
             return true;
         } else {
@@ -31,7 +30,7 @@ public class LabelService implements MainService<Label> {
     @Override
     public void deleteObject(int id) throws SQLException {
         Label label = daoLabels.getObjectById(id);
-        if (label == null)
+        if (label != null)
             daoLabels.deleteObject(id);
     }
 
@@ -51,7 +50,7 @@ public class LabelService implements MainService<Label> {
     }
 
     @Override
-    public List<Label> getByItem(Label obj) {
-        return null;
+    public List<Label> getByItem(Label obj) throws SQLException {
+        return daoLabels.getByItem(obj);
     }
 }

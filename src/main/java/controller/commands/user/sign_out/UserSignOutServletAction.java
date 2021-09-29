@@ -13,7 +13,7 @@ public class UserSignOutServletAction implements ServletAction {
 
     public UserSignOutServletAction() {
         ReadPropertiesFile propertyPage = new ReadPropertiesFile();
-        SIGN_OUT_PAGE = propertyPage.getPageProperty("MAIN_PAGE");
+        SIGN_OUT_PAGE = propertyPage.getCommandsProperty("MAIN");
     }
 
     @Override

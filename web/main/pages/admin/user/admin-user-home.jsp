@@ -13,51 +13,37 @@
 <div class="wrapper">
     <%@ include file="/main/pages/comn/header-admin.jsp" %>
     <section class="body">
-
-        <table border="1" width="80%" cellpadding="5">
-            <tr>
-                <th>ID</th>
-                <th>Имя</th>
-                <th>Фамилия</th>
-                <th>Пол</th>
-                <th>Дата Рождение</th>
-                <th>Почта</th>
-                <th>Роль</th>
-
-                <th>UPDATE</th>
-                <th>DELETE</th>
-            </tr>
-            <c:forEach items="${allUsers}" var="user">
-                <tr>
-                    <td><c:out value="${user.getId()}"/></td>
-                    <td><c:out value="${user.getName()}"/></td>
-                    <td><c:out value="${user.getSurname()}"/></td>
-                    <td><c:out value="${user.isSex()}"/></td>
-                    <td><c:out value="${user.getDate()}"/></td>
-                    <td><c:out value="${user.getEmail()}"/></td>
-                    <td><c:out value="${user.getRole().getName()}"/></td>
-                    <td>
-                        <form method="POST"
-                              action="${pageContext.request.contextPath}/admin/user/update?id=${user.getId()}">
-                            <input type="submit" value="Update"/>
-                        </form>
-                    </td>
-                    <td>
-                        <form method="POST"
-                              action="${pageContext.request.contextPath}/admin/user/delete?id=${user.getId()}">
-                            <input type="submit" value="Delete"/>
-                        </form>
-                    </td>
-                </tr>
-            </c:forEach>
-        </table>
-
-        <form method="POST" action="${pageContext.request.contextPath}/admin/user/add}">
-            <input type="submit" value="Add"/>
-        </form>
-
+        <div class="container">
+            <div class="edit">
+                <div class="edit__item head">
+                    <p class="small">№</p>
+                    <p class="small">Имя</p>
+                    <p class="small">Фамилия</p>
+                    <p class="small">Пол</p>
+                    <p class="small">Дата Рождение</p>
+                    <p class="big">Почта</p>
+                    <p class="small">Роль</p>
+                </div>
+                <c:forEach items="${allUsers}" var="user">
+                    <div class="edit__item">
+                        <p class="small"><c:out value="${user.getId()}"/></p>
+                        <p class="small"><c:out value="${user.getName()}"/></p>
+                        <p class="small"><c:out value="${user.getSurname()}"/></p>
+                        <p class="small"><c:out value="${user.isSex()}"/></p>
+                        <p class="small"><c:out value="${user.getDate()}"/></p>
+                        <p class="big"><c:out value="${user.getEmail()}"/></p>
+                        <p class="small"><c:out value="${user.getRole().getName()}"/></p>
+                        <div class="edit__set">
+                            <form action="${pageContext.request.contextPath}/admin/user/delete?id=${user.getId()}" method="POST">
+                                <input class="delete" type="submit" value="Удалить"></input>
+                            </form>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
     </section>
-    <%@ include file="/main/pages/comn/footer-user.jsp" %>
+    <%@ include file="/main/pages/comn/footer-admin.jsp" %>
 </div>
 </body>
 </html>
