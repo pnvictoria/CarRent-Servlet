@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/main/css/footer.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/main/css/header-auth.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/main/css/global.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/main/css/items.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/main/css/user-page.css">
     <title>User page</title>
 </head>
@@ -32,25 +33,6 @@
                     </div>
                 </div>
             </div>
-
-            <section class="setting">
-                <c:forEach items="${orderList}" var="order">
-                    <div class="items">
-                        <div class="items__item">
-                            <div class="items__info">
-                                <p><span>ORDER ID: </span> <c:out value="${order.getId()}"/></p>
-                                <p><span>Car: </span> <c:out value="${order.getCar().getName()}"/></p>
-                                <p><span>Phone: </span> <c:out value="${order.getPhone()}"/></p>
-                                <p><span>State: </span> <c:out value="${order.getState().getName()}"/></p>
-                            </div>
-                        </div>
-                    </div>
-                </c:forEach>
-            </section>
-
-
-
-
             <div class="setting">
                 <div class="setting__wrapper">
                     <h2>Настройки</h2>

@@ -88,7 +88,7 @@
                             </div>
                             <div>
                                 <% if (user != null && user.getRole().getId() == 2) { %>
-                                <a href="${pageContext.request.contextPath}/car-rent?carId=${filter.getId()}">
+                                <a href="${pageContext.request.contextPath}/user/car-rent?carId=${filter.getId()}">
                                     <div class="items__next">
                                         <svg width="8" height="11" viewBox="0 0 8 11" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">

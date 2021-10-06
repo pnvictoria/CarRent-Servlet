@@ -36,6 +36,12 @@
           justify-content: space-between;
   margin-bottom: 4em;
 }
+
+.body .error img {
+  width: 50%;
+  margin-left: 25%;
+}
+
 .body .form {
   height: 75%;
   display: -webkit-box;

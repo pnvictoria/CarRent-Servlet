@@ -178,6 +178,14 @@
   letter-spacing: -0.164757px;
   color: #051f61;
 }
+
+.rent span {
+    font-family: Montserrat;
+    font-weight: bold;
+    font-size: 14px;
+    color: #051f61;
+}
+
 .body .items__price {
   display: -webkit-box;
   display: -ms-flexbox;

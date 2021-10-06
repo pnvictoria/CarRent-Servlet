@@ -25,6 +25,10 @@
             <a href="${pageContext.request.contextPath}/admin/level/home" class="header__link">Классы машин</a>
             <a href="${pageContext.request.contextPath}/admin/label/home" class="header__link">Марки машин</a>
 
+
+
+            <a href="${pageContext.request.contextPath}/admin/order/home" class="header__link">Заказы</a>
+
         </nav>
         <a href="${pageContext.request.contextPath}/sign-out">
             <div class="header__avatar">

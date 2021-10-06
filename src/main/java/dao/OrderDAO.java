@@ -51,12 +51,21 @@ public class OrderDAO implements MainDAO<Order> {
 
     @Override
     public void deleteObject(int id) throws SQLException {
-
+        PreparedStatement ps = connection.prepareStatement(DELETE_ORDER_BY_ID);
+        ps.setLong(1, id);
+        ps.executeUpdate();
     }
 
     @Override
     public void updateObject(Order obj) {
-
+        try {
+            PreparedStatement ps = connection.prepareStatement(UPDATE_ORDER_BY_ID);
+            ps.setLong(1, obj.getState().getId());
+            ps.setLong(2, obj.getId());
+            ps.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     @Override

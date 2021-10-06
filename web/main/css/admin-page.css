@@ -566,6 +566,11 @@ form .delete {
   margin-top: 15px;
 }
 
+form .edit_btn {
+  margin-top: 15px;
+}
+
+
 .edit__item .big {
   width: 160px;
   padding: 17px 20px;

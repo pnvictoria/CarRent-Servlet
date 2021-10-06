@@ -13,11 +13,11 @@ public class DataBaseConnection {
     private static final Logger LOG = LoggerFactory.getLogger(DataBaseConnection.class);
 
     private static Connection connection = null;
-    public static String DB_DRIVER;
-    public static String DB_URL;
-    public static String DB_NAME;
-    public static String DB_USERNAME;
-    public static String DB_PASSWORD;
+    private static final String DB_DRIVER;
+    private static final String DB_URL;
+    private static final String DB_NAME;
+    private static final String DB_USERNAME;
+    private static final String DB_PASSWORD;
 
     static {
         ReadPropertiesFile propertyPage = new ReadPropertiesFile();
@@ -29,8 +29,9 @@ public class DataBaseConnection {
         try {
             Class.forName(DB_DRIVER);
             connection = DriverManager.getConnection(DB_URL + DB_NAME, DB_USERNAME, DB_PASSWORD);
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            LOG.error("Exception2: {}", e.getMessage(), e);
+            throw new RuntimeException();
         }
     }
 
