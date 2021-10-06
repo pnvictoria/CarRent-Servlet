@@ -19,7 +19,7 @@ public class LoginFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-//        Filter.super.init(filterConfig);
+        Filter.super.init(filterConfig);
     }
 
     @Override
@@ -30,13 +30,12 @@ public class LoginFilter implements Filter {
         if (user != null && ROLE_ADMIN.equals(user.getRole().getName())) {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
-            System.out.println("TEST");
-            request.getRequestDispatcher("index.jsp").forward(servletRequest, servletResponse);
+            request.getRequestDispatcher("/main/pages/error.jsp").forward(servletRequest, servletResponse);
         }
     }
 
     @Override
     public void destroy() {
-//        Filter.super.destroy();
+        Filter.super.destroy();
     }
 }

@@ -20,10 +20,8 @@
 <div class="wrapper">
     <%@ include file="/main/pages/comn/header-guest.jsp" %>
     <section class="body">
-        <div class="container sign-in">
-            <div class="background">
-                <img src="${pageContext.request.contextPath}/main/images/background.webp" alt="background" draggable="false">
-            </div>
+        <div class="error">
+            <img src="${pageContext.request.contextPath}/main/images/error.png" alt="background" draggable="false">
         </div>
     </section>
     <%@ include file="/main/pages/comn/footer-user.jsp" %>
